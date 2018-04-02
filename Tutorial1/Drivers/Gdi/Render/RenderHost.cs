@@ -2,9 +2,15 @@
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 {
-    public class RenderHost
-        : Engine.Render.RenderHost
+    /// <summary>
+    /// Gdi render host.
+    /// </summary>
+    public class RenderHost :
+        Engine.Render.RenderHost
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public RenderHost(IntPtr hostHandle) :
             base(hostHandle)
         {

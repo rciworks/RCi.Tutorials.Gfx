@@ -5,6 +5,9 @@ namespace RCi.Tutorials.Gfx.Utils
 {
     public static class U
     {
+        /// <summary>
+        /// Does <see cref="List{T}.ForEach"/> on <see cref="IEnumerable{T}"/> collection.
+        /// </summary>
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
         {
             foreach (var item in collection)
@@ -13,19 +16,29 @@ namespace RCi.Tutorials.Gfx.Utils
             }
         }
 
+        /// <summary>
+        /// Get handle of this window.
+        /// </summary>
         public static IntPtr Handle(this System.Windows.Forms.Control window)
         {
             return window.IsDisposed ? default : Handle((System.Windows.Forms.IWin32Window)window);
         }
 
+        /// <summary>
+        /// Get handle of this window.
+        /// </summary>
         public static IntPtr Handle(this System.Windows.Forms.IWin32Window window)
         {
-            return window?.Handle ?? default;
+            return window.Handle;
         }
 
+        /// <summary>
+        /// Get handle of this window.
+        /// </summary>
         public static IntPtr Handle(this System.Windows.Media.Visual window)
         {
-            return window.HandleSource()?.Handle ?? default;
+            var handleSource = window.HandleSource();
+            return handleSource == null || handleSource.IsDisposed ? default : handleSource.Handle;
         }
 
         /// <summary>

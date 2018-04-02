@@ -7,22 +7,68 @@ namespace RCi.Tutorials.Gfx.Win
     {
         #region // storage
 
+        /// <summary>
+        /// Handle of targeted window.
+        /// </summary>
         public IntPtr Handle { get; }
-        public WindowInfo Parent { get; }
+
+        /// <summary>
+        /// Parent handle of this window.
+        /// </summary>
         public IntPtr ParentHandle { get; }
+
+        /// <summary>
+        /// Class name.
+        /// </summary>
         public string ClassName { get; }
+
+        /// <summary>
+        /// Title/caption of window.
+        /// </summary>
         public string Caption { get; }
+
+        /// <summary>
+        /// Raw text of window.
+        /// </summary>
         public string RawText { get; }
+
+        /// <summary>
+        /// Window rectangle.
+        /// </summary>
         public System.Drawing.Rectangle RectangleWindow { get; }
+
+        /// <summary>
+        /// Client rectangle (local).
+        /// </summary>
         public System.Drawing.Rectangle RectangleClientLocal { get; }
+
+        /// <summary>
+        /// Client rectangle (global).
+        /// </summary>
         public System.Drawing.Rectangle RectangleClientAbsolute { get; }
+
+        /// <summary>
+        /// Is window visible?
+        /// </summary>
         public bool IsWindowVisible { get; }
+
+        /// <summary>
+        /// Parent <see cref="WindowInfo"/> (if provided).
+        /// </summary>
+        public WindowInfo Parent { get; }
+
+        /// <summary>
+        /// Children of window (if requested).
+        /// </summary>
         public List<WindowInfo> Children { get; }
 
         #endregion
 
         #region // ctor
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public WindowInfo(IntPtr handle, WindowInfo parent, bool getChildren)
         {
             // store
@@ -53,16 +99,19 @@ namespace RCi.Tutorials.Gfx.Win
             }
         }
 
+        /// <inheritdoc />
         public WindowInfo(IntPtr handle) :
             this(handle, null, true)
         {
         }
 
+        /// <inheritdoc />
         public WindowInfo(IntPtr handle, WindowInfo parent) :
             this(handle, parent, true)
         {
         }
 
+        /// <inheritdoc />
         public WindowInfo(IntPtr handle, bool getChildren) :
             this(handle, null, getChildren)
         {
@@ -72,6 +121,7 @@ namespace RCi.Tutorials.Gfx.Win
 
         #region // routines
 
+        /// <inheritdoc />
         public override string ToString()
         {
             return $"{$"{Handle.ToInt32():X16}".ToUpperInvariant()} '{ClassName}' '{Caption}' '{RawText}' " +
@@ -80,6 +130,9 @@ namespace RCi.Tutorials.Gfx.Win
                    $"[{RectangleClientLocal.X}, {RectangleClientLocal.Y}; {RectangleClientLocal.Width} x {RectangleClientLocal.Height}]";
         }
 
+        /// <summary>
+        /// Collect children of this window.
+        /// </summary>
         private void CollectChildren()
         {
             var child = IntPtr.Zero;
@@ -97,15 +150,31 @@ namespace RCi.Tutorials.Gfx.Win
             }
         }
 
-        public WindowInfo GetRoot()
+        /// <summary>
+        /// Get root window handle.
+        /// </summary>
+        public static IntPtr GetRootHandle(IntPtr handle)
         {
-            var root = this;
-            while (root.ParentHandle != IntPtr.Zero)
+            var rootHandle = handle;
+            while (true)
             {
-                root = new WindowInfo(root.ParentHandle);
+                var parentHandle = User32.GetParent(rootHandle);
+                if (parentHandle != IntPtr.Zero)
+                {
+                    rootHandle = parentHandle;
+                }
+                else
+                {
+                    break;
+                }
             }
-            return root;
+            return rootHandle;
         }
+
+        /// <summary>
+        /// Get root <see cref="WindowInfo"/>.
+        /// </summary>
+        public WindowInfo GetRoot() => new WindowInfo(GetRootHandle(Handle));
 
         #endregion
     }

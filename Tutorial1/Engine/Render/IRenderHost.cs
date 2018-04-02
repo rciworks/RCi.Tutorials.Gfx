@@ -2,9 +2,15 @@
 
 namespace RCi.Tutorials.Gfx.Engine.Render
 {
-    public interface IRenderHost
-        : IDisposable
+    /// <summary>
+    /// Interface for render host.
+    /// </summary>
+    public interface IRenderHost :
+        IDisposable
     {
+        /// <summary>
+        /// Handle of hosting window.
+        /// </summary>
         IntPtr HostHandle { get; }
     }
 }

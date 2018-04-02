@@ -12,6 +12,9 @@ namespace RCi.Tutorials.Gfx.Win
 
         #endregion
 
+        /// <summary>
+        /// Get client rectangle.
+        /// </summary>
         public static System.Drawing.Rectangle GetClientRectangle(IntPtr handle)
         {
             User32.ClientToScreen(handle, out var point);
@@ -19,6 +22,9 @@ namespace RCi.Tutorials.Gfx.Win
             return new System.Drawing.Rectangle(point.X, point.Y, rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
+        /// <summary>
+        /// Get window title/caption.
+        /// </summary>
         public static string GetWindowCaption(IntPtr hwnd)
         {
             var lpWindowText = new StringBuilder(byte.MaxValue);
@@ -26,18 +32,27 @@ namespace RCi.Tutorials.Gfx.Win
             return lpWindowText.ToString();
         }
 
+        /// <summary>
+        /// Get window class name.
+        /// </summary>
         public static string GetWindowClassName(IntPtr hwnd)
         {
             var sb = new StringBuilder(byte.MaxValue);
             return User32.GetClassName(hwnd, sb, sb.Capacity) != 0 ? sb.ToString() : null;
         }
 
+        /// <summary>
+        /// Get window rectangle.
+        /// </summary>
         public static System.Drawing.Rectangle GetWindowRectangle(IntPtr hwnd)
         {
             User32.GetWindowRect(hwnd, out var rect);
             return new System.Drawing.Rectangle(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
+        /// <summary>
+        /// Get window raw text.
+        /// </summary>
         public static string GetWindowTextRaw(IntPtr hwnd)
         {
             // get correct string length
