@@ -13,6 +13,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public IntPtr HostHandle { get; private set; }
 
+        /// <inheritdoc />
         public FpsCounter FpsCounter { get; private set; }
 
         #endregion
@@ -42,6 +43,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
 
         #region // render
 
+        /// <inheritdoc />
         public void Render()
         {
             FpsCounter.StartFrame();
@@ -51,6 +53,9 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             FpsCounter.StopFrame();
         }
 
+        /// <summary>
+        /// Internal rendering for particular driver.
+        /// </summary>
         protected abstract void RenderInternal();
 
         #endregion

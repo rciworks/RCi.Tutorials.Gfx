@@ -13,8 +13,14 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// </summary>
         IntPtr HostHandle { get; }
 
+        /// <summary>
+        /// Measures fps.
+        /// </summary>
         FpsCounter FpsCounter { get; }
 
+        /// <summary>
+        /// Render.
+        /// </summary>
         void Render();
     }
 }

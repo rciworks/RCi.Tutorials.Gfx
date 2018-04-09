@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using RCi.Tutorials.Gfx.Engine.Render;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 {
@@ -11,8 +12,14 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
     {
         #region // storage
 
+        /// <summary>
+        /// Graphics retrieved from <see cref="IRenderHost.HostHandle"/>.
+        /// </summary>
         private Graphics GraphicsHost { get; set; }
 
+        /// <summary>
+        /// Font for drawing text with <see cref="System.Drawing"/> objects.
+        /// </summary>
         private Font FontConsolas12 { get; set; }
 
         #endregion
@@ -30,6 +37,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             FontConsolas12 = new Font("Consolas", 12);
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             FontConsolas12?.Dispose();
@@ -45,6 +53,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 
         #region // render
 
+        /// <inheritdoc />
         protected override void RenderInternal()
         {
             GraphicsHost.Clear(Color.Black);

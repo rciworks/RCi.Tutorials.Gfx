@@ -47,6 +47,8 @@ namespace RCi.Tutorials.Gfx.Client
             while (!Dispatcher.HasShutdownStarted)
             {
                 Render(RenderHosts);
+
+                // message pump
                 System.Windows.Forms.Application.DoEvents();
             }
         }
@@ -63,6 +65,9 @@ namespace RCi.Tutorials.Gfx.Client
 
         #region // render
 
+        /// <summary>
+        /// Render <see cref="IRenderHost"/>s.
+        /// </summary>
         private static void Render(IEnumerable<IRenderHost> renderHosts)
         {
             renderHosts.ForEach(rh => rh.Render());
