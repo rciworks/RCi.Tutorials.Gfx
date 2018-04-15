@@ -33,7 +33,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public virtual void Dispose()
         {
-            FpsCounter?.Dispose();
+            FpsCounter.Dispose();
             FpsCounter = default;
 
             HostHandle = default;

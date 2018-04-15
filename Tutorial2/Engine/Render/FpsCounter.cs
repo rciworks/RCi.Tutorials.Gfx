@@ -70,10 +70,10 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public void Dispose()
         {
-            StopwatchUpdate?.Stop();
+            StopwatchUpdate.Stop();
             StopwatchUpdate = default;
 
-            StopwatchFrame?.Stop();
+            StopwatchFrame.Stop();
             StopwatchFrame = default;
         }
 

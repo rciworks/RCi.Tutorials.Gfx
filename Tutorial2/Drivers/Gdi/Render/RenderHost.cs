@@ -40,10 +40,10 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <inheritdoc />
         public override void Dispose()
         {
-            FontConsolas12?.Dispose();
+            FontConsolas12.Dispose();
             FontConsolas12 = default;
 
-            GraphicsHost?.Dispose();
+            GraphicsHost.Dispose();
             GraphicsHost = default;
 
             base.Dispose();
