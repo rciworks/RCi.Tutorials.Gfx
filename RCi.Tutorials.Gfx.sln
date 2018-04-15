@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 1 - Create Windows
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 2 - Render Loop, Fps Counter", "Tutorial2\Tutorial 2 - Render Loop, Fps Counter.csproj", "{E31589B9-87DC-4650-900F-E2DAE18370AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 3 - Double Buffer", "Tutorial3\Tutorial 3 - Double Buffer.csproj", "{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E31589B9-87DC-4650-900F-E2DAE18370AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E31589B9-87DC-4650-900F-E2DAE18370AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E31589B9-87DC-4650-900F-E2DAE18370AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
