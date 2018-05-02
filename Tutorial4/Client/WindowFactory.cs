@@ -31,6 +31,33 @@ namespace RCi.Tutorials.Gfx.Client
         }
 
         /// <summary>
+        /// Create <see cref="System.Windows.Forms"/> API host control.
+        /// </summary>
+        private static System.Windows.Forms.Control CreateHostControl()
+        {
+            var hostControl = new System.Windows.Forms.Panel
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                BackColor = System.Drawing.Color.Transparent,
+                ForeColor = System.Drawing.Color.Transparent,
+            };
+
+            // focus control, so that we could capture mousewheel events
+            void EnsureFocus(System.Windows.Forms.Control control)
+            {
+                if (!control.Focused)
+                {
+                    control.Focus();
+                }
+            }
+
+            hostControl.MouseEnter += (sender, args) => EnsureFocus(hostControl);
+            hostControl.MouseClick += (sender, args) => EnsureFocus(hostControl);
+
+            return hostControl;
+        }
+
+        /// <summary>
         /// Create <see cref="System.Windows.Forms.Form"/> and <see cref="IRenderHost"/> for it.
         /// </summary>
         private static IRenderHost CreateWindowForm(System.Drawing.Size size, string title, Func<IntPtr, IRenderHost> ctorRenderHost)
@@ -41,20 +68,8 @@ namespace RCi.Tutorials.Gfx.Client
                 Text = title,
             };
 
-            var hostControl = new System.Windows.Forms.Panel
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                BackColor = System.Drawing.Color.Transparent,
-                ForeColor = System.Drawing.Color.Transparent,
-            };
+            var hostControl = CreateHostControl();
             window.Controls.Add(hostControl);
-
-            // fix mouse wheel
-            hostControl.MouseEnter += (sender, args) =>
-            {
-                if (System.Windows.Forms.Form.ActiveForm != window) window.Activate();
-                if (!hostControl.Focused) hostControl.Focus();
-            };
 
             window.Closed += (sender, args) => System.Windows.Application.Current.Shutdown();
 
@@ -75,19 +90,14 @@ namespace RCi.Tutorials.Gfx.Client
                 Title = title,
             };
 
-            var hostControl = new System.Windows.Controls.Grid
-            {
-                Background = System.Windows.Media.Brushes.Transparent,
-                Focusable = true,
-            };
-            window.Content = hostControl;
+            var hostControl = CreateHostControl();
 
-            // fix mouse wheel (although it's only for Windows.Forms, this is just OCD to make window active as well)
-            hostControl.MouseEnter += (sender, args) =>
+            // create forms host (wrapper for wpf)
+            var windowsFormsHost = new System.Windows.Forms.Integration.WindowsFormsHost
             {
-                if (!window.IsActive) window.Activate();
-                if (!hostControl.IsFocused) hostControl.Focus();
+                Child = hostControl,
             };
+            window.Content = windowsFormsHost;
 
             window.Closed += (sender, args) => System.Windows.Application.Current.Shutdown();
 
