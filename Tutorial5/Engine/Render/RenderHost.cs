@@ -1,4 +1,5 @@
 ﻿using System;
+using RCi.Tutorials.Gfx.Inputs;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
 {
@@ -14,6 +15,9 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         public IntPtr HostHandle { get; private set; }
 
         /// <inheritdoc />
+        public IInput HostInput { get; private set; }
+
+        /// <inheritdoc />
         public FpsCounter FpsCounter { get; private set; }
 
         #endregion
@@ -23,10 +27,10 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected RenderHost(IntPtr hostHandle)
+        protected RenderHost(IRenderHostSetup renderHostSetup)
         {
-            HostHandle = hostHandle;
-
+            HostHandle = renderHostSetup.HostHandle;
+            HostInput = renderHostSetup.HostInput;
             FpsCounter = new FpsCounter(new TimeSpan(0, 0, 0, 0, 1000));
         }
 
@@ -35,6 +39,9 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         {
             FpsCounter.Dispose();
             FpsCounter = default;
+
+            HostInput.Dispose();
+            HostInput = default;
 
             HostHandle = default;
         }

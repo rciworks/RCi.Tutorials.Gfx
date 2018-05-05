@@ -1,4 +1,5 @@
 ﻿using System;
+using RCi.Tutorials.Gfx.Inputs;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
 {
@@ -12,6 +13,11 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// Handle of hosting window.
         /// </summary>
         IntPtr HostHandle { get; }
+
+        /// <summary>
+        /// Input from host.
+        /// </summary>
+        IInput HostInput { get; }
 
         /// <summary>
         /// Measures fps.

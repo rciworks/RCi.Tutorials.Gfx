@@ -34,11 +34,18 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.8.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Spatial.0.4.0\lib\net40\MathNet.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -56,8 +63,27 @@
     <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
     <Compile Include="Engine\Render\FpsCounter.cs" />
     <Compile Include="Engine\Render\IRenderHost.cs" />
+    <Compile Include="Engine\Render\IRenderHostSetup.cs" />
     <Compile Include="Engine\Render\RenderHost.cs" />
+    <Compile Include="Engine\Render\RenderHostSetup.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="Inputs\IInput.cs" />
+    <Compile Include="Inputs\IKeyEventArgs.cs" />
+    <Compile Include="Inputs\IMouseEventArgs.cs" />
+    <Compile Include="Inputs\Input.cs" />
+    <Compile Include="Inputs\InputForms.cs" />
+    <Compile Include="Inputs\InputWpf.cs" />
+    <Compile Include="Inputs\ISizeEventArgs.cs" />
+    <Compile Include="Inputs\Key.cs" />
+    <Compile Include="Inputs\KeyEventArgs.cs" />
+    <Compile Include="Inputs\KeyEventHandler.cs" />
+    <Compile Include="Inputs\Modifiers.cs" />
+    <Compile Include="Inputs\MouseButtons.cs" />
+    <Compile Include="Inputs\MouseEventArgs.cs" />
+    <Compile Include="Inputs\MouseEventHandler.cs" />
+    <Compile Include="Inputs\SizeEventArgs.cs" />
+    <Compile Include="Inputs\SizeEventHandler.cs" />
+    <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\U.cs" />
     <Compile Include="Win\User32.cs" />
@@ -68,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

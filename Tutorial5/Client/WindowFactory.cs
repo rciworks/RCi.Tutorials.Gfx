@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RCi.Tutorials.Gfx.Engine.Render;
+using RCi.Tutorials.Gfx.Inputs;
 using RCi.Tutorials.Gfx.Utils;
 using RCi.Tutorials.Gfx.Win;
 
@@ -20,8 +21,8 @@ namespace RCi.Tutorials.Gfx.Client
             // create windows (and render hosts)
             var renderHosts = new[]
             {
-                CreateWindowForm(size, "Forms Gdi", h => new Drivers.Gdi.Render.RenderHost(h)),
-                CreateWindowWpf(size, "Wpf Gdi", h => new Drivers.Gdi.Render.RenderHost(h)),
+                CreateWindowForm(size, "Forms Gdi", rhs => new Drivers.Gdi.Render.RenderHost(rhs)),
+                CreateWindowWpf(size, "Wpf Gdi", rhs => new Drivers.Gdi.Render.RenderHost(rhs)),
             };
 
             // sort windows in the middle of screen
@@ -60,7 +61,7 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Create <see cref="System.Windows.Forms.Form"/> and <see cref="IRenderHost"/> for it.
         /// </summary>
-        private static IRenderHost CreateWindowForm(System.Drawing.Size size, string title, Func<IntPtr, IRenderHost> ctorRenderHost)
+        private static IRenderHost CreateWindowForm(System.Drawing.Size size, string title, Func<IRenderHostSetup, IRenderHost> ctorRenderHost)
         {
             var window = new System.Windows.Forms.Form
             {
@@ -75,13 +76,13 @@ namespace RCi.Tutorials.Gfx.Client
 
             window.Show();
 
-            return ctorRenderHost(hostControl.Handle());
+            return ctorRenderHost(new RenderHostSetup(hostControl.Handle(), new InputForms(hostControl)));
         }
 
         /// <summary>
         /// Create <see cref="System.Windows.Window"/> and <see cref="IRenderHost"/> for it.
         /// </summary>
-        private static IRenderHost CreateWindowWpf(System.Drawing.Size size, string title, Func<IntPtr, IRenderHost> ctorRenderHost)
+        private static IRenderHost CreateWindowWpf(System.Drawing.Size size, string title, Func<IRenderHostSetup, IRenderHost> ctorRenderHost)
         {
             var window = new System.Windows.Window
             {
@@ -103,7 +104,7 @@ namespace RCi.Tutorials.Gfx.Client
 
             window.Show();
 
-            return ctorRenderHost(hostControl.Handle());
+            return ctorRenderHost(new RenderHostSetup(hostControl.Handle(), new InputForms(hostControl)));
         }
 
         /// <summary>

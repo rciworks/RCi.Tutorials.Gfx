@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Win;
 
@@ -35,8 +34,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Constructor.
         /// </summary>
-        public RenderHost(IntPtr hostHandle) :
-            base(hostHandle)
+        public RenderHost(IRenderHostSetup renderHostSetup) :
+            base(renderHostSetup)
         {
             GraphicsHost = Graphics.FromHwnd(HostHandle);
             BufferedGraphics = BufferedGraphicsManager.Current.Allocate(GraphicsHost, new Rectangle(Point.Empty, W.GetClientRectangle(HostHandle).Size));
