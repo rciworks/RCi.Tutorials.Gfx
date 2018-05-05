@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 3 - GDI Double Buf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 4 - Forms, WPF and WinAPI", "Tutorial4\Tutorial 4 - Forms, WPF and WinAPI.csproj", "{02A0A9DC-7942-4071-BDA7-60695DA5E779}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 5 - Input", "Tutorial5\Tutorial 5 - Input.csproj", "{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{02A0A9DC-7942-4071-BDA7-60695DA5E779}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02A0A9DC-7942-4071-BDA7-60695DA5E779}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02A0A9DC-7942-4071-BDA7-60695DA5E779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
