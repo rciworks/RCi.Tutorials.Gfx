@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 4 - Forms, WPF and
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 5 - Input", "Tutorial5\Tutorial 5 - Input.csproj", "{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 6 - GDI Back Buffer", "Tutorial6\Tutorial 6 - GDI Back Buffer.csproj", "{C4240246-E59D-4F53-9BE5-4E88329FEABC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4240246-E59D-4F53-9BE5-4E88329FEABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4240246-E59D-4F53-9BE5-4E88329FEABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4240246-E59D-4F53-9BE5-4E88329FEABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4240246-E59D-4F53-9BE5-4E88329FEABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
