@@ -69,8 +69,6 @@
 
             // clear storage
             Control = default;
-
-            base.Dispose();
         }
 
         #endregion

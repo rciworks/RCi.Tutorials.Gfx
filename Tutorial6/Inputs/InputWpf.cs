@@ -72,8 +72,6 @@ namespace RCi.Tutorials.Gfx.Inputs
 
             // clear storage
             Control = default;
-
-            base.Dispose();
         }
 
         #endregion
