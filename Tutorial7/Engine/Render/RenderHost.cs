@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using RCi.Tutorials.Gfx.Engine.Common;
 using RCi.Tutorials.Gfx.Inputs;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
@@ -19,14 +20,19 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         public IInput HostInput { get; private set; }
 
         /// <summary>
+        /// Desired surface size.
+        /// </summary>
+        protected Size HostSize { get; private set; }
+
+        /// <summary>
         /// Desired buffer size.
         /// </summary>
         protected Size BufferSize { get; private set; }
 
         /// <summary>
-        /// Viewport size. The size into which buffer will be scaled.
+        /// Viewport.
         /// </summary>
-        protected Size ViewportSize { get; private set; }
+        protected Viewport Viewport { get; private set; }
 
         /// <inheritdoc />
         public FpsCounter FpsCounter { get; private set; }
@@ -43,8 +49,9 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             HostHandle = renderHostSetup.HostHandle;
             HostInput = renderHostSetup.HostInput;
 
+            HostSize = HostInput.Size;
             BufferSize = HostInput.Size;
-            ViewportSize = HostInput.Size;
+            Viewport = new Viewport(Point.Empty, HostSize, 0, 1);
 
             FpsCounter = new FpsCounter(new TimeSpan(0, 0, 0, 0, 1000));
 
@@ -59,8 +66,9 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             FpsCounter.Dispose();
             FpsCounter = default;
 
+            Viewport = default;
             BufferSize = default;
-            ViewportSize = default;
+            HostSize = default;
 
             HostInput.Dispose();
             HostInput = default;
@@ -75,16 +83,35 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc cref="IInput.SizeChanged" />
         private void HostInputOnSizeChanged(object sender, ISizeEventArgs args)
         {
-            var size = args.NewSize;
-
-            // sanity check
-            if (size.Width < 1 || size.Height < 1)
+            Size Sanitize(Size size)
             {
-                size = new Size(1, 1);
+                if (size.Width < 1 || size.Height < 1)
+                {
+                    size = new Size(1, 1);
+                }
+                return size;
             }
 
-            ResizeBuffers(size);
-            ResizeViewport(size);
+            var hostSize = Sanitize(HostInput.Size);
+            if (HostSize != hostSize)
+            {
+                ResizeHost(hostSize);
+            }
+
+            var bufferSize = Sanitize(args.NewSize);
+            if (BufferSize != bufferSize)
+            {
+                ResizeBuffers(bufferSize);
+            }
+        }
+
+        /// <summary>
+        /// Resize host.
+        /// </summary>
+        protected virtual void ResizeHost(Size size)
+        {
+            HostSize = size;
+            Viewport = new Viewport(Point.Empty, size, 0, 1);
         }
 
         /// <summary>
@@ -93,14 +120,6 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         protected virtual void ResizeBuffers(Size size)
         {
             BufferSize = size;
-        }
-
-        /// <summary>
-        /// Resize viewport.
-        /// </summary>
-        protected virtual void ResizeViewport(Size size)
-        {
-            ViewportSize = size;
         }
 
         #endregion
