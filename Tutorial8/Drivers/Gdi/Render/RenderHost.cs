@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using MathNet.Spatial.Euclidean;
-using RCi.Tutorials.Gfx.Engine.Common;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
