@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 6 - GDI Back Buffe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 7 - Screen Space, View Space", "Tutorial7\Tutorial 7 - Screen Space, View Space.csproj", "{5EBA559E-817E-4FE7-B99D-A0608C0B5120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 8", "Tutorial8\Tutorial 8.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 8 - Matrices, Transformations", "Tutorial8\Tutorial 8 - Matrices, Transformations.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

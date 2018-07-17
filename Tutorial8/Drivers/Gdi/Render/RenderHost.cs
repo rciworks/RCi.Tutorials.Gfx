@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Engine.Common;
 using RCi.Tutorials.Gfx.Engine.Render;
+using RCi.Tutorials.Gfx.Mathematics;
+using RCi.Tutorials.Gfx.Mathematics.Extensions;
 using RCi.Tutorials.Gfx.Utils;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
@@ -147,14 +150,24 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             });
 
             // screen space triangle
-            DrawLineScreenSpace(graphics, Pens.White, new Point3D(100, 100, 0), new Point3D(100, 200, 0));
-            DrawLineScreenSpace(graphics, Pens.White, new Point3D(100, 200, 0), new Point3D(300, 200, 0));
-            DrawLineScreenSpace(graphics, Pens.White, new Point3D(300, 200, 0), new Point3D(100, 100, 0));
+            DrawPolyline(new[]
+            {
+                new Point3D(100, 100, 0),
+                new Point3D(100, 200, 0),
+                new Point3D(300, 200, 0),
+                new Point3D(100, 100, 0),
+            }, Space.Screen, Pens.White);
 
             // view space triangle
-            DrawLineViewSpace(graphics, Pens.Black, new Point3D(0, 0, 0), new Point3D(0, -0.9f, 0));
-            DrawLineViewSpace(graphics, Pens.Black, new Point3D(0, -0.9f, 0), new Point3D(0.9F, -0.9f, 0));
-            DrawLineViewSpace(graphics, Pens.Black, new Point3D(0.9F, -0.9f, 0), new Point3D(0, 0, 0));
+            DrawPolyline(new[]
+            {
+                new Point3D(0, 0, 0),
+                new Point3D(0, -0.9f, 0),
+                new Point3D(0.9F, -0.9f, 0),
+                new Point3D(0, 0, 0),
+            }, Space.View, Pens.Black);
+
+            TestTransformations();
 
             graphics.DrawString(FpsCounter.FpsString, FontConsolas12, Brushes.Red, 0, 0);
             graphics.DrawString($"Buffer   = {BufferSize.Width}, {BufferSize.Height}", FontConsolas12, Brushes.Cyan, 0, 16);
@@ -165,26 +178,108 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             BufferedGraphics.Render(GraphicsHostDeviceContext);
         }
 
-        private void DrawLineScreenSpace(Graphics graphics, Pen pen, Point3D startScreen, Point3D endScreen)
+        private void DrawPolyline(IEnumerable<Point3D> points, Space space, Pen pen)
         {
-            graphics.DrawLine(pen, (float)startScreen.X, (float)startScreen.Y, (float)endScreen.X, (float)endScreen.Y);
+            switch (space)
+            {
+                case Space.World:
+                    throw new NotSupportedException();
+
+                case Space.View:
+                    DrawPolylineScreenSpace(MatrixEx.Viewport(Viewport).Transform(points), pen);
+                    break;
+
+                case Space.Screen:
+                    DrawPolylineScreenSpace(points, pen);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(space), space, null);
+            }
         }
 
-        private static Point3D TransformFromViewSpaceToScreenSpace(Viewport viewport, Point3D point)
+        private void DrawPolylineScreenSpace(IEnumerable<Point3D> pointsScreen, Pen pen)
         {
-            return new Point3D
-            (
-                (point.X + 1) * 0.5 * viewport.Width + viewport.X,
-                (1 - point.Y) * 0.5 * viewport.Height + viewport.Y,
-                0
-            );
+            var from = default(Point3D?);
+            foreach (var pointScreen in pointsScreen)
+            {
+                if (from.HasValue)
+                {
+                    BackBuffer.Graphics.DrawLine(pen, (float)from.Value.X, (float)from.Value.Y, (float)pointScreen.X, (float)pointScreen.Y);
+                }
+                from = pointScreen;
+            }
         }
 
-        private void DrawLineViewSpace(Graphics graphics, Pen pen, Point3D startView, Point3D endView)
+        private void TestTransformations()
         {
-            var startScreen = TransformFromViewSpaceToScreenSpace(Viewport, startView);
-            var endScreen = TransformFromViewSpaceToScreenSpace(Viewport, endView);
-            DrawLineScreenSpace(graphics, pen, startScreen, endScreen);
+            // raw coordinates for arrow in screen space
+            var pointsArrowScreen = new[]
+            {
+                new Point3D(0, 0, 0),
+                new Point3D(40, 0, 0),
+                new Point3D(35, 10, 0),
+                new Point3D(50, 0, 0),
+                new Point3D(35, -10, 0),
+                new Point3D(40, 0, 0),
+            };
+
+            // raw coordinates for arrow in view space
+            var pointsArrowView = new[]
+            {
+                new Point3D(0, 0, 0),
+                new Point3D(0.08, 0, 0),
+                new Point3D(0.07, 0.02, 0),
+                new Point3D(0.1, 0, 0),
+                new Point3D(0.07, -0.02, 0),
+                new Point3D(0.08, 0, 0),
+            };
+
+            // draw default
+            DrawPolyline(pointsArrowScreen, Space.Screen, Pens.Yellow);
+            DrawPolyline(pointsArrowView, Space.View, Pens.Cyan);
+
+            // get animation params
+            var periodDuration = new TimeSpan(0, 0, 0, 5, 0);
+            var utcNow = DateTime.UtcNow;
+            var t = (utcNow.Second * 1000 + utcNow.Millisecond) % periodDuration.TotalMilliseconds / periodDuration.TotalMilliseconds;
+            var sinT = Math.Sin(t * Math.PI * 2);
+
+            // translate
+            DrawPolyline((MatrixEx.Translate(sinT * 40, 0, 0) * MatrixEx.Translate(50, 100, 0)).Transform(pointsArrowScreen), Space.Screen, Pens.White);
+            DrawPolyline((MatrixEx.Translate(sinT * 0.1, 0, 0) * MatrixEx.Translate(-0.8, 0, 0)).Transform(pointsArrowView), Space.View, Pens.Black);
+
+            // scale
+            DrawPolyline((MatrixEx.Scale(t * 2, t * 2, 1) * MatrixEx.Translate(150, 100, 0)).Transform(pointsArrowScreen), Space.Screen, Pens.White);
+            DrawPolyline((MatrixEx.Scale(t * 2, t * 2, 1) * MatrixEx.Translate(-0.6, 0, 0)).Transform(pointsArrowView), Space.View, Pens.Black);
+
+            // rotate
+            DrawPolyline((MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) * MatrixEx.Translate(300, 100, 0)).Transform(pointsArrowScreen), Space.Screen, Pens.White);
+            DrawPolyline((MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) * MatrixEx.Translate(-0.2, 0, 0)).Transform(pointsArrowView), Space.View, Pens.Black);
+
+            // rotate * translate
+            DrawPolyline((
+                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *
+                MatrixEx.Translate(0, sinT * 40, 0) *
+                MatrixEx.Translate(400, 100, 0)
+            ).Transform(pointsArrowScreen), Space.Screen, Pens.White);
+            DrawPolyline((
+                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *
+                MatrixEx.Translate(0, sinT * 0.2, 0) *
+                MatrixEx.Translate(0, 0, 0)
+            ).Transform(pointsArrowView), Space.View, Pens.Black);
+
+            // translate * rotate
+            DrawPolyline((
+                MatrixEx.Translate(0, sinT * 40, 0) *
+                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *        
+                MatrixEx.Translate(500, 100, 0)
+            ).Transform(pointsArrowScreen), Space.Screen, Pens.White);
+            DrawPolyline((
+                MatrixEx.Translate(0, sinT * 0.2, 0) *
+                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *
+                MatrixEx.Translate(0.4, 0, 0)
+            ).Transform(pointsArrowView), Space.View, Pens.Black);
         }
 
         #endregion
