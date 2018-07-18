@@ -37,6 +37,11 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public FpsCounter FpsCounter { get; private set; }
 
+        /// <summary>
+        /// Timestamp when frame was started (UTC).
+        /// </summary>
+        protected DateTime FrameStarted { get; private set; }
+
         #endregion
 
         #region // ctor
@@ -129,10 +134,9 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public void Render()
         {
+            FrameStarted = DateTime.UtcNow;
             FpsCounter.StartFrame();
-
             RenderInternal();
-
             FpsCounter.StopFrame();
         }
 

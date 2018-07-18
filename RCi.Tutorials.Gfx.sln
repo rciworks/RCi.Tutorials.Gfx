@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 7 - Screen Space, 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 8 - Matrices, Transformations", "Tutorial8\Tutorial 8 - Matrices, Transformations.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 9", "Tutorial9\Tutorial 9.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 9 - World Space, Model Space", "Tutorial9\Tutorial 9 - World Space, Model Space.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

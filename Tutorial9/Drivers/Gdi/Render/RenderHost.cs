@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Threading.Tasks;
+using System.Linq;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Mathematics;
@@ -132,45 +132,12 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         protected override void RenderInternal()
         {
             var graphics = BackBuffer.Graphics;
+            graphics.Clear(Color.Black);
 
-            var t = DateTime.UtcNow.Millisecond / 1000.0;
-            Color GetColor(int x, int y) => Color.FromArgb
-            (
-                byte.MaxValue,
-                (byte)((double)x / BufferSize.Width * byte.MaxValue),
-                (byte)((double)y / BufferSize.Height * byte.MaxValue),
-                (byte)(Math.Sin(t * Math.PI) * byte.MaxValue)
-            );
-
-            Parallel.For(0, BackBuffer.Buffer.Length, index =>
-            {
-                BackBuffer.GetXY(index, out var x, out var y);
-                BackBuffer.Buffer[index] = GetColor(x, y).ToArgb();
-            });
-
-            // screen space triangle
-            DrawPolyline(new[]
-            {
-                new Point3D(100, 100, 0),
-                new Point3D(100, 200, 0),
-                new Point3D(300, 200, 0),
-                new Point3D(100, 100, 0),
-            }, Space.Screen, Pens.White);
-
-            // view space triangle
-            DrawPolyline(new[]
-            {
-                new Point3D(0, 0, 0),
-                new Point3D(0, -0.9f, 0),
-                new Point3D(0.9F, -0.9f, 0),
-                new Point3D(0, 0, 0),
-            }, Space.View, Pens.Black);
-
-            TestTransformations();
+            DrawWorldAxis();
+            DrawGeometry();
 
             graphics.DrawString(FpsCounter.FpsString, FontConsolas12, Brushes.Red, 0, 0);
-            graphics.DrawString($"Buffer   = {BufferSize.Width}, {BufferSize.Height}", FontConsolas12, Brushes.Cyan, 0, 16);
-            graphics.DrawString($"Viewport = {Viewport.Width}, {Viewport.Height}", FontConsolas12, Brushes.Cyan, 0, 32);
 
             // flush and swap buffers
             BufferedGraphics.Graphics.DrawImage(BackBuffer.Bitmap, new RectangleF(PointF.Empty, Viewport.Size), new RectangleF(new PointF(-0.5f, -0.5f), BufferSize), GraphicsUnit.Pixel);
@@ -182,7 +149,34 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             switch (space)
             {
                 case Space.World:
-                    throw new NotSupportedException();
+                    var t = GetDeltaTime(new TimeSpan(0, 0, 0, 10));
+                    var angle = t * Math.PI * 2;
+                    var radius = 2;
+
+                    // view matrix
+                    var cameraPosition = new Vector3D(Math.Sin(angle) * radius, Math.Cos(angle) * radius, 1);
+                    var cameraTarget = new Vector3D(0, 0, 0);
+                    var cameraUpVector = new UnitVector3D(0, 0, 1);
+                    var matrixView = MatrixEx.LookAtRH(cameraPosition, cameraTarget, cameraUpVector);
+
+                    // projection matrix
+                    var fovY = Math.PI * 0.5;
+                    var aspectRatio = (double)BufferSize.Width / BufferSize.Height;
+                    var nearPlane = 0.001;
+                    var farPlane = 1000;
+                    var matrixPerspective = MatrixEx.PerspectiveFovRH(fovY, aspectRatio, nearPlane, farPlane);
+
+                    var fieldHeight = 3;
+                    var fieldWidth = fieldHeight * aspectRatio;
+                    var matrixOrthographic = MatrixEx.OrthoRH(fieldWidth, fieldHeight, nearPlane, farPlane);
+
+                    var matrixProjection = matrixPerspective;
+
+                    // view space (NDC) to screen space matrix
+                    var matrixViewport = MatrixEx.Viewport(Viewport);
+
+                    DrawPolylineScreenSpace((matrixView * matrixProjection * matrixViewport).Transform(points), pen);
+                    break;
 
                 case Space.View:
                     DrawPolylineScreenSpace(MatrixEx.Viewport(Viewport).Transform(points), pen);
@@ -210,75 +204,73 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             }
         }
 
-        private void TestTransformations()
+        private double GetDeltaTime(TimeSpan periodDuration)
         {
-            // raw coordinates for arrow in screen space
-            var pointsArrowScreen = new[]
+            return GetDeltaTime(FrameStarted, periodDuration);
+        }
+
+        private static double GetDeltaTime(DateTime timestamp, TimeSpan periodDuration)
+        {
+            return (timestamp.Second * 1000 + timestamp.Millisecond) % periodDuration.TotalMilliseconds / periodDuration.TotalMilliseconds;
+        }
+
+        private void DrawWorldAxis()
+        {
+            DrawPolyline(new[] { new Point3D(0, 0, 0), new Point3D(1, 0, 0), }, Space.World, Pens.Red);
+            DrawPolyline(new[] { new Point3D(0, 0, 0), new Point3D(0, 1, 0), }, Space.World, Pens.LawnGreen);
+            DrawPolyline(new[] { new Point3D(0, 0, 0), new Point3D(0, 0, 1), }, Space.World, Pens.Blue);
+        }
+
+        private static readonly Point3D[][] CubePolylines = new[]
+        {
+            new[]
             {
                 new Point3D(0, 0, 0),
-                new Point3D(40, 0, 0),
-                new Point3D(35, 10, 0),
-                new Point3D(50, 0, 0),
-                new Point3D(35, -10, 0),
-                new Point3D(40, 0, 0),
-            };
-
-            // raw coordinates for arrow in view space
-            var pointsArrowView = new[]
-            {
+                new Point3D(1, 0, 0),
+                new Point3D(1, 1, 0),
+                new Point3D(0, 1, 0),
                 new Point3D(0, 0, 0),
-                new Point3D(0.08, 0, 0),
-                new Point3D(0.07, 0.02, 0),
-                new Point3D(0.1, 0, 0),
-                new Point3D(0.07, -0.02, 0),
-                new Point3D(0.08, 0, 0),
-            };
+            },
+            new[]
+            {
+                new Point3D(0, 0, 1),
+                new Point3D(1, 0, 1),
+                new Point3D(1, 1, 1),
+                new Point3D(0, 1, 1),
+                new Point3D(0, 0, 1),
+            },
+            new[] { new Point3D(0, 0, 0), new Point3D(0, 0, 1), },
+            new[] { new Point3D(1, 0, 0), new Point3D(1, 0, 1), },
+            new[] { new Point3D(1, 1, 0), new Point3D(1, 1, 1), },
+            new[] { new Point3D(0, 1, 0), new Point3D(0, 1, 1), },
+        }.Select(cubePolyline => MatrixEx.Translate(-0.5, -0.5, -0.5).Transform(cubePolyline).ToArray()).ToArray();
 
-            // draw default
-            DrawPolyline(pointsArrowScreen, Space.Screen, Pens.Yellow);
-            DrawPolyline(pointsArrowView, Space.View, Pens.Cyan);
+        private void DrawGeometry()
+        {
+            // bigger cube
+            var angle = GetDeltaTime(new TimeSpan(0, 0, 0, 5)) * Math.PI * 2;
+            var matrixModel =
+                MatrixEx.Scale(0.5) *
+                MatrixEx.Rotate(new UnitVector3D(1, 0, 0), angle) *
+                MatrixEx.Translate(1, 0, 0);
 
-            // get animation params
-            var periodDuration = new TimeSpan(0, 0, 0, 5, 0);
-            var utcNow = DateTime.UtcNow;
-            var t = (utcNow.Second * 1000 + utcNow.Millisecond) % periodDuration.TotalMilliseconds / periodDuration.TotalMilliseconds;
-            var sinT = Math.Sin(t * Math.PI * 2);
+            foreach (var cubePolyline in CubePolylines)
+            {
+                DrawPolyline(matrixModel.Transform(cubePolyline), Space.World, Pens.White);
+            }
 
-            // translate
-            DrawPolyline((MatrixEx.Translate(sinT * 40, 0, 0) * MatrixEx.Translate(50, 100, 0)).Transform(pointsArrowScreen), Space.Screen, Pens.White);
-            DrawPolyline((MatrixEx.Translate(sinT * 0.1, 0, 0) * MatrixEx.Translate(-0.8, 0, 0)).Transform(pointsArrowView), Space.View, Pens.Black);
+            // smaller cube
+            angle = GetDeltaTime(new TimeSpan(0, 0, 0, 1)) * Math.PI * 2;
+            matrixModel =
+                MatrixEx.Scale(0.5) *
+                MatrixEx.Rotate(new UnitVector3D(0, 1, 0), angle) *
+                MatrixEx.Translate(0, 1, 0) *
+                matrixModel;
 
-            // scale
-            DrawPolyline((MatrixEx.Scale(t * 2, t * 2, 1) * MatrixEx.Translate(150, 100, 0)).Transform(pointsArrowScreen), Space.Screen, Pens.White);
-            DrawPolyline((MatrixEx.Scale(t * 2, t * 2, 1) * MatrixEx.Translate(-0.6, 0, 0)).Transform(pointsArrowView), Space.View, Pens.Black);
-
-            // rotate
-            DrawPolyline((MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) * MatrixEx.Translate(300, 100, 0)).Transform(pointsArrowScreen), Space.Screen, Pens.White);
-            DrawPolyline((MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) * MatrixEx.Translate(-0.2, 0, 0)).Transform(pointsArrowView), Space.View, Pens.Black);
-
-            // rotate * translate
-            DrawPolyline((
-                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *
-                MatrixEx.Translate(0, sinT * 40, 0) *
-                MatrixEx.Translate(400, 100, 0)
-            ).Transform(pointsArrowScreen), Space.Screen, Pens.White);
-            DrawPolyline((
-                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *
-                MatrixEx.Translate(0, sinT * 0.2, 0) *
-                MatrixEx.Translate(0, 0, 0)
-            ).Transform(pointsArrowView), Space.View, Pens.Black);
-
-            // translate * rotate
-            DrawPolyline((
-                MatrixEx.Translate(0, sinT * 40, 0) *
-                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *        
-                MatrixEx.Translate(500, 100, 0)
-            ).Transform(pointsArrowScreen), Space.Screen, Pens.White);
-            DrawPolyline((
-                MatrixEx.Translate(0, sinT * 0.2, 0) *
-                MatrixEx.Rotate(new Vector3D(0, 0, 1), t * Math.PI * 2) *
-                MatrixEx.Translate(0.4, 0, 0)
-            ).Transform(pointsArrowView), Space.View, Pens.Black);
+            foreach (var cubePolyline in CubePolylines)
+            {
+                DrawPolyline(matrixModel.Transform(cubePolyline), Space.World, Pens.Yellow);
+            }
         }
 
         #endregion

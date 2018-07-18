@@ -357,7 +357,7 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         #region // gfx
 
         /// <summary>
-        /// World space to View space
+        /// World space to View space.
         /// </summary>
         public static Matrix<double> LookAtRH(in Vector3D cameraPosition, in Vector3D cameraTarget, in UnitVector3D cameraUpVector)
         {
