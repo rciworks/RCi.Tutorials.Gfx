@@ -164,10 +164,12 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
                     var aspectRatio = (double)BufferSize.Width / BufferSize.Height;
                     var nearPlane = 0.001;
                     var farPlane = 1000;
+                    // ReSharper disable once UnusedVariable
                     var matrixPerspective = MatrixEx.PerspectiveFovRH(fovY, aspectRatio, nearPlane, farPlane);
 
                     var fieldHeight = 3;
                     var fieldWidth = fieldHeight * aspectRatio;
+                    // ReSharper disable once UnusedVariable
                     var matrixOrthographic = MatrixEx.OrthoRH(fieldWidth, fieldHeight, nearPlane, farPlane);
 
                     var matrixProjection = matrixPerspective;
