@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 1 - Create Windows", "Tutorial1\Tutorial 1 - Create Windows.csproj", "{490C5D5B-5BD4-4A9F-91CC-C0F6B94AE93B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 001 - Create Windows", "Tutorial1\Tutorial 001 - Create Windows.csproj", "{490C5D5B-5BD4-4A9F-91CC-C0F6B94AE93B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 2 - Render Loop, Fps Counter", "Tutorial2\Tutorial 2 - Render Loop, Fps Counter.csproj", "{E31589B9-87DC-4650-900F-E2DAE18370AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 002 - Render Loop, Fps Counter", "Tutorial2\Tutorial 002 - Render Loop, Fps Counter.csproj", "{E31589B9-87DC-4650-900F-E2DAE18370AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 3 - GDI Double Buffer", "Tutorial3\Tutorial 3 - GDI Double Buffer.csproj", "{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 003 - GDI Double Buffer", "Tutorial3\Tutorial 003 - GDI Double Buffer.csproj", "{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 4 - Forms, WPF and WinAPI", "Tutorial4\Tutorial 4 - Forms, WPF and WinAPI.csproj", "{02A0A9DC-7942-4071-BDA7-60695DA5E779}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 004 - Forms, WPF and WinAPI", "Tutorial4\Tutorial 004 - Forms, WPF and WinAPI.csproj", "{02A0A9DC-7942-4071-BDA7-60695DA5E779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 5 - Input", "Tutorial5\Tutorial 5 - Input.csproj", "{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 005 - Input", "Tutorial5\Tutorial 005 - Input.csproj", "{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 6 - GDI Back Buffer", "Tutorial6\Tutorial 6 - GDI Back Buffer.csproj", "{C4240246-E59D-4F53-9BE5-4E88329FEABC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 006 - GDI Back Buffer", "Tutorial6\Tutorial 006 - GDI Back Buffer.csproj", "{C4240246-E59D-4F53-9BE5-4E88329FEABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 7 - Screen Space, View Space", "Tutorial7\Tutorial 7 - Screen Space, View Space.csproj", "{5EBA559E-817E-4FE7-B99D-A0608C0B5120}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 007 - Screen Space, View Space", "Tutorial7\Tutorial 007 - Screen Space, View Space.csproj", "{5EBA559E-817E-4FE7-B99D-A0608C0B5120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 8 - Matrices, Transformations", "Tutorial8\Tutorial 8 - Matrices, Transformations.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 008 - Matrices, Transformations", "Tutorial8\Tutorial 008 - Matrices, Transformations.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 9 - World Space, Model Space", "Tutorial9\Tutorial 9 - World Space, Model Space.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 009 - World Space, Model Space", "Tutorial9\Tutorial 009 - World Space, Model Space.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 010", "Tutorial10\Tutorial 010.csproj", "{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{DD0541AD-B692-4767-ABBA-36F1A368F13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD0541AD-B692-4767-ABBA-36F1A368F13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD0541AD-B692-4767-ABBA-36F1A368F13D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
