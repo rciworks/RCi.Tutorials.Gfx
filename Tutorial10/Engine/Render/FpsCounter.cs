@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
 {
+    /// <summary>
+    /// Measures fps (frames per second).
+    /// </summary>
     public class FpsCounter :
         IDisposable
     {

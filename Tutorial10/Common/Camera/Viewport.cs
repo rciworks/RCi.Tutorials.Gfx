@@ -1,5 +1,8 @@
-﻿namespace RCi.Tutorials.Gfx.Engine.Common
+﻿namespace RCi.Tutorials.Gfx.Common.Camera
 {
+    /// <summary>
+    /// Specifies the affine transformation of x and y from normalized device coordinates to screen coordinates.
+    /// </summary>
     public struct Viewport
     {
         #region // storage

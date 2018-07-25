@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 008 - Matrices, Tr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 009 - World Space, Model Space", "Tutorial9\Tutorial 009 - World Space, Model Space.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 010", "Tutorial10\Tutorial 010.csproj", "{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 010 - Camera", "Tutorial10\Tutorial 010 - Camera.csproj", "{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

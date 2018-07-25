@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using RCi.Tutorials.Gfx.Engine.Common;
+using MathNet.Spatial.Euclidean;
+using RCi.Tutorials.Gfx.Common.Camera;
+using RCi.Tutorials.Gfx.Common.Camera.Projections;
 using RCi.Tutorials.Gfx.Inputs;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
@@ -29,10 +31,19 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// </summary>
         protected Size BufferSize { get; private set; }
 
-        /// <summary>
-        /// Viewport.
-        /// </summary>
-        protected Viewport Viewport { get; private set; }
+        /// <inheritdoc cref="CameraInfo" />
+        private ICameraInfo m_CameraInfo;
+
+        /// <inheritdoc />
+        public ICameraInfo CameraInfo
+        {
+            get => m_CameraInfo;
+            set
+            {
+                m_CameraInfo = value;
+                CameraInfoChanged?.Invoke(this, m_CameraInfo);
+            }
+        }
 
         /// <inheritdoc />
         public FpsCounter FpsCounter { get; private set; }
@@ -41,6 +52,13 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// Timestamp when frame was started (UTC).
         /// </summary>
         protected DateTime FrameStarted { get; private set; }
+
+        #endregion
+
+        #region // events
+
+        /// <inheritdoc />
+        public event EventHandler<ICameraInfo> CameraInfoChanged;
 
         #endregion
 
@@ -56,11 +74,20 @@ namespace RCi.Tutorials.Gfx.Engine.Render
 
             HostSize = HostInput.Size;
             BufferSize = HostInput.Size;
-            Viewport = new Viewport(Point.Empty, HostSize, 0, 1);
-
+            CameraInfo = new CameraInfo
+            (
+                new Point3D(1, 1, 1),
+                new Point3D(0, 0, 0),
+                new UnitVector3D(0, 0, 1),
+                new ProjectionPerspective(0.001, 1000, Math.PI * 0.5, 1),
+                //new ProjectionOrthographic(0.001, 1000, 2, 2),
+                new Viewport(0, 0, 1, 1, 0, 1)
+            );
             FpsCounter = new FpsCounter(new TimeSpan(0, 0, 0, 0, 1000));
 
             HostInput.SizeChanged += HostInputOnSizeChanged;
+
+            HostInputOnSizeChanged(this, new SizeEventArgs(HostSize));
         }
 
         /// <inheritdoc />
@@ -71,7 +98,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             FpsCounter.Dispose();
             FpsCounter = default;
 
-            Viewport = default;
+            CameraInfo = default;
             BufferSize = default;
             HostSize = default;
 
@@ -97,16 +124,34 @@ namespace RCi.Tutorials.Gfx.Engine.Render
                 return size;
             }
 
-            var hostSize = Sanitize(HostInput.Size);
+            // update host (surface size)
+            var hostSize = Sanitize(args.NewSize);
             if (HostSize != hostSize)
             {
                 ResizeHost(hostSize);
             }
 
-            var bufferSize = Sanitize(args.NewSize);
-            if (BufferSize != bufferSize)
+            // update camera info
+            var cameraInfo = CameraInfo;
+            if (cameraInfo.Viewport.Size != hostSize)
             {
-                ResizeBuffers(bufferSize);
+                var viewport = new Viewport
+                (
+                    cameraInfo.Viewport.X,
+                    cameraInfo.Viewport.Y,
+                    hostSize.Width,
+                    hostSize.Height,
+                    cameraInfo.Viewport.MinZ,
+                    cameraInfo.Viewport.MaxZ
+                );
+                CameraInfo = new CameraInfo
+                (
+                    cameraInfo.Position,
+                    cameraInfo.Target,
+                    cameraInfo.UpVector,
+                    cameraInfo.Projection.GetAdjustedProjection(viewport.AspectRatio),
+                    viewport
+                );
             }
         }
 
@@ -116,7 +161,6 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         protected virtual void ResizeHost(Size size)
         {
             HostSize = size;
-            Viewport = new Viewport(Point.Empty, size, 0, 1);
         }
 
         /// <summary>
@@ -127,6 +171,18 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             BufferSize = size;
         }
 
+        /// <summary>
+        /// Ensure <see cref="BufferSize"/> are synced with <see cref="ICameraInfo"/>
+        /// </summary>
+        protected void EnsureBufferSize()
+        {
+            var size = CameraInfo.Viewport.Size;
+            if (BufferSize != size)
+            {
+                ResizeBuffers(size);
+            }
+        }
+
         #endregion
 
         #region // render
@@ -134,6 +190,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public void Render()
         {
+            EnsureBufferSize();
             FrameStarted = DateTime.UtcNow;
             FpsCounter.StartFrame();
             RenderInternal();

@@ -61,8 +61,18 @@
   <ItemGroup>
     <Compile Include="Client\Program.cs" />
     <Compile Include="Client\WindowFactory.cs" />
+    <Compile Include="Common\Camera\CameraInfo.cs" />
+    <Compile Include="Common\Camera\CameraInfoCache.cs" />
+    <Compile Include="Common\Camera\ICameraInfo.cs" />
+    <Compile Include="Common\Camera\ICameraInfoCache.cs" />
+    <Compile Include="Common\Camera\Projections\IProjection.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionOrthographic.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionPerspective.cs" />
+    <Compile Include="Common\Camera\Projections\Projection.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
     <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
-    <Compile Include="Engine\Common\Viewport.cs" />
+    <Compile Include="Common\Camera\Viewport.cs" />
     <Compile Include="Engine\Render\FpsCounter.cs" />
     <Compile Include="Engine\Render\IRenderHost.cs" />
     <Compile Include="Engine\Render\IRenderHostSetup.cs" />

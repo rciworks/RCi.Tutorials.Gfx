@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Spatial.Euclidean;
-using RCi.Tutorials.Gfx.Engine.Common;
+using RCi.Tutorials.Gfx.Common.Camera;
 
 namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 {

@@ -140,7 +140,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             graphics.DrawString(FpsCounter.FpsString, FontConsolas12, Brushes.Red, 0, 0);
 
             // flush and swap buffers
-            BufferedGraphics.Graphics.DrawImage(BackBuffer.Bitmap, new RectangleF(PointF.Empty, Viewport.Size), new RectangleF(new PointF(-0.5f, -0.5f), BufferSize), GraphicsUnit.Pixel);
+            BufferedGraphics.Graphics.DrawImage(BackBuffer.Bitmap, new RectangleF(PointF.Empty, HostSize), new RectangleF(new PointF(-0.5f, -0.5f), BufferSize), GraphicsUnit.Pixel);
             BufferedGraphics.Render(GraphicsHostDeviceContext);
         }
 
@@ -149,39 +149,11 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             switch (space)
             {
                 case Space.World:
-                    var t = GetDeltaTime(new TimeSpan(0, 0, 0, 10));
-                    var angle = t * Math.PI * 2;
-                    var radius = 2;
-
-                    // view matrix
-                    var cameraPosition = new Vector3D(Math.Sin(angle) * radius, Math.Cos(angle) * radius, 1);
-                    var cameraTarget = new Vector3D(0, 0, 0);
-                    var cameraUpVector = new UnitVector3D(0, 0, 1);
-                    var matrixView = MatrixEx.LookAtRH(cameraPosition, cameraTarget, cameraUpVector);
-
-                    // projection matrix
-                    var fovY = Math.PI * 0.5;
-                    var aspectRatio = (double)BufferSize.Width / BufferSize.Height;
-                    var nearPlane = 0.001;
-                    var farPlane = 1000;
-                    // ReSharper disable once UnusedVariable
-                    var matrixPerspective = MatrixEx.PerspectiveFovRH(fovY, aspectRatio, nearPlane, farPlane);
-
-                    var fieldHeight = 3;
-                    var fieldWidth = fieldHeight * aspectRatio;
-                    // ReSharper disable once UnusedVariable
-                    var matrixOrthographic = MatrixEx.OrthoRH(fieldWidth, fieldHeight, nearPlane, farPlane);
-
-                    var matrixProjection = matrixPerspective;
-
-                    // view space (NDC) to screen space matrix
-                    var matrixViewport = MatrixEx.Viewport(Viewport);
-
-                    DrawPolylineScreenSpace((matrixView * matrixProjection * matrixViewport).Transform(points), pen);
+                    DrawPolylineScreenSpace(CameraInfo.Cache.MatrixViewProjectionViewport.Transform(points), pen);
                     break;
 
                 case Space.View:
-                    DrawPolylineScreenSpace(MatrixEx.Viewport(Viewport).Transform(points), pen);
+                    DrawPolylineScreenSpace(CameraInfo.Cache.MatrixViewport.Transform(points), pen);
                     break;
 
                 case Space.Screen:
@@ -211,7 +183,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             return GetDeltaTime(FrameStarted, periodDuration);
         }
 
-        private static double GetDeltaTime(DateTime timestamp, TimeSpan periodDuration)
+        public static double GetDeltaTime(DateTime timestamp, TimeSpan periodDuration)
         {
             return (timestamp.Second * 1000 + timestamp.Millisecond) % periodDuration.TotalMilliseconds / periodDuration.TotalMilliseconds;
         }
@@ -249,7 +221,14 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 
         private void DrawGeometry()
         {
-            // bigger cube
+            // screen space
+            DrawPolyline(new[] { new Point3D(3, 20, 0), new Point3D(140, 20, 0) }, Space.Screen, Pens.Gray);
+
+            // view space
+            DrawPolyline(new[] { new Point3D(-0.9, -0.9, 0), new Point3D(0.9, -0.9, 0) }, Space.View, Pens.Gray);
+
+
+            // world space bigger cube
             var angle = GetDeltaTime(new TimeSpan(0, 0, 0, 5)) * Math.PI * 2;
             var matrixModel =
                 MatrixEx.Scale(0.5) *
@@ -261,7 +240,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
                 DrawPolyline(matrixModel.Transform(cubePolyline), Space.World, Pens.White);
             }
 
-            // smaller cube
+            // world space smaller cube
             angle = GetDeltaTime(new TimeSpan(0, 0, 0, 1)) * Math.PI * 2;
             matrixModel =
                 MatrixEx.Scale(0.5) *

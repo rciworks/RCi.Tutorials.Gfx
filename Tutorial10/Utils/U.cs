@@ -6,6 +6,14 @@ namespace RCi.Tutorials.Gfx.Utils
     public static class U
     {
         /// <summary>
+        /// <see cref="ICloneable.Clone"/> and cast it to explicit type <typeparam name="T"/>.
+        /// </summary>
+        public static T Cloned<T>(this T cloneable) where T : ICloneable
+        {
+            return (T)cloneable.Clone();
+        }
+
+        /// <summary>
         /// Does <see cref="List{T}.ForEach"/> on <see cref="IEnumerable{T}"/> collection.
         /// </summary>
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)

@@ -1,4 +1,5 @@
 ﻿using System;
+using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Inputs;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
@@ -19,14 +20,20 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// </summary>
         IInput HostInput { get; }
 
-        /// <summary>
-        /// Measures fps.
-        /// </summary>
+        /// <inheritdoc cref="ICameraInfo"/>
+        ICameraInfo CameraInfo { get; set; }
+
+        /// <inheritdoc cref="Engine.Render.FpsCounter"/>
         FpsCounter FpsCounter { get; }
 
         /// <summary>
         /// Render.
         /// </summary>
         void Render();
+
+        /// <summary>
+        /// Fires when <see cref="CameraInfo"/> changed.
+        /// </summary>
+        event EventHandler<ICameraInfo> CameraInfoChanged;
     }
 }
