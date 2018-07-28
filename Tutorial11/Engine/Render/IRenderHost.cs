@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Inputs;
 
@@ -19,6 +20,11 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// Input from host.
         /// </summary>
         IInput HostInput { get; }
+
+        /// <summary>
+        /// Desired surface size.
+        /// </summary>
+        Size HostSize { get; }
 
         /// <inheritdoc cref="ICameraInfo"/>
         ICameraInfo CameraInfo { get; set; }

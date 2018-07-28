@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Common.Camera.Projections;
+using RCi.Tutorials.Gfx.Engine.Operators;
 using RCi.Tutorials.Gfx.Inputs;
+using RCi.Tutorials.Gfx.Utils;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
 {
@@ -21,10 +24,8 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <inheritdoc />
         public IInput HostInput { get; private set; }
 
-        /// <summary>
-        /// Desired surface size.
-        /// </summary>
-        protected Size HostSize { get; private set; }
+        /// <inheritdoc />
+        public Size HostSize { get; private set; }
 
         /// <summary>
         /// Desired buffer size.
@@ -44,6 +45,11 @@ namespace RCi.Tutorials.Gfx.Engine.Render
                 CameraInfoChanged?.Invoke(this, m_CameraInfo);
             }
         }
+
+        /// <summary>
+        /// Active operators.
+        /// </summary>
+        protected IEnumerable<IOperator> Operators { get; set; }
 
         /// <inheritdoc />
         public FpsCounter FpsCounter { get; private set; }
@@ -85,15 +91,19 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             );
             FpsCounter = new FpsCounter(new TimeSpan(0, 0, 0, 0, 1000));
 
-            HostInput.SizeChanged += HostInputOnSizeChanged;
+            Operators = new List<IOperator>
+            {
+                new OperatorResize(this, ResizeHost),
+            };
 
-            HostInputOnSizeChanged(this, new SizeEventArgs(HostSize));
+            OperatorResize.Resize(this, HostSize, ResizeHost);
         }
 
         /// <inheritdoc />
         public virtual void Dispose()
         {
-            HostInput.SizeChanged -= HostInputOnSizeChanged;
+            Operators.ForEach(o => o.Dispose());
+            Operators = default;
 
             FpsCounter.Dispose();
             FpsCounter = default;
@@ -111,49 +121,6 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         #endregion
 
         #region // routines
-
-        /// <inheritdoc cref="IInput.SizeChanged" />
-        private void HostInputOnSizeChanged(object sender, ISizeEventArgs args)
-        {
-            Size Sanitize(Size size)
-            {
-                if (size.Width < 1 || size.Height < 1)
-                {
-                    size = new Size(1, 1);
-                }
-                return size;
-            }
-
-            // update host (surface size)
-            var hostSize = Sanitize(args.NewSize);
-            if (HostSize != hostSize)
-            {
-                ResizeHost(hostSize);
-            }
-
-            // update camera info
-            var cameraInfo = CameraInfo;
-            if (cameraInfo.Viewport.Size != hostSize)
-            {
-                var viewport = new Viewport
-                (
-                    cameraInfo.Viewport.X,
-                    cameraInfo.Viewport.Y,
-                    hostSize.Width,
-                    hostSize.Height,
-                    cameraInfo.Viewport.MinZ,
-                    cameraInfo.Viewport.MaxZ
-                );
-                CameraInfo = new CameraInfo
-                (
-                    cameraInfo.Position,
-                    cameraInfo.Target,
-                    cameraInfo.UpVector,
-                    cameraInfo.Projection.GetAdjustedProjection(viewport.AspectRatio),
-                    viewport
-                );
-            }
-        }
 
         /// <summary>
         /// Resize host.

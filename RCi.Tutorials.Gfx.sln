@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 009 - World Space,
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 010 - Camera", "Tutorial10\Tutorial 010 - Camera.csproj", "{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 011", "Tutorial11\Tutorial 011.csproj", "{9B3A6F54-B8D8-48AF-BF43-4B5EE2C7DA3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 011 - Operators", "Tutorial11\Tutorial 011 - Operators.csproj", "{9B3A6F54-B8D8-48AF-BF43-4B5EE2C7DA3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

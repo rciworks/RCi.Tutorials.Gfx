@@ -73,6 +73,9 @@
     <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
     <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
     <Compile Include="Common\Camera\Viewport.cs" />
+    <Compile Include="Engine\Operators\IOperator.cs" />
+    <Compile Include="Engine\Operators\Operator.cs" />
+    <Compile Include="Engine\Operators\OperatorResize.cs" />
     <Compile Include="Engine\Render\FpsCounter.cs" />
     <Compile Include="Engine\Render\IRenderHost.cs" />
     <Compile Include="Engine\Render\IRenderHostSetup.cs" />
