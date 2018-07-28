@@ -94,6 +94,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
             Operators = new List<IOperator>
             {
                 new OperatorResize(this, ResizeHost),
+                new OperatorCameraZoom(this),
             };
 
             OperatorResize.Resize(this, HostSize, ResizeHost);

@@ -75,6 +75,7 @@
     <Compile Include="Common\Camera\Viewport.cs" />
     <Compile Include="Engine\Operators\IOperator.cs" />
     <Compile Include="Engine\Operators\Operator.cs" />
+    <Compile Include="Engine\Operators\OperatorCameraZoom.cs" />
     <Compile Include="Engine\Operators\OperatorResize.cs" />
     <Compile Include="Engine\Render\FpsCounter.cs" />
     <Compile Include="Engine\Render\IRenderHost.cs" />
