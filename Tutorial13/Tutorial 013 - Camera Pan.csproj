@@ -65,6 +65,7 @@
     <Compile Include="Common\Camera\CameraInfoCache.cs" />
     <Compile Include="Common\Camera\ICameraInfo.cs" />
     <Compile Include="Common\Camera\ICameraInfoCache.cs" />
+    <Compile Include="Common\Camera\ICameraInfoEx.cs" />
     <Compile Include="Common\Camera\Projections\IProjection.cs" />
     <Compile Include="Common\Camera\Projections\IProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\IProjectionPerspective.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Engine\Operators\IOperator.cs" />
     <Compile Include="Engine\Operators\Operator.cs" />
     <Compile Include="Engine\Operators\OperatorCameraZoom.cs" />
+    <Compile Include="Engine\Operators\OperatorCameraPan.cs" />
     <Compile Include="Engine\Operators\OperatorResize.cs" />
     <Compile Include="Engine\Render\FpsCounter.cs" />
     <Compile Include="Engine\Render\IRenderHost.cs" />

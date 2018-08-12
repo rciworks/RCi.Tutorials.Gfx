@@ -1,5 +1,6 @@
 ﻿using System;
 using MathNet.Numerics.LinearAlgebra;
+using MathNet.Spatial.Euclidean;
 
 namespace RCi.Tutorials.Gfx.Common.Camera.Projections
 {
@@ -28,5 +29,10 @@ namespace RCi.Tutorials.Gfx.Common.Camera.Projections
         /// Create new projection based on existing one and adjusted by new aspect ratio.
         /// </summary>
         IProjection GetAdjustedProjection(double aspectRatio);
+
+        /// <summary>
+        /// Get mouse ray in world space.
+        /// </summary>
+        Ray3D GetMouseRay(ICameraInfo cameraInfo, Point3D mouseWorld);
     }
 }

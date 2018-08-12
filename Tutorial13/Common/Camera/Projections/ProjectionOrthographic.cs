@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Common.Camera.Projections
@@ -56,6 +57,12 @@ namespace RCi.Tutorials.Gfx.Common.Camera.Projections
         public override IProjection GetAdjustedProjection(double aspectRatio)
         {
             return new ProjectionOrthographic(NearPlane, FarPlane, FieldHeight * aspectRatio, FieldHeight);
+        }
+
+        /// <inheritdoc />
+        public override Ray3D GetMouseRay(ICameraInfo cameraInfo, Point3D mouseWorld)
+        {
+            return new Ray3D(mouseWorld, cameraInfo.GetEyeDirection());
         }
 
         #endregion
