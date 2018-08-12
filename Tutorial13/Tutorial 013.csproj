@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{70A6D8C2-74B3-4048-A761-ED72197043A5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
+    <AssemblyName>Tutorial1</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.5.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Spatial.0.4.0\lib\net40\MathNet.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\Program.cs" />
+    <Compile Include="Client\WindowFactory.cs" />
+    <Compile Include="Common\Camera\CameraInfo.cs" />
+    <Compile Include="Common\Camera\CameraInfoCache.cs" />
+    <Compile Include="Common\Camera\ICameraInfo.cs" />
+    <Compile Include="Common\Camera\ICameraInfoCache.cs" />
+    <Compile Include="Common\Camera\Projections\IProjection.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionOrthographic.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionPerspective.cs" />
+    <Compile Include="Common\Camera\Projections\Projection.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
+    <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
+    <Compile Include="Common\Camera\Viewport.cs" />
+    <Compile Include="Engine\Operators\IOperator.cs" />
+    <Compile Include="Engine\Operators\Operator.cs" />
+    <Compile Include="Engine\Operators\OperatorCameraZoom.cs" />
+    <Compile Include="Engine\Operators\OperatorResize.cs" />
+    <Compile Include="Engine\Render\FpsCounter.cs" />
+    <Compile Include="Engine\Render\IRenderHost.cs" />
+    <Compile Include="Engine\Render\IRenderHostSetup.cs" />
+    <Compile Include="Engine\Render\RenderHost.cs" />
+    <Compile Include="Engine\Render\RenderHostSetup.cs" />
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Inputs\IInput.cs" />
+    <Compile Include="Inputs\IKeyEventArgs.cs" />
+    <Compile Include="Inputs\IMouseEventArgs.cs" />
+    <Compile Include="Inputs\Input.cs" />
+    <Compile Include="Inputs\InputForms.cs" />
+    <Compile Include="Inputs\InputWpf.cs" />
+    <Compile Include="Inputs\ISizeEventArgs.cs" />
+    <Compile Include="Inputs\Key.cs" />
+    <Compile Include="Inputs\KeyEventArgs.cs" />
+    <Compile Include="Inputs\KeyEventHandler.cs" />
+    <Compile Include="Inputs\Modifiers.cs" />
+    <Compile Include="Inputs\MouseButtons.cs" />
+    <Compile Include="Inputs\MouseEventArgs.cs" />
+    <Compile Include="Inputs\MouseEventHandler.cs" />
+    <Compile Include="Inputs\SizeEventArgs.cs" />
+    <Compile Include="Inputs\SizeEventHandler.cs" />
+    <Compile Include="Mathematics\Extensions\MatrixEx.cs" />
+    <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
+    <Compile Include="Mathematics\Space.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DirectBitmap.cs" />
+    <Compile Include="Utils\U.cs" />
+    <Compile Include="Win\User32.cs" />
+    <Compile Include="Win\POINT.cs" />
+    <Compile Include="Win\RECT.cs" />
+    <Compile Include="Win\W.cs" />
+    <Compile Include="Win\WindowInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

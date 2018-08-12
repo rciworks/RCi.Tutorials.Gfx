@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 011 - Operators", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 012 - Camera Zoom", "Tutorial12\Tutorial 012 - Camera Zoom.csproj", "{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 013", "Tutorial13\Tutorial 013.csproj", "{70A6D8C2-74B3-4048-A761-ED72197043A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A6D8C2-74B3-4048-A761-ED72197043A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A6D8C2-74B3-4048-A761-ED72197043A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A6D8C2-74B3-4048-A761-ED72197043A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A6D8C2-74B3-4048-A761-ED72197043A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
