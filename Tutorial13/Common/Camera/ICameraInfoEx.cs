@@ -6,6 +6,9 @@ using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Common.Camera
 {
+    /// <summary>
+    /// <see cref="ICameraInfo"/> extensions.
+    /// </summary>
     public static class ICameraInfoEx
     {
         /// <summary>

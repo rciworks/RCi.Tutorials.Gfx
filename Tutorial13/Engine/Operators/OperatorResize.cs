@@ -39,6 +39,7 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
 
         #region // routines
 
+        /// <inheritdoc />
         protected override void InputOnSizeChanged(object sender, ISizeEventArgs args)
         {
             base.InputOnSizeChanged(sender, args);

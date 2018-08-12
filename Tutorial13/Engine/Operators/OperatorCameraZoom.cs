@@ -24,6 +24,7 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
 
         #region // routines
 
+        /// <inheritdoc />
         protected override void InputOnMouseWheel(object sender, IMouseEventArgs args)
         {
             base.InputOnMouseWheel(sender, args);

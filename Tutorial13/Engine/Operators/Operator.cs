@@ -55,30 +55,37 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
 
         #region // sensors
 
+        /// <inheritdoc cref="IInput.SizeChanged"/>
         protected virtual void InputOnSizeChanged(object sender, ISizeEventArgs args)
         {
         }
 
+        /// <inheritdoc cref="IInput.KeyDown"/>
         protected virtual void InputOnKeyDown(object sender, IKeyEventArgs args)
         {
         }
 
+        /// <inheritdoc cref="IInput.KeyUp"/>
         protected virtual void InputOnKeyUp(object sender, IKeyEventArgs args)
         {
         }
 
+        /// <inheritdoc cref="IInput.MouseMove"/>
         protected virtual void InputOnMouseMove(object sender, IMouseEventArgs args)
         {
         }
 
+        /// <inheritdoc cref="IInput.MouseDown"/>
         protected virtual void InputOnMouseDown(object sender, IMouseEventArgs args)
         {
         }
 
+        /// <inheritdoc cref="IInput.MouseUp"/>
         protected virtual void InputOnMouseUp(object sender, IMouseEventArgs args)
         {
         }
 
+        /// <inheritdoc cref="IInput.MouseWheel"/>
         protected virtual void InputOnMouseWheel(object sender, IMouseEventArgs args)
         {
         }
