@@ -96,6 +96,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
                 new OperatorResize(this, ResizeHost),
                 new OperatorCameraZoom(this),
                 new OperatorCameraPan(this),
+                new OperatorCameraOrbit(this),
             };
 
             OperatorResize.Resize(this, HostSize, ResizeHost);

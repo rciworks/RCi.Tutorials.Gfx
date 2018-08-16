@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 012 - Camera Zoom"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 013 - Camera Pan", "Tutorial13\Tutorial 013 - Camera Pan.csproj", "{70A6D8C2-74B3-4048-A761-ED72197043A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 014", "Tutorial14\Tutorial 014.csproj", "{D76C766C-0D48-422F-8554-1031559FABD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 014 - Camera Orbit", "Tutorial14\Tutorial 014 - Camera Orbit.csproj", "{D76C766C-0D48-422F-8554-1031559FABD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
