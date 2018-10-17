@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Program.cs" />
+    <Compile Include="Client\Seed.cs" />
     <Compile Include="Client\WindowFactory.cs" />
     <Compile Include="Common\Camera\CameraInfo.cs" />
     <Compile Include="Common\Camera\CameraInfoCache.cs" />
@@ -102,6 +103,23 @@
     <Compile Include="Inputs\MouseEventHandler.cs" />
     <Compile Include="Inputs\SizeEventArgs.cs" />
     <Compile Include="Inputs\SizeEventHandler.cs" />
+    <Compile Include="Materials\IHaveMaterial.cs" />
+    <Compile Include="Materials\IHavePrimitiveBehaviour.cs" />
+    <Compile Include="Materials\IHavePrimitiveTopology.cs" />
+    <Compile Include="Materials\IHaveVertices.cs" />
+    <Compile Include="Materials\IMaterial.cs" />
+    <Compile Include="Materials\IPrimitive.cs" />
+    <Compile Include="Materials\IVertex.cs" />
+    <Compile Include="Materials\Material.cs" />
+    <Compile Include="Materials\Position\IMaterial.cs" />
+    <Compile Include="Materials\Position\IPrimitive.cs" />
+    <Compile Include="Materials\Position\IVertex.cs" />
+    <Compile Include="Materials\Position\Material.cs" />
+    <Compile Include="Materials\Position\Primitive.cs" />
+    <Compile Include="Materials\Position\Vertex.cs" />
+    <Compile Include="Materials\Primitive.cs" />
+    <Compile Include="Materials\PrimitiveBehaviour.cs" />
+    <Compile Include="Materials\PrimitiveTopology.cs" />
     <Compile Include="Mathematics\Extensions\MatrixEx.cs" />
     <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
     <Compile Include="Mathematics\Space.cs" />

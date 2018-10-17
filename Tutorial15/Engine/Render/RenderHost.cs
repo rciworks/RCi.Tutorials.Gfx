@@ -6,6 +6,7 @@ using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Common.Camera.Projections;
 using RCi.Tutorials.Gfx.Engine.Operators;
 using RCi.Tutorials.Gfx.Inputs;
+using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Utils;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
@@ -158,19 +159,19 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         #region // render
 
         /// <inheritdoc />
-        public void Render()
+        public void Render(IEnumerable<IPrimitive> primitives)
         {
             EnsureBufferSize();
             FrameStarted = DateTime.UtcNow;
             FpsCounter.StartFrame();
-            RenderInternal();
+            RenderInternal(primitives);
             FpsCounter.StopFrame();
         }
 
         /// <summary>
         /// Internal rendering for particular driver.
         /// </summary>
-        protected abstract void RenderInternal();
+        protected abstract void RenderInternal(IEnumerable<IPrimitive> primitives);
 
         #endregion
     }

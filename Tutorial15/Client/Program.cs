@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RCi.Tutorials.Gfx.Engine.Render;
+using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Utils;
 
 namespace RCi.Tutorials.Gfx.Client
@@ -46,7 +47,7 @@ namespace RCi.Tutorials.Gfx.Client
             // render loop
             while (!Dispatcher.HasShutdownStarted)
             {
-                Render(RenderHosts);
+                Render(RenderHosts, Seed.GetPrimitives());
 
                 // message pump
                 System.Windows.Forms.Application.DoEvents();
@@ -68,9 +69,9 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Render <see cref="IRenderHost"/>s.
         /// </summary>
-        private static void Render(IEnumerable<IRenderHost> renderHosts)
+        private static void Render(IEnumerable<IRenderHost> renderHosts, IEnumerable<IPrimitive> primitives)
         {
-            renderHosts.ForEach(rh => rh.Render());
+            renderHosts.ForEach(rh => rh.Render(primitives));
         }
 
         #endregion

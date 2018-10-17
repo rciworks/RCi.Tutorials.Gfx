@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Inputs;
+using RCi.Tutorials.Gfx.Materials;
 
 namespace RCi.Tutorials.Gfx.Engine.Render
 {
@@ -35,7 +37,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <summary>
         /// Render.
         /// </summary>
-        void Render();
+        void Render(IEnumerable<IPrimitive> primitives);
 
         /// <summary>
         /// Fires when <see cref="CameraInfo"/> changed.
