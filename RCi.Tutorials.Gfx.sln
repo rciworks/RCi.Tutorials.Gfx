@@ -3,35 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 001 - Create Windows", "Tutorial1\Tutorial 001 - Create Windows.csproj", "{490C5D5B-5BD4-4A9F-91CC-C0F6B94AE93B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 001 - Create Windows", "Tutorial 001 - Create Windows\Tutorial 001 - Create Windows.csproj", "{490C5D5B-5BD4-4A9F-91CC-C0F6B94AE93B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 002 - Render Loop, Fps Counter", "Tutorial2\Tutorial 002 - Render Loop, Fps Counter.csproj", "{E31589B9-87DC-4650-900F-E2DAE18370AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 002 - Render Loop, Fps Counter", "Tutorial 002 - Render Loop, Fps Counter\Tutorial 002 - Render Loop, Fps Counter.csproj", "{E31589B9-87DC-4650-900F-E2DAE18370AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 003 - GDI Double Buffer", "Tutorial3\Tutorial 003 - GDI Double Buffer.csproj", "{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 003 - GDI Double Buffer", "Tutorial 003 - GDI Double Buffer\Tutorial 003 - GDI Double Buffer.csproj", "{99E09DF8-1DD8-4298-B62D-C4E93EF170D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 004 - Forms, WPF and WinAPI", "Tutorial4\Tutorial 004 - Forms, WPF and WinAPI.csproj", "{02A0A9DC-7942-4071-BDA7-60695DA5E779}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 004 - Forms, WPF and WinAPI", "Tutorial 004 - Forms, WPF and WinAPI\Tutorial 004 - Forms, WPF and WinAPI.csproj", "{02A0A9DC-7942-4071-BDA7-60695DA5E779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 005 - Input", "Tutorial5\Tutorial 005 - Input.csproj", "{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 005 - Input", "Tutorial 005 - Input\Tutorial 005 - Input.csproj", "{A36DB8E7-7F19-4FF7-9D67-5ED9023D108D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 006 - GDI Back Buffer", "Tutorial6\Tutorial 006 - GDI Back Buffer.csproj", "{C4240246-E59D-4F53-9BE5-4E88329FEABC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 006 - GDI Back Buffer", "Tutorial 006 - GDI Back Buffer\Tutorial 006 - GDI Back Buffer.csproj", "{C4240246-E59D-4F53-9BE5-4E88329FEABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 007 - Screen Space, View Space", "Tutorial7\Tutorial 007 - Screen Space, View Space.csproj", "{5EBA559E-817E-4FE7-B99D-A0608C0B5120}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 007 - Screen Space, View Space", "Tutorial 007 - Screen Space, View Space\Tutorial 007 - Screen Space, View Space.csproj", "{5EBA559E-817E-4FE7-B99D-A0608C0B5120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 008 - Matrices, Transformations", "Tutorial8\Tutorial 008 - Matrices, Transformations.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 008 - Matrices, Transformations", "Tutorial 008 - Matrices, Transformations\Tutorial 008 - Matrices, Transformations.csproj", "{2F75BDA7-7F3B-4802-B545-C7D17B94404F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 009 - World Space, Model Space", "Tutorial9\Tutorial 009 - World Space, Model Space.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 009 - World Space, Model Space", "Tutorial 009 - World Space, Model Space\Tutorial 009 - World Space, Model Space.csproj", "{DD0541AD-B692-4767-ABBA-36F1A368F13D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 010 - Camera", "Tutorial10\Tutorial 010 - Camera.csproj", "{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 010 - Camera", "Tutorial 010 - Camera\Tutorial 010 - Camera.csproj", "{EC35FD3D-1D33-42E8-95D9-9304AD35BF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 011 - Operators", "Tutorial11\Tutorial 011 - Operators.csproj", "{9B3A6F54-B8D8-48AF-BF43-4B5EE2C7DA3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 011 - Operators", "Tutorial 011 - Operators\Tutorial 011 - Operators.csproj", "{9B3A6F54-B8D8-48AF-BF43-4B5EE2C7DA3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 012 - Camera Zoom", "Tutorial12\Tutorial 012 - Camera Zoom.csproj", "{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 012 - Camera Zoom", "Tutorial 012 - Camera Zoom\Tutorial 012 - Camera Zoom.csproj", "{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 013 - Camera Pan", "Tutorial13\Tutorial 013 - Camera Pan.csproj", "{70A6D8C2-74B3-4048-A761-ED72197043A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 013 - Camera Pan", "Tutorial 013 - Camera Pan\Tutorial 013 - Camera Pan.csproj", "{70A6D8C2-74B3-4048-A761-ED72197043A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 014 - Camera Orbit", "Tutorial14\Tutorial 014 - Camera Orbit.csproj", "{D76C766C-0D48-422F-8554-1031559FABD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 014 - Camera Orbit", "Tutorial 014 - Camera Orbit\Tutorial 014 - Camera Orbit.csproj", "{D76C766C-0D48-422F-8554-1031559FABD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 015 - Primitives, Materials", "Tutorial15\Tutorial 015 - Primitives, Materials.csproj", "{51673CAC-28A4-4D3D-A676-5F59D195C92F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 015 - Primitives, Materials", "Tutorial 015 - Primitives, Materials\Tutorial 015 - Primitives, Materials.csproj", "{51673CAC-28A4-4D3D-A676-5F59D195C92F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
