@@ -98,7 +98,7 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
             var eye = cameraInfoStart.Position;
             var target = cameraInfoStart.Target;
 
-            // create local coordiante system
+            // create local coordinate system
             var zAxis = cameraInfoStart.UpVector;
             var yzPlane = new Plane(new Point3D(), cameraInfoStart.GetEyeDirection().ToPoint3D(), zAxis.ToPoint3D());
             var xAxis = yzPlane.Normal;

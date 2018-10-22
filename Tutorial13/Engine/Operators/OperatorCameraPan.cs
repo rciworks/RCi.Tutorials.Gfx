@@ -21,7 +21,7 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
         private ICameraInfo MouseDownCameraInfo { get; set; }
 
         /// <summary>
-        /// Plane which goes throught <see cref="GetPanOrigin"/> and is perpendicular
+        /// Plane which goes through <see cref="GetPanOrigin"/> and is perpendicular
         /// to <see cref="ICameraInfoEx.GetEyeDirection"/> at the time when mouse was pressed down.
         /// </summary>
         private Plane? MouseDownPlane { get; set; }

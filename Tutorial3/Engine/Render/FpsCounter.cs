@@ -34,12 +34,12 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         private int FrameCount { get; set; }
 
         /// <summary>
-        /// Average fps (for rendering) in last <see cref="UpdateRate"/> amout of time.
+        /// Average fps (for rendering) in last <see cref="UpdateRate"/> amount of time.
         /// </summary>
         public double FpsRender { get; private set; }
 
         /// <summary>
-        /// Average fps (for global rendering) in last <see cref="UpdateRate"/> amout of time.
+        /// Average fps (for global rendering) in last <see cref="UpdateRate"/> amount of time.
         /// </summary>
         public double FpsGlobal { get; private set; }
 
