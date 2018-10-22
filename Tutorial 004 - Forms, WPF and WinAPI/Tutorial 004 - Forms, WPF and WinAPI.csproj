@@ -7,7 +7,7 @@
     <ProjectGuid>{02A0A9DC-7942-4071-BDA7-60695DA5E779}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial1</AssemblyName>
+    <AssemblyName>Tutorial 004 - Forms, WPF and WinAPI</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

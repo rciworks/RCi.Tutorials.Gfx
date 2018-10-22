@@ -7,7 +7,7 @@
     <ProjectGuid>{C4240246-E59D-4F53-9BE5-4E88329FEABC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial1</AssemblyName>
+    <AssemblyName>Tutorial 006 - GDI Back Buffer</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

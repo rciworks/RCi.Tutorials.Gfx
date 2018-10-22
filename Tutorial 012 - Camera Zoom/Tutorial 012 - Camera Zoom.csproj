@@ -7,7 +7,7 @@
     <ProjectGuid>{C79BBC0B-B9C4-4FFF-90ED-764DA8A6B065}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial1</AssemblyName>
+    <AssemblyName>Tutorial 012 - Camera Zoom</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

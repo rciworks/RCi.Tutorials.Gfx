@@ -7,7 +7,7 @@
     <ProjectGuid>{70A6D8C2-74B3-4048-A761-ED72197043A5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial1</AssemblyName>
+    <AssemblyName>Tutorial 013 - Camera Pan</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
