@@ -94,53 +94,87 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         #region // transform
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void MultiplyRowMajor(this Matrix<double> m,
-            double x, double y, double z, double w,
-            out double _x, out double _y, out double _z, out double _w)
+        public static Vector4D MultiplyRowMajor(this Matrix<double> m, in Vector4D v)
         {
-            _x = m[0, 0] * x + m[1, 0] * y + m[2, 0] * z + m[3, 0] * w;
-            _y = m[0, 1] * x + m[1, 1] * y + m[2, 1] * z + m[3, 1] * w;
-            _z = m[0, 2] * x + m[1, 2] * y + m[2, 2] * z + m[3, 2] * w;
-            _w = m[0, 3] * x + m[1, 3] * y + m[2, 3] * z + m[3, 3] * w;
+            return new Vector4D
+            (
+                m[0, 0] * v.X + m[1, 0] * v.Y + m[2, 0] * v.Z + m[3, 0] * v.W,
+                m[0, 1] * v.X + m[1, 1] * v.Y + m[2, 1] * v.Z + m[3, 1] * v.W,
+                m[0, 2] * v.X + m[1, 2] * v.Y + m[2, 2] * v.Z + m[3, 2] * v.W,
+                m[0, 3] * v.X + m[1, 3] * v.Y + m[2, 3] * v.Z + m[3, 3] * v.W
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void MultiplyColumnMajor(this Matrix<double> m,
-            double x, double y, double z, double w,
-            out double _x, out double _y, out double _z, out double _w)
+        public static Vector4F MultiplyRowMajor(this Matrix<double> m, in Vector4F v)
         {
-            _x = m[0, 0] * x + m[0, 1] * y + m[0, 2] * z + m[0, 3] * w;
-            _y = m[1, 0] * x + m[1, 1] * y + m[1, 2] * z + m[1, 3] * w;
-            _z = m[2, 0] * x + m[2, 1] * y + m[2, 2] * z + m[2, 3] * w;
-            _w = m[3, 0] * x + m[3, 1] * y + m[3, 2] * z + m[3, 3] * w;
+            return new Vector4F
+            (
+                (float)(m[0, 0] * v.X + m[1, 0] * v.Y + m[2, 0] * v.Z + m[3, 0] * v.W),
+                (float)(m[0, 1] * v.X + m[1, 1] * v.Y + m[2, 1] * v.Z + m[3, 1] * v.W),
+                (float)(m[0, 2] * v.X + m[1, 2] * v.Y + m[2, 2] * v.Z + m[3, 2] * v.W),
+                (float)(m[0, 3] * v.X + m[1, 3] * v.Y + m[2, 3] * v.Z + m[3, 3] * v.W)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4D MultiplyColumnMajor(this Matrix<double> m, in Vector4D v)
+        {
+            return new Vector4D
+            (
+                m[0, 0] * v.X + m[0, 1] * v.Y + m[0, 2] * v.Z + m[0, 3] * v.W,
+                m[1, 0] * v.X + m[1, 1] * v.Y + m[1, 2] * v.Z + m[1, 3] * v.W,
+                m[2, 0] * v.X + m[2, 1] * v.Y + m[2, 2] * v.Z + m[2, 3] * v.W,
+                m[3, 0] * v.X + m[3, 1] * v.Y + m[3, 2] * v.Z + m[3, 3] * v.W
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4F MultiplyColumnMajor(this Matrix<double> m, in Vector4F v)
+        {
+            return new Vector4F
+            (
+                (float)(m[0, 0] * v.X + m[0, 1] * v.Y + m[0, 2] * v.Z + m[0, 3] * v.W),
+                (float)(m[1, 0] * v.X + m[1, 1] * v.Y + m[1, 2] * v.Z + m[1, 3] * v.W),
+                (float)(m[2, 0] * v.X + m[2, 1] * v.Y + m[2, 2] * v.Z + m[2, 3] * v.W),
+                (float)(m[3, 0] * v.X + m[3, 1] * v.Y + m[3, 2] * v.Z + m[3, 3] * v.W)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Point3D Transform(this Matrix<double> m, in Point3D v)
         {
-            MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
-            return new Point3D(x / w, y / w, z / w);
+            return MultiplyRowMajor(m, v.ToVector4D(1)).ToPoint3DNormalized();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this Matrix<double> m, in Vector3D v)
         {
-            MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
-            return new Vector3D(x / w, y / w, z / w);
+            return MultiplyRowMajor(m, v.ToVector4D(1)).ToVector3DNormalized();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3F Transform(this Matrix<double> m, in Vector3F v)
         {
-            MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
-            return new Vector3F((float)(x / w), (float)(y / w), (float)(z / w));
+            return MultiplyRowMajor(m, v.ToVector4F(1)).ToVector3FNormalized();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this Matrix<double> m, in UnitVector3D v)
         {
-            MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
-            return new Vector3D(x / w, y / w, z / w);
+            return MultiplyRowMajor(m, v.ToVector4D(1)).ToVector3DNormalized();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4D Transform(this Matrix<double> m, in Vector4D v)
+        {
+            return MultiplyRowMajor(m, v);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4F Transform(this Matrix<double> m, in Vector4F v)
+        {
+            return MultiplyRowMajor(m, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -157,6 +191,18 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<Vector3F> Transform(this Matrix<double> matrix, IEnumerable<Vector3F> value)
+        {
+            return value.Select(v => matrix.Transform(v));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<Vector4D> Transform(this Matrix<double> matrix, IEnumerable<Vector4D> value)
+        {
+            return value.Select(v => matrix.Transform(v));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<Vector4F> Transform(this Matrix<double> matrix, IEnumerable<Vector4F> value)
         {
             return value.Select(v => matrix.Transform(v));
         }

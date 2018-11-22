@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using MathNet.Numerics.LinearAlgebra;
 using MathNet.Spatial.Euclidean;
 
 namespace RCi.Tutorials.Gfx.Mathematics.Extensions
@@ -135,27 +134,5 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         }
 
         #endregion
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F Transform(this Matrix<double> m, in Vector4F value)
-        {
-            // vector and matrix multiplication rules:
-            //
-            // if:
-            //      var v = Vector<double>.Build.DenseOfArray(new[] { x, y, z, w });
-            // correct: 
-            //      var _v = v * m;
-            // incorrect:
-            //      var _v = m * v;
-
-            // row major:
-            return new Vector4F
-            (
-                (float)(m[0, 0] * value.X + m[1, 0] * value.Y + m[2, 0] * value.Z + m[3, 0] * value.W),
-                (float)(m[0, 1] * value.X + m[1, 1] * value.Y + m[2, 1] * value.Z + m[3, 1] * value.W),
-                (float)(m[0, 2] * value.X + m[1, 2] * value.Y + m[2, 2] * value.Z + m[3, 2] * value.W),
-                (float)(m[0, 3] * value.X + m[1, 3] * value.Y + m[2, 3] * value.Z + m[3, 3] * value.W)
-            );
-        }
     }
 }
