@@ -37,7 +37,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Back buffer.
         /// </summary>
-        private DirectBitmap BackBuffer { get; set; }
+        public DirectBitmap BackBuffer { get; set; }
 
         /// <summary>
         /// Font for drawing text with <see cref="System.Drawing"/> objects.
@@ -147,7 +147,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         {
             // currently we know how to draw only those type of primitives, so just filter them out
             // in a future we're gonna solve this generically (without typecasting)
-            foreach (var primitive in primitives.OfType<Materials.Position.IPrimitive>())
+            foreach (var primitive in primitives.OfType<Gfx.Materials.Position.IPrimitive>())
             {
                 using (var pen = new Pen(primitive.Material.Color))
                 {

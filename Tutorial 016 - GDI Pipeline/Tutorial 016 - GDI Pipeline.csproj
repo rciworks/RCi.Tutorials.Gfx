@@ -73,6 +73,11 @@
     <Compile Include="Common\Camera\Projections\Projection.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
+    <Compile Include="Drivers\Gdi\Materials\IShader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\IVertexShader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
+    <Compile Include="Drivers\Gdi\Render\IPipeline.cs" />
+    <Compile Include="Drivers\Gdi\Render\Pipeline.cs" />
     <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
     <Compile Include="Common\Camera\Viewport.cs" />
     <Compile Include="Engine\Operators\IOperator.cs" />
