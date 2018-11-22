@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Materials;
@@ -46,6 +47,32 @@ namespace RCi.Tutorials.Gfx.Client
             new[] { new Vector3F(0, 1, 0), new Vector3F(0, 1, 1), },
         }.Select(polyline => MatrixEx.Translate(-0.5, -0.5, -0.5).Transform(polyline).ToArray()).ToArray();
 
+        /// <summary>
+        /// Point cloud of a bunny.
+        /// </summary>
+        private static readonly IPrimitive[] PointCloudBunny = new Func<IPrimitive[]>(() =>
+        {
+            // adjust for different coordinate system
+            var matrix = MatrixEx.Scale(10) * MatrixEx.Rotate(QuaternionEx.AroundAxis(UnitVector3D.XAxis, Math.PI * 0.5));
+
+            // point cloud source: http://graphics.stanford.edu/data/3Dscanrep/
+            var vertices = StreamPointCloud_XYZ(@"..\..\..\resources\bunny.xyz")
+                .Select(vertex => new Materials.Position.Vertex(matrix.Transform(vertex)))
+                .ToArray();
+
+            return new IPrimitive[]
+            {
+                // construct point list (point cloud) primitive
+                new Materials.Position.Primitive
+                (
+                    new PrimitiveBehaviour(Space.World),
+                    PrimitiveTopology.PointList,
+                    vertices,
+                    Color.White
+                )
+            };
+        })();
+
         #endregion
 
         /// <summary>
@@ -61,7 +88,9 @@ namespace RCi.Tutorials.Gfx.Client
         /// </summary>
         public static IEnumerable<IPrimitive> GetPrimitives()
         {
-            return GetPrimitivesAxisPoints();
+            return GetPrimitivesAxisPoints()
+                .Concat(GetPrimitivesPointCloud())
+                ;
         }
 
         /// <summary>
@@ -219,6 +248,32 @@ namespace RCi.Tutorials.Gfx.Client
                 Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F(0, 0, (float)i / freq))).ToArray(),
                 Color.Blue
             );
+        }
+
+        /// <summary>
+        /// Get some point cloud primitives.
+        /// </summary>
+        private static IEnumerable<IPrimitive> GetPrimitivesPointCloud()
+        {
+            return PointCloudBunny;
+        }
+
+        /// <summary>
+        /// Read *.xyz point cloud file.
+        /// </summary>
+        public static IEnumerable<Vector3F> StreamPointCloud_XYZ(string filePath)
+        {
+            using (var inputStream = new FileStream(filePath, FileMode.Open))
+            {
+                var pointCount = inputStream.Length / (4 * 3); // 4 bytes per float, 3 floats per vertex
+                using (var reader = new BinaryReader(inputStream))
+                {
+                    for (var i = 0L; i < pointCount; i++)
+                    {
+                        yield return new Vector3F(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+                    }
+                }
+            }
         }
     }
 }
