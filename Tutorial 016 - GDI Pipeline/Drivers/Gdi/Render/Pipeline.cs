@@ -162,7 +162,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         #region // point
 
         /// <summary>
-        /// Rasterize point (in clipping space).
+        /// Rasterize point (input vertex in clip space).
         /// </summary>
         private void RasterizePoint(ref TVertexShader vertex0)
         {
@@ -171,7 +171,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         }
 
         /// <summary>
-        /// Draw point (in screen space).
+        /// Draw point (input vertex in screen space).
         /// </summary>
         private void DrawPoint(ref TVertexShader vertex0)
         {

@@ -11,7 +11,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         #region // storage
 
         /// <summary>
-        /// Transform from world space to clipping space.
+        /// Transform from world space to clip space.
         /// </summary>
         private Matrix<double> MatrixWorldViewProjection { get; set; } = MatrixEx.Identity;
 

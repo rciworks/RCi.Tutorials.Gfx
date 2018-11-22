@@ -8,7 +8,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
     public interface IVertexShader
     {
         /// <summary>
-        /// NDC position (vertex shader output).
+        /// Clip space position (vertex shader output).
         /// </summary>
         Vector4F Position { get; }
     }
