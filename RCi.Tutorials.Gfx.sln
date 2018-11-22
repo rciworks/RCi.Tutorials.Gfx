@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 014 - Camera Orbit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 015 - Primitives, Materials", "Tutorial 015 - Primitives, Materials\Tutorial 015 - Primitives, Materials.csproj", "{51673CAC-28A4-4D3D-A676-5F59D195C92F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 016 - GDI Pipeline", "Tutorial 016 - GDI Pipeline\Tutorial 016 - GDI Pipeline.csproj", "{B04CF5FD-59B8-46CE-BD96-E1ECB383B25B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{51673CAC-28A4-4D3D-A676-5F59D195C92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51673CAC-28A4-4D3D-A676-5F59D195C92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51673CAC-28A4-4D3D-A676-5F59D195C92F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04CF5FD-59B8-46CE-BD96-E1ECB383B25B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04CF5FD-59B8-46CE-BD96-E1ECB383B25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04CF5FD-59B8-46CE-BD96-E1ECB383B25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04CF5FD-59B8-46CE-BD96-E1ECB383B25B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
