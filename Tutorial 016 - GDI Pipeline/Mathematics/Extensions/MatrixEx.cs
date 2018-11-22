@@ -83,7 +83,11 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
                 0, 0, 0, 1,
             }.ToMatrix();
 
-        public static Matrix<double> Identity => s_Identity.Clone();
+        public static Matrix<double> Identity
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => s_Identity.Clone();
+        }
 
         #endregion
 
@@ -126,6 +130,13 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3F Transform(this Matrix<double> m, in Vector3F v)
+        {
+            MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
+            return new Vector3F((float)(x / w), (float)(y / w), (float)(z / w));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this Matrix<double> m, in UnitVector3D v)
         {
             MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
@@ -140,6 +151,12 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<Vector3D> Transform(this Matrix<double> matrix, IEnumerable<Vector3D> value)
+        {
+            return value.Select(v => matrix.Transform(v));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<Vector3F> Transform(this Matrix<double> matrix, IEnumerable<Vector3F> value)
         {
             return value.Select(v => matrix.Transform(v));
         }
@@ -392,6 +409,7 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         /// <summary>
         /// View space to Clip space.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> OrthoRH(double width, double height, double znearPlane, double zfarPlane)
         {
             return new[]
@@ -406,6 +424,7 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         /// <summary>
         /// NDC to Screen space.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Viewport(in Viewport viewport)
         {
             return new[]
