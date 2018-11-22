@@ -17,31 +17,31 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Collection of polylines representing edges of cube 1x1x1 at (0, 0, 0).
         /// </summary>
-        private static readonly Point3D[][] CubePolylines = new[]
+        private static readonly Vector3F[][] CubePolylines = new[]
         {
             // bottom
             new[]
             {
-                new Point3D(0, 0, 0),
-                new Point3D(1, 0, 0),
-                new Point3D(1, 1, 0),
-                new Point3D(0, 1, 0),
-                new Point3D(0, 0, 0),
+                new Vector3F(0, 0, 0),
+                new Vector3F(1, 0, 0),
+                new Vector3F(1, 1, 0),
+                new Vector3F(0, 1, 0),
+                new Vector3F(0, 0, 0),
             },
             // top
             new[]
             {
-                new Point3D(0, 0, 1),
-                new Point3D(1, 0, 1),
-                new Point3D(1, 1, 1),
-                new Point3D(0, 1, 1),
-                new Point3D(0, 0, 1),
+                new Vector3F(0, 0, 1),
+                new Vector3F(1, 0, 1),
+                new Vector3F(1, 1, 1),
+                new Vector3F(0, 1, 1),
+                new Vector3F(0, 0, 1),
             },
             // sides
-            new[] { new Point3D(0, 0, 0), new Point3D(0, 0, 1), },
-            new[] { new Point3D(1, 0, 0), new Point3D(1, 0, 1), },
-            new[] { new Point3D(1, 1, 0), new Point3D(1, 1, 1), },
-            new[] { new Point3D(0, 1, 0), new Point3D(0, 1, 1), },
+            new[] { new Vector3F(0, 0, 0), new Vector3F(0, 0, 1), },
+            new[] { new Vector3F(1, 0, 0), new Vector3F(1, 0, 1), },
+            new[] { new Vector3F(1, 1, 0), new Vector3F(1, 1, 1), },
+            new[] { new Vector3F(0, 1, 0), new Vector3F(0, 1, 1), },
         }.Select(polyline => MatrixEx.Translate(-0.5, -0.5, -0.5).Transform(polyline).ToArray()).ToArray();
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace RCi.Tutorials.Gfx.Client
                 PrimitiveTopology.LineStrip,
                 new Materials.Position.IVertex[]
                 {
-                    new Materials.Position.Vertex(new Point3D(3, 20, 0)),
-                    new Materials.Position.Vertex(new Point3D(140, 20, 0)),
+                    new Materials.Position.Vertex(new Vector3F(3, 20, 0)),
+                    new Materials.Position.Vertex(new Vector3F(140, 20, 0)),
                 },
                 Color.Gray
             );
@@ -88,8 +88,8 @@ namespace RCi.Tutorials.Gfx.Client
                 PrimitiveTopology.LineStrip,
                 new Materials.Position.IVertex[]
                 {
-                    new Materials.Position.Vertex(new Point3D(-0.9, -0.9, 0)),
-                    new Materials.Position.Vertex(new Point3D(0.9, -0.9, 0)),
+                    new Materials.Position.Vertex(new Vector3F(-0.9f, -0.9f, 0)),
+                    new Materials.Position.Vertex(new Vector3F(0.9f, -0.9f, 0)),
                 },
                 Color.Gray
             );
@@ -107,8 +107,8 @@ namespace RCi.Tutorials.Gfx.Client
                 PrimitiveTopology.LineStrip,
                 new Materials.Position.IVertex[]
                 {
-                    new Materials.Position.Vertex(new Point3D(0, 0, 0)),
-                    new Materials.Position.Vertex(new Point3D(1, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(1, 0, 0)),
                 },
                 Color.Red
             );
@@ -120,8 +120,8 @@ namespace RCi.Tutorials.Gfx.Client
                 PrimitiveTopology.LineStrip,
                 new Materials.Position.IVertex[]
                 {
-                    new Materials.Position.Vertex(new Point3D(0, 0, 0)),
-                    new Materials.Position.Vertex(new Point3D(0, 1, 0)),
+                    new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(0, 1, 0)),
                 },
                 Color.LawnGreen
             );
@@ -133,8 +133,8 @@ namespace RCi.Tutorials.Gfx.Client
                 PrimitiveTopology.LineStrip,
                 new Materials.Position.IVertex[]
                 {
-                    new Materials.Position.Vertex(new Point3D(0, 0, 0)),
-                    new Materials.Position.Vertex(new Point3D(0, 0, 1)),
+                    new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(0, 0, 1)),
                 },
                 Color.Blue
             );

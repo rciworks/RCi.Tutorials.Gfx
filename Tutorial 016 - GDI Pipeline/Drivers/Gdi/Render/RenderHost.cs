@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
@@ -163,7 +162,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             }
         }
 
-        private void DrawPolyline(IEnumerable<Point3D> points, Space space, Pen pen)
+        private void DrawPolyline(IEnumerable<Vector3F> points, Space space, Pen pen)
         {
             switch (space)
             {
@@ -184,14 +183,14 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             }
         }
 
-        private void DrawPolylineScreenSpace(IEnumerable<Point3D> pointsScreen, Pen pen)
+        private void DrawPolylineScreenSpace(IEnumerable<Vector3F> pointsScreen, Pen pen)
         {
-            var from = default(Point3D?);
+            var from = default(Vector3F?);
             foreach (var pointScreen in pointsScreen)
             {
                 if (from.HasValue)
                 {
-                    BackBuffer.Graphics.DrawLine(pen, (float)from.Value.X, (float)from.Value.Y, (float)pointScreen.X, (float)pointScreen.Y);
+                    BackBuffer.Graphics.DrawLine(pen, from.Value.X, from.Value.Y, pointScreen.X, pointScreen.Y);
                 }
                 from = pointScreen;
             }

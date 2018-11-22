@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using MathNet.Spatial.Euclidean;
+using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Materials.Position
 {
@@ -11,7 +11,7 @@ namespace RCi.Tutorials.Gfx.Materials.Position
         #region // storage
 
         /// <inheritdoc />
-        public Point3D Position { get; }
+        public Vector3F Position { get; }
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace RCi.Tutorials.Gfx.Materials.Position
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Vertex(Point3D position)
+        public Vertex(Vector3F position)
         {
             Position = position;
         }

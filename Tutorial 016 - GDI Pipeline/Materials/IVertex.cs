@@ -1,4 +1,4 @@
-﻿using MathNet.Spatial.Euclidean;
+﻿using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Materials
 {
@@ -15,6 +15,6 @@ namespace RCi.Tutorials.Gfx.Materials
     public interface IVertexPosition :
         IVertex
     {
-        Point3D Position { get; }
+        Vector3F Position { get; }
     }
 }
