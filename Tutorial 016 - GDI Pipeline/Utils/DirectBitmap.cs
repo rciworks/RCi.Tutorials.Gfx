@@ -10,29 +10,10 @@ namespace RCi.Tutorials.Gfx.Utils
     /// Bitmap wrapper for direct access to its memory.
     /// </summary>
     public class DirectBitmap :
+        Buffer2D<int>,
         IDisposable
     {
         #region // storage
-
-        /// <summary>
-        /// Size of <see cref="Bitmap"/>.
-        /// </summary>
-        public Size Size { get; }
-
-        /// <summary>
-        /// Width of <see cref="Bitmap"/>.
-        /// </summary>
-        public int Width => Size.Width;
-
-        /// <summary>
-        /// Height of <see cref="Bitmap"/>.
-        /// </summary>
-        public int Height => Size.Height;
-
-        /// <summary>
-        /// Actual buffer which is used for <see cref="Bitmap"/>.
-        /// </summary>
-        public int[] Buffer { get; private set; }
 
         /// <summary>
         /// Pinned GC handle to <see cref="Buffer"/>.
@@ -54,10 +35,9 @@ namespace RCi.Tutorials.Gfx.Utils
         #region // ctor
 
         /// <inheritdoc />
-        public DirectBitmap(Size size)
+        public DirectBitmap(Size size) :
+            base(size)
         {
-            Size = size;
-            Buffer = new int[Width * Height];
             BufferHandle = GCHandle.Alloc(Buffer, GCHandleType.Pinned);
             Bitmap = new Bitmap(Width, Height, Width * 4, PixelFormat.Format32bppPArgb, BufferHandle.AddrOfPinnedObject());
             Graphics = Graphics.FromImage(Bitmap);
@@ -69,7 +49,7 @@ namespace RCi.Tutorials.Gfx.Utils
         {
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IDisposable" />
         public void Dispose()
         {
             Graphics.Dispose();
@@ -80,35 +60,29 @@ namespace RCi.Tutorials.Gfx.Utils
 
             BufferHandle.Free();
             BufferHandle = default;
-
-            Buffer = default;
         }
 
         #endregion
 
         #region // routines
 
+        /// <summary>
+        /// Set pixel color at (x, y).
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetIndex(int x, int y) => x + y * Width;
+        public void SetPixel(int x, int y, Color color) => SetValue(x, y, color.ToArgb());
 
+        /// <summary>
+        /// Get pixel color at (x, y).
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void GetXY(int index, out int x, out int y)
-        {
-            y = index / Width;
-            x = index - y * Width;
-        }
+        public Color GetPixel(int x, int y) => Color.FromArgb(GetValue(x, y));
 
+        /// <summary>
+        /// Clear buffer by one color.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetArgb(int x, int y, int argb) => Buffer[GetIndex(x, y)] = argb;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetArgb(int x, int y) => Buffer[GetIndex(x, y)];
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetPixel(int x, int y, Color color) => SetArgb(x, y, color.ToArgb());
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Color GetPixel(int x, int y) => Color.FromArgb(GetArgb(x, y));
+        public void Clear(Color color) => Clear(color.ToArgb());
 
         #endregion
     }

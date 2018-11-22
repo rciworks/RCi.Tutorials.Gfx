@@ -14,6 +14,8 @@ namespace RCi.Tutorials.Gfx.Client
     /// </summary>
     public static class Seed
     {
+        #region // storage
+
         /// <summary>
         /// Collection of polylines representing edges of cube 1x1x1 at (0, 0, 0).
         /// </summary>
@@ -44,6 +46,8 @@ namespace RCi.Tutorials.Gfx.Client
             new[] { new Vector3F(0, 1, 0), new Vector3F(0, 1, 1), },
         }.Select(polyline => MatrixEx.Translate(-0.5, -0.5, -0.5).Transform(polyline).ToArray()).ToArray();
 
+        #endregion
+
         /// <summary>
         /// Get period leftover ratio in given timespan.
         /// </summary>
@@ -57,10 +61,7 @@ namespace RCi.Tutorials.Gfx.Client
         /// </summary>
         public static IEnumerable<IPrimitive> GetPrimitives()
         {
-            return GetPrimitivesScreenViewLines()
-                .Concat(GetPrimitivesWorldAxis())
-                .Concat(GetPrimitivesCubes())
-                ;
+            return GetPrimitivesAxisPoints();
         }
 
         /// <summary>
@@ -73,7 +74,7 @@ namespace RCi.Tutorials.Gfx.Client
             (
                 new PrimitiveBehaviour(Space.Screen),
                 PrimitiveTopology.LineStrip,
-                new Materials.Position.IVertex[]
+                new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(3, 20, 0)),
                     new Materials.Position.Vertex(new Vector3F(140, 20, 0)),
@@ -86,7 +87,7 @@ namespace RCi.Tutorials.Gfx.Client
             (
                 new PrimitiveBehaviour(Space.View),
                 PrimitiveTopology.LineStrip,
-                new Materials.Position.IVertex[]
+                new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(-0.9f, -0.9f, 0)),
                     new Materials.Position.Vertex(new Vector3F(0.9f, -0.9f, 0)),
@@ -105,7 +106,7 @@ namespace RCi.Tutorials.Gfx.Client
             (
                 new PrimitiveBehaviour(Space.World),
                 PrimitiveTopology.LineStrip,
-                new Materials.Position.IVertex[]
+                new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
                     new Materials.Position.Vertex(new Vector3F(1, 0, 0)),
@@ -118,7 +119,7 @@ namespace RCi.Tutorials.Gfx.Client
             (
                 new PrimitiveBehaviour(Space.World),
                 PrimitiveTopology.LineStrip,
-                new Materials.Position.IVertex[]
+                new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
                     new Materials.Position.Vertex(new Vector3F(0, 1, 0)),
@@ -131,7 +132,7 @@ namespace RCi.Tutorials.Gfx.Client
             (
                 new PrimitiveBehaviour(Space.World),
                 PrimitiveTopology.LineStrip,
-                new Materials.Position.IVertex[]
+                new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
                     new Materials.Position.Vertex(new Vector3F(0, 0, 1)),
@@ -160,7 +161,7 @@ namespace RCi.Tutorials.Gfx.Client
                 (
                     new PrimitiveBehaviour(Space.World),
                     PrimitiveTopology.LineStrip,
-                    matrixModel.Transform(cubePolyline).Select(position => new Materials.Position.Vertex(position)).Cast<Materials.Position.IVertex>(),
+                    matrixModel.Transform(cubePolyline).Select(position => new Materials.Position.Vertex(position)).ToArray(),
                     Color.White
                 );
             }
@@ -179,10 +180,45 @@ namespace RCi.Tutorials.Gfx.Client
                 (
                     new PrimitiveBehaviour(Space.World),
                     PrimitiveTopology.LineStrip,
-                    matrixModel.Transform(cubePolyline).Select(position => new Materials.Position.Vertex(position)).Cast<Materials.Position.IVertex>(),
+                    matrixModel.Transform(cubePolyline).Select(position => new Materials.Position.Vertex(position)).ToArray(),
                     Color.Yellow
                 );
             }
+        }
+
+        /// <summary>
+        /// Get some point primitives to represent world axis.
+        /// </summary>
+        private static IEnumerable<IPrimitive> GetPrimitivesAxisPoints()
+        {
+            const int freq = 100;
+
+            // x axis
+            yield return new Materials.Position.Primitive
+            (
+                new PrimitiveBehaviour(Space.World),
+                PrimitiveTopology.PointList,
+                Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F((float)i / freq, 0, 0))).ToArray(),
+                Color.Red
+            );
+
+            // y axis
+            yield return new Materials.Position.Primitive
+            (
+                new PrimitiveBehaviour(Space.World),
+                PrimitiveTopology.PointList,
+                Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F(0, (float)i / freq, 0))).ToArray(),
+                Color.LawnGreen
+            );
+
+            // z axis
+            yield return new Materials.Position.Primitive
+            (
+                new PrimitiveBehaviour(Space.World),
+                PrimitiveTopology.PointList,
+                Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F(0, 0, (float)i / freq))).ToArray(),
+                Color.Blue
+            );
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RCi.Tutorials.Gfx.Materials
+﻿namespace RCi.Tutorials.Gfx.Materials
 {
     /// <inheritdoc cref="IPrimitive"/>
     public abstract class Primitive :
@@ -66,7 +64,7 @@ namespace RCi.Tutorials.Gfx.Materials
         public PrimitiveTopology PrimitiveTopology { get; }
 
         /// <inheritdoc />
-        public IReadOnlyList<TVertex> Vertices { get; }
+        public TVertex[] Vertices { get; }
 
         #endregion
 
@@ -75,7 +73,7 @@ namespace RCi.Tutorials.Gfx.Materials
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected Primitive(PrimitiveBehaviour primitiveBehaviour, TMaterial material, PrimitiveTopology primitiveTopology, IReadOnlyList<TVertex> vertices) :
+        protected Primitive(PrimitiveBehaviour primitiveBehaviour, TMaterial material, PrimitiveTopology primitiveTopology, TVertex[] vertices) :
             base(primitiveBehaviour, material)
         {
             PrimitiveTopology = primitiveTopology;
