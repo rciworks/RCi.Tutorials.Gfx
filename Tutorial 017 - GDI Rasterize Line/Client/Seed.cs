@@ -88,7 +88,9 @@ namespace RCi.Tutorials.Gfx.Client
         /// </summary>
         public static IEnumerable<IPrimitive> GetPrimitives()
         {
-            return GetPrimitivesAxisPoints()
+            return GetPrimitivesWorldAxis()
+                .Concat(GetPrimitivesScreenViewLines())
+                .Concat(GetPrimitivesCubes())
                 .Concat(GetPrimitivesPointCloud())
                 ;
         }
@@ -102,7 +104,7 @@ namespace RCi.Tutorials.Gfx.Client
             yield return new Materials.Position.Primitive
             (
                 new PrimitiveBehaviour(Space.Screen),
-                PrimitiveTopology.LineStrip,
+                PrimitiveTopology.LineList,
                 new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(3, 20, 0)),
@@ -115,7 +117,7 @@ namespace RCi.Tutorials.Gfx.Client
             yield return new Materials.Position.Primitive
             (
                 new PrimitiveBehaviour(Space.View),
-                PrimitiveTopology.LineStrip,
+                PrimitiveTopology.LineList,
                 new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(-0.9f, -0.9f, 0)),
@@ -134,7 +136,7 @@ namespace RCi.Tutorials.Gfx.Client
             yield return new Materials.Position.Primitive
             (
                 new PrimitiveBehaviour(Space.World),
-                PrimitiveTopology.LineStrip,
+                PrimitiveTopology.LineList,
                 new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
@@ -147,7 +149,7 @@ namespace RCi.Tutorials.Gfx.Client
             yield return new Materials.Position.Primitive
             (
                 new PrimitiveBehaviour(Space.World),
-                PrimitiveTopology.LineStrip,
+                PrimitiveTopology.LineList,
                 new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
@@ -160,7 +162,7 @@ namespace RCi.Tutorials.Gfx.Client
             yield return new Materials.Position.Primitive
             (
                 new PrimitiveBehaviour(Space.World),
-                PrimitiveTopology.LineStrip,
+                PrimitiveTopology.LineList,
                 new[]
                 {
                     new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
@@ -213,41 +215,6 @@ namespace RCi.Tutorials.Gfx.Client
                     Color.Yellow
                 );
             }
-        }
-
-        /// <summary>
-        /// Get some point primitives to represent world axis.
-        /// </summary>
-        private static IEnumerable<IPrimitive> GetPrimitivesAxisPoints()
-        {
-            const int freq = 100;
-
-            // x axis
-            yield return new Materials.Position.Primitive
-            (
-                new PrimitiveBehaviour(Space.World),
-                PrimitiveTopology.PointList,
-                Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F((float)i / freq, 0, 0))).ToArray(),
-                Color.Red
-            );
-
-            // y axis
-            yield return new Materials.Position.Primitive
-            (
-                new PrimitiveBehaviour(Space.World),
-                PrimitiveTopology.PointList,
-                Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F(0, (float)i / freq, 0))).ToArray(),
-                Color.LawnGreen
-            );
-
-            // z axis
-            yield return new Materials.Position.Primitive
-            (
-                new PrimitiveBehaviour(Space.World),
-                PrimitiveTopology.PointList,
-                Enumerable.Range(0, freq).Select(i => new Materials.Position.Vertex(new Vector3F(0, 0, (float)i / freq))).ToArray(),
-                Color.Blue
-            );
         }
 
         /// <summary>
