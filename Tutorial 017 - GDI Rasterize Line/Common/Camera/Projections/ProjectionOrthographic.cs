@@ -1,5 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra;
-using MathNet.Spatial.Euclidean;
+﻿using MathNet.Spatial.Euclidean;
+using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Common.Camera.Projections
@@ -48,9 +48,9 @@ namespace RCi.Tutorials.Gfx.Common.Camera.Projections
         }
 
         /// <inheritdoc />
-        public override Matrix<double> GetMatrixProjection()
+        public override Matrix4D GetMatrixProjection()
         {
-            return MatrixEx.OrthoRH(FieldWidth, FieldHeight, NearPlane, FarPlane);
+            return Matrix4DEx.OrthoRH(FieldWidth, FieldHeight, NearPlane, FarPlane);
         }
 
         /// <inheritdoc />

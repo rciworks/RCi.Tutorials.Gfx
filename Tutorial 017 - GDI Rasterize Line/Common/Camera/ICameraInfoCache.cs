@@ -1,4 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Common.Camera
 {
@@ -10,51 +10,51 @@ namespace RCi.Tutorials.Gfx.Common.Camera
         /// <summary>
         /// Matrix: world space -> camera space.
         /// </summary>
-        Matrix<double> MatrixView { get; }
+        Matrix4D MatrixView { get; }
 
         /// <summary>
         /// Inverse <see cref="MatrixView"/>.
         /// </summary>
-        Matrix<double> MatrixViewInverse { get; }
+        Matrix4D MatrixViewInverse { get; }
 
         /// <summary>
         /// Matrix: camera space -> clip space.
         /// </summary>
-        Matrix<double> MatrixProjection { get; }
+        Matrix4D MatrixProjection { get; }
 
         /// <summary>
         /// Inverse <see cref="MatrixProjection"/>.
         /// </summary>
-        Matrix<double> MatrixProjectionInverse { get; }
+        Matrix4D MatrixProjectionInverse { get; }
 
         /// <summary>
         /// Matrix: clip space -> screen space.
         /// </summary>
-        Matrix<double> MatrixViewport { get; }
+        Matrix4D MatrixViewport { get; }
 
         /// <summary>
         /// Inverse <see cref="MatrixViewport"/>.
         /// </summary>
-        Matrix<double> MatrixViewportInverse { get; }
+        Matrix4D MatrixViewportInverse { get; }
 
         /// <summary>
         /// Matrix: world space -> camera space -> clip space.
         /// </summary>
-        Matrix<double> MatrixViewProjection { get; }
+        Matrix4D MatrixViewProjection { get; }
 
         /// <summary>
         /// Inverse <see cref="MatrixViewProjection"/>.
         /// </summary>
-        Matrix<double> MatrixViewProjectionInverse { get; }
+        Matrix4D MatrixViewProjectionInverse { get; }
 
         /// <summary>
         /// Matrix: world space -> camera space -> clip space -> screen space.
         /// </summary>
-        Matrix<double> MatrixViewProjectionViewport { get; }
+        Matrix4D MatrixViewProjectionViewport { get; }
 
         /// <summary>
         /// Inverse <see cref="MatrixViewProjectionViewport"/>.
         /// </summary>
-        Matrix<double> MatrixViewProjectionViewportInverse { get; }
+        Matrix4D MatrixViewProjectionViewportInverse { get; }
     }
 }

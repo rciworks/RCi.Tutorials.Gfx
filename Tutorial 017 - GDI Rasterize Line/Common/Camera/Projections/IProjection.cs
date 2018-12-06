@@ -1,6 +1,6 @@
 ﻿using System;
-using MathNet.Numerics.LinearAlgebra;
 using MathNet.Spatial.Euclidean;
+using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Common.Camera.Projections
 {
@@ -23,7 +23,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera.Projections
         /// <summary>
         /// Create projection matrix.
         /// </summary>
-        Matrix<double> GetMatrixProjection();
+        Matrix4D GetMatrixProjection();
 
         /// <summary>
         /// Create new projection based on existing one and adjusted by new aspect ratio.

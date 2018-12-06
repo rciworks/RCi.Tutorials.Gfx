@@ -5,83 +5,44 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 {
     public static class Vector4FEx
     {
-        #region // from
+        #region // import
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Vector2F value, float z, float w)
-        {
-            return new Vector4F(value.X, value.Y, z, w);
-        }
+        public static Vector4F ToVector4F(this Point2D value, float z, float w) => new Vector4F((float)value.X, (float)value.Y, z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Vector3F value, float w)
-        {
-            return new Vector4F(value.X, value.Y, value.Z, w);
-        }
+        public static Vector4F ToVector4F(this Vector2D value, float z, float w) => new Vector4F((float)value.X, (float)value.Y, z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this in Vector4D value)
-        {
-            return new Vector4F((float)value.X, (float)value.Y, (float)value.Z, (float)value.W);
-        }
+        public static Vector4F ToVector4F(this Vector2F value, float z, float w) => new Vector4F(value.X, value.Y, z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Point2D value, float z, float w)
-        {
-            return new Vector4F((float)value.X, (float)value.Y, z, w);
-        }
+        public static Vector4F ToVector4F(this in Point3D value, float w) => new Vector4F((float)value.X, (float)value.Y, (float)value.Z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Point3D value, float w)
-        {
-            return new Vector4F((float)value.X, (float)value.Y, (float)value.Z, w);
-        }
+        public static Vector4F ToVector4F(this in Vector3D value, float w) => new Vector4F((float)value.X, (float)value.Y, (float)value.Z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Vector2D value, float z, float w)
-        {
-            return new Vector4F((float)value.X, (float)value.Y, z, w);
-        }
+        public static Vector4F ToVector4F(this in UnitVector3D value, float w) => new Vector4F((float)value.X, (float)value.Y, (float)value.Z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Vector3D value, float w)
-        {
-            return new Vector4F((float)value.X, (float)value.Y, (float)value.Z, w);
-        }
+        public static Vector4F ToVector4F(this Vector3F value, float w) => new Vector4F(value.X, value.Y, value.Z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4F ToVector4F(this Vector4D value)
-        {
-            return new Vector4F((float)value.X, (float)value.Y, (float)value.Z, (float)value.W);
-        }
+        public static Vector4F ToVector4F(this in Vector4D value) => new Vector4F((float)value.X, (float)value.Y, (float)value.Z, (float)value.W);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4F ToVector4F(this Vector4F value) => new Vector4F(value.X, value.Y, value.Z, value.W);
 
         #endregion
 
-        #region // to
+        #region // export
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3F ToVector3FNormalized(this in Vector4F value)
-        {
-            return new Vector3F(value.X / value.W, value.Y / value.W, value.Z / value.W);
-        }
+        public static double[] ToDoubles(this Vector4F value) => new double[] { value.X, value.Y, value.Z, value.W };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4D ToVector4D(this Vector4F value)
-        {
-            return new Vector4D(value.X, value.Y, value.Z, value.W);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float[] ToFloats(this in Vector4F value)
-        {
-            return new[] { value.X, value.Y, value.Z, value.W, };
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double[] ToDoubles(this in Vector4F value)
-        {
-            return new double[] { value.X, value.Y, value.Z, value.W, };
-        }
+        public static float[] ToFloats(this Vector4F value) => new[] { value.X, value.Y, value.Z, value.W };
 
         #endregion
 

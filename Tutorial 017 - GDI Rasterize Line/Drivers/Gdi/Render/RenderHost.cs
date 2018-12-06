@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using MathNet.Numerics.LinearAlgebra;
 using RCi.Tutorials.Gfx.Drivers.Gdi.Materials;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
-using RCi.Tutorials.Gfx.Mathematics.Extensions;
 using RCi.Tutorials.Gfx.Utils;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
@@ -179,7 +177,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Get default matrix for vertex shader.
         /// </summary>
-        private static Matrix<double> GetMatrixForVertexShader(IRenderHost renderHost, Space space)
+        private static Matrix4D GetMatrixForVertexShader(IRenderHost renderHost, Space space)
         {
             switch (space)
             {
@@ -187,7 +185,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
                     return renderHost.CameraInfo.Cache.MatrixViewProjection;
 
                 case Space.View:
-                    return MatrixEx.Identity;
+                    return Matrix4D.Identity;
 
                 case Space.Screen:
                     return renderHost.CameraInfo.Cache.MatrixViewportInverse;

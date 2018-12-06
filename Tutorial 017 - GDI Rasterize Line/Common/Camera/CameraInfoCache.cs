@@ -1,4 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Common.Camera
@@ -10,34 +10,34 @@ namespace RCi.Tutorials.Gfx.Common.Camera
         #region // storage
 
         /// <inheritdoc />
-        public Matrix<double> MatrixView { get; }
+        public Matrix4D MatrixView { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewInverse { get; }
+        public Matrix4D MatrixViewInverse { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixProjection { get; }
+        public Matrix4D MatrixProjection { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixProjectionInverse { get; }
+        public Matrix4D MatrixProjectionInverse { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewport { get; }
+        public Matrix4D MatrixViewport { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewportInverse { get; }
+        public Matrix4D MatrixViewportInverse { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewProjection { get; }
+        public Matrix4D MatrixViewProjection { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewProjectionInverse { get; }
+        public Matrix4D MatrixViewProjectionInverse { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewProjectionViewport { get; }
+        public Matrix4D MatrixViewProjectionViewport { get; }
 
         /// <inheritdoc />
-        public Matrix<double> MatrixViewProjectionViewportInverse { get; }
+        public Matrix4D MatrixViewProjectionViewportInverse { get; }
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera
             // raw
 
             // world space -> camera space
-            MatrixView = MatrixEx.LookAtRH(cameraInfo.Position.ToVector3D(), cameraInfo.Target.ToVector3D(), cameraInfo.UpVector);
+            MatrixView = Matrix4DEx.LookAtRH(cameraInfo.Position.ToVector3D(), cameraInfo.Target.ToVector3D(), cameraInfo.UpVector);
             MatrixViewInverse = MatrixView.Inverse();
 
             // camera space -> clip space
@@ -57,7 +57,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera
             MatrixProjectionInverse = MatrixProjection.Inverse();
 
             // clip space -> screen space
-            MatrixViewport = MatrixEx.Viewport(cameraInfo.Viewport);
+            MatrixViewport = Matrix4DEx.Viewport(cameraInfo.Viewport);
             MatrixViewportInverse = MatrixViewport.Inverse();
 
             // multiplicatives

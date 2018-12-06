@@ -1,5 +1,4 @@
 ﻿using System;
-using MathNet.Numerics.LinearAlgebra;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
@@ -24,7 +23,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera
         /// <summary>
         /// Get transformation matrix from one space to another.
         /// </summary>
-        public static Matrix<double> GetTransformationMatrix(this ICameraInfo cameraInfo, Space from, Space to)
+        public static Matrix4D GetTransformationMatrix(this ICameraInfo cameraInfo, Space from, Space to)
         {
             switch (from)
             {
@@ -32,7 +31,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera
                     switch (to)
                     {
                         case Space.World:
-                            return MatrixEx.Identity;
+                            return Matrix4D.Identity;
 
                         case Space.View:
                             return cameraInfo.Cache.MatrixViewProjection;
@@ -51,7 +50,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera
                             return cameraInfo.Cache.MatrixViewProjectionInverse;
 
                         case Space.View:
-                            return MatrixEx.Identity;
+                            return Matrix4D.Identity;
 
                         case Space.Screen:
                             return cameraInfo.Cache.MatrixViewport;
@@ -70,7 +69,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera
                             return cameraInfo.Cache.MatrixViewportInverse;
 
                         case Space.Screen:
-                            return MatrixEx.Identity;
+                            return Matrix4D.Identity;
 
                         default:
                             throw new ArgumentOutOfRangeException(nameof(to), to, null);

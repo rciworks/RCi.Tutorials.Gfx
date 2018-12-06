@@ -48,10 +48,55 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             return new Quaternion(real, cross.X, cross.Y, cross.Z).Normalized;
         }
 
+        public static Quaternion ToQuaternion(this in Matrix4D matrix)
+        {
+            double x, y, z, w;
+
+            var num1 = matrix.M00 + matrix.M11 + matrix.M22;
+            if (num1 > 0.0)
+            {
+                var num2 = Math.Sqrt(num1 + 1);
+                w = num2 * 0.5;
+                var num3 = 0.5 / num2;
+                x = (matrix.M12 - matrix.M21) * num3;
+                y = (matrix.M20 - matrix.M02) * num3;
+                z = (matrix.M01 - matrix.M10) * num3;
+            }
+            else if (matrix.M00 >= matrix.M11 && matrix.M00 >= matrix.M22)
+            {
+                var num2 = Math.Sqrt(1.0 + matrix.M00 - matrix.M11 - matrix.M22);
+                var num3 = 0.5 / num2;
+                x = 0.5 * num2;
+                y = (matrix.M01 + matrix.M10) * num3;
+                z = (matrix.M02 + matrix.M20) * num3;
+                w = (matrix.M12 - matrix.M21) * num3;
+            }
+            else if (matrix.M11 > matrix.M22)
+            {
+                var num2 = Math.Sqrt(1.0 + matrix.M11 - matrix.M00 - matrix.M22);
+                var num3 = 0.5 / num2;
+                x = (matrix.M10 + matrix.M01) * num3;
+                y = 0.5 * num2;
+                z = (matrix.M21 + matrix.M12) * num3;
+                w = (matrix.M20 - matrix.M02) * num3;
+            }
+            else
+            {
+                var num2 = Math.Sqrt(1.0 + matrix.M22 - matrix.M00 - matrix.M11);
+                var num3 = 0.5 / num2;
+                x = (matrix.M20 + matrix.M02) * num3;
+                y = (matrix.M21 + matrix.M12) * num3;
+                z = 0.5 * num2;
+                w = (matrix.M01 - matrix.M10) * num3;
+            }
+
+            return new Quaternion(w, x, y, z);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion AroundAxis(in UnitVector3D axis, double angle)
         {
-            return MatrixEx.Rotate(axis, angle).ToQuaternion();
+            return Matrix4DEx.Rotate(axis, angle).ToQuaternion();
         }
     }
 }

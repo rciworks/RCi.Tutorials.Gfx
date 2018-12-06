@@ -1,5 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra;
-using MathNet.Spatial.Euclidean;
+﻿using MathNet.Spatial.Euclidean;
+using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Common.Camera.Projections
 {
@@ -34,7 +34,7 @@ namespace RCi.Tutorials.Gfx.Common.Camera.Projections
         public abstract object Clone();
 
         /// <inheritdoc />
-        public abstract Matrix<double> GetMatrixProjection();
+        public abstract Matrix4D GetMatrixProjection();
 
         /// <inheritdoc />
         public abstract IProjection GetAdjustedProjection(double aspectRatio);

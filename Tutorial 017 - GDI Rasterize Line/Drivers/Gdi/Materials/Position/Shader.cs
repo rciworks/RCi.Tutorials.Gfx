@@ -1,5 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
-using RCi.Tutorials.Gfx.Materials.Position;
+﻿using RCi.Tutorials.Gfx.Materials.Position;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
@@ -13,7 +12,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         /// <summary>
         /// Transform from world space to clip space.
         /// </summary>
-        private Matrix<double> MatrixWorldViewProjection { get; set; } = MatrixEx.Identity;
+        private Matrix4D MatrixWorldViewProjection { get; set; } = Matrix4D.Identity;
 
         /// <summary>
         /// Color in which primitives are gonna be drawn.
@@ -27,7 +26,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         /// <summary>
         /// Update global shader memory.
         /// </summary>
-        public void Update(Matrix<double> matrixWorldViewProjection, System.Drawing.Color color)
+        public void Update(in Matrix4D matrixWorldViewProjection, System.Drawing.Color color)
         {
             MatrixWorldViewProjection = matrixWorldViewProjection;
             Color = color.ToVector4F();
