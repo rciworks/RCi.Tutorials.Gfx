@@ -12,18 +12,4 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         /// </summary>
         Vector4F Position { get; }
     }
-
-    /// <summary>
-    /// Access to clone shader vertex.
-    /// TODO: temporary
-    /// </summary>
-    public interface IVertex<out TVertex> :
-        IVertex
-        where TVertex : struct, IVertex
-    {
-        /// <summary>
-        /// Clone shader vertex with new NDC position.
-        /// </summary>
-        TVertex CloneWithNewPosition(Vector4F position);
-    }
 }

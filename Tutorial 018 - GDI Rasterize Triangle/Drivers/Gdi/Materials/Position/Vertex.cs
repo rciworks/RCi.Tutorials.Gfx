@@ -5,7 +5,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 {
     /// <inheritdoc cref="IVertex"/>
     public readonly struct Vertex :
-        IVertex<Vertex>
+        IVertex
     {
         #region // storage
 
@@ -26,13 +26,6 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         #endregion
 
         #region // routines
-
-        /// <inheritdoc />
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vertex CloneWithNewPosition(Vector4F position)
-        {
-            return new Vertex(position);
-        }
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

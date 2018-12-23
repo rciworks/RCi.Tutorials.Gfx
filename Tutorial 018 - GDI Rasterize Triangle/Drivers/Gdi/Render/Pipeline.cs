@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using RCi.Tutorials.Gfx.Drivers.Gdi.Materials;
-using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
+using PrimitiveTopology = RCi.Tutorials.Gfx.Materials.PrimitiveTopology;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 {
@@ -11,7 +11,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
     public class Pipeline<TVertexIn, TVertex> :
         IPipeline<TVertexIn, TVertex>
         where TVertexIn : struct
-        where TVertex : struct, IVertex<TVertex/* TODO: temporary */>
+        where TVertex : struct, IVertex
     {
         #region // singleton
 
@@ -52,25 +52,6 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 
         #endregion
 
-        #region // routines
-
-        /// <summary>
-        /// Transform clip space to NDC to screen space.
-        /// </summary>
-        private void TransformClipToScreen(ref TVertex vertex)
-        {
-            // clip space to NDC to screen space
-            var positionScreen = RenderHost.CameraInfo.Cache.MatrixViewport
-                .Transform(vertex.Position)
-                .ToVector3FNormalized()
-                .ToVector4F(1);
-
-            // clone and override
-            vertex = vertex.CloneWithNewPosition(positionScreen);
-        }
-
-        #endregion
-
         #region // stages
 
         /// <summary>
@@ -84,36 +65,34 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
                 verticesVsOut[i] = Shader.VertexShader(vertices[i]);
             }
 
-            StagePrimitiveAssembly(verticesVsOut, primitiveTopology);
+            StageVertexPostProcessing(verticesVsOut, primitiveTopology);
         }
 
         /// <summary>
-        /// Primitive assembly stage.
+        /// Vertex post-processing stage.
         /// </summary>
-        private void StagePrimitiveAssembly(TVertex[] vertices, PrimitiveTopology primitiveTopology)
+        private void StageVertexPostProcessing(TVertex[] vertices, PrimitiveTopology primitiveTopology)
         {
             switch (primitiveTopology)
             {
                 case PrimitiveTopology.PointList:
                     for (var i = 0; i < vertices.Length; i++)
                     {
-                        RasterizePoint(ref vertices[i]);
+                        VertexPostProcessingPoint(vertices[i]);
                     }
                     break;
 
                 case PrimitiveTopology.LineList:
                     for (var i = 0; i < vertices.Length; i += 2)
                     {
-                        RasterizeLine(ref vertices[i], ref vertices[i + 1]);
+                        VertexPostProcessingLine(vertices[i], vertices[i + 1]);
                     }
                     break;
 
                 case PrimitiveTopology.LineStrip:
                     for (var i = 0; i < vertices.Length - 1; i++)
                     {
-                        var copy0 = vertices[i];
-                        var copy1 = vertices[i + 1];
-                        RasterizeLine(ref copy0, ref copy1);
+                        VertexPostProcessingLine(vertices[i], vertices[i + 1]);
                     }
                     break;
 
@@ -133,7 +112,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Pixel (fragment) shader stage.
         /// </summary>
-        private void StagePixelShader(int x, int y, ref TVertex vertex)
+        private void StagePixelShader(int x, int y, in TVertex vertex)
         {
             var color = Shader.PixelShader(vertex);
 
@@ -166,28 +145,78 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 
         #endregion
 
-        #region // rasterize
+        #region // vertex post-processing
+
+        #region // primitives
+
+        private struct PrimitivePoint
+        {
+            public Vector4F PositionScreen0;
+        }
+
+        private struct PrimitiveLine
+        {
+            public Vector4F PositionScreen0;
+            public Vector4F PositionScreen1;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Post process vertex.
+        /// </summary>
+        private void VertexPostProcessing(in TVertex vertex, out Vector4F positionScreen)
+        {
+            // clip space to NDC to screen space
+            positionScreen = RenderHost.CameraInfo.Cache.MatrixViewport
+                // TODO: currently do perspective division here
+                .Transform(vertex.Position)
+                .ToVector3FNormalized()
+                .ToVector4F(1);
+        }
+
+        /// <summary>
+        /// Post process point vertex.
+        /// </summary>
+        private void VertexPostProcessingPoint(in TVertex vertex0)
+        {
+            // vertex post processing + primitive assembly
+            PrimitivePoint primitive;
+            VertexPostProcessing(vertex0, out primitive.PositionScreen0);
+
+            // rasterization stage
+            RasterizePoint(primitive);
+        }
+
+        /// <summary>
+        /// Post process line vertices.
+        /// </summary>
+        private void VertexPostProcessingLine(in TVertex vertex0, in TVertex vertex1)
+        {
+            // vertex post processing + primitive assembly
+            PrimitiveLine primitive;
+            VertexPostProcessing(vertex0, out primitive.PositionScreen0);
+            VertexPostProcessing(vertex1, out primitive.PositionScreen1);
+
+            // rasterization stage
+            RasterizeLine(primitive);
+        }
+
+        #endregion
+
+        #region // rasterization
 
         #region // point
 
         /// <summary>
-        /// Rasterize point (input vertex in clip space).
+        /// Rasterize point.
         /// </summary>
-        private void RasterizePoint(ref TVertex vertex0)
+        private void RasterizePoint(in PrimitivePoint primitive)
         {
-            // TODO: clipping
-            TransformClipToScreen(ref vertex0);
-            DrawPoint(ref vertex0);
-        }
+            var x = (int)primitive.PositionScreen0.X;
+            var y = (int)primitive.PositionScreen0.Y;
 
-        /// <summary>
-        /// Draw point (input vertex in screen space).
-        /// </summary>
-        private void DrawPoint(ref TVertex vertex0)
-        {
-            var x = (int)vertex0.Position.X;
-            var y = (int)vertex0.Position.Y;
-            StagePixelShader(x, y, ref vertex0);
+            StagePixelShader(x, y, default);
         }
 
         #endregion
@@ -195,37 +224,22 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         #region // line
 
         /// <summary>
-        /// Rasterize line (input vertices in clip space).
+        /// Rasterize line.
         /// </summary>
-        private void RasterizeLine(ref TVertex vertex0, ref TVertex vertex1)
+        private void RasterizeLine(in PrimitiveLine primitive)
         {
-            // TODO: clipping
-            TransformClipToScreen(ref vertex0);
-            TransformClipToScreen(ref vertex1);
-            DrawLine(ref vertex0, ref vertex1);
-        }
-
-        /// <summary>
-        /// Draw line (input vertices in screen space).
-        /// </summary>
-        private void DrawLine(ref TVertex vertex0, ref TVertex vertex1)
-        {
-            // we're in screen space
-            var x0 = (int)vertex0.Position.X;
-            var y0 = (int)vertex0.Position.Y;
-            var x1 = (int)vertex1.Position.X;
-            var y1 = (int)vertex1.Position.Y;
-
-            // TODO: vertex interpolation
-            var empty = default(TVertex);
+            var x0 = (int)primitive.PositionScreen0.X;
+            var y0 = (int)primitive.PositionScreen0.Y;
+            var x1 = (int)primitive.PositionScreen1.X;
+            var y1 = (int)primitive.PositionScreen1.Y;
 
             // get pixel stream
             var pixels = BresenhamLine(x0, y0, x1, y1);
 
             // draw pixels
-            foreach (var point in pixels)
+            foreach (var pixel in pixels)
             {
-                StagePixelShader(point.X, point.Y, ref empty);
+                StagePixelShader(pixel.X, pixel.Y, default);
             }
         }
 
