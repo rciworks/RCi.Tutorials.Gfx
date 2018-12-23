@@ -7,6 +7,24 @@ namespace RCi.Tutorials.Gfx.Utils
     public static class U
     {
         /// <summary>
+        /// Clamp value (ensure it falls into a given range).
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Clamp(this int value, int min, int max)
+        {
+            if (value < min)
+            {
+                value = min;
+                return value;
+            }
+            if (value > max)
+            {
+                value = max;
+            }
+            return value;
+        }
+
+        /// <summary>
         /// <see cref="ICloneable.Clone"/> and cast it to explicit type <typeparam name="T"/>.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -97,6 +115,17 @@ namespace RCi.Tutorials.Gfx.Utils
         public static System.Windows.Interop.HwndSource HandleSource(this System.Windows.Media.Visual window)
         {
             return System.Windows.PresentationSource.FromVisual(window) as System.Windows.Interop.HwndSource;
+        }
+
+        /// <summary>
+        /// Swap two instances.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Swap<T>(ref T value0, ref T value1)
+        {
+            var temp = value0;
+            value0 = value1;
+            value1 = temp;
         }
 
         /// <summary>

@@ -53,7 +53,7 @@ namespace RCi.Tutorials.Gfx.Client
         private static readonly IPrimitive[] PointCloudBunny = new Func<IPrimitive[]>(() =>
         {
             // adjust for different coordinate system
-            var matrix = Matrix4DEx.Scale(10) * Matrix4DEx.Rotate(QuaternionEx.AroundAxis(UnitVector3D.XAxis, Math.PI * 0.5));
+            var matrix = Matrix4DEx.Scale(10) * Matrix4DEx.Rotate(QuaternionEx.AroundAxis(UnitVector3D.XAxis, Math.PI * 0.5)) * Matrix4DEx.Translate(-1, -1, -0.5);
 
             // point cloud source: http://graphics.stanford.edu/data/3Dscanrep/
             var vertices = StreamPointCloud_XYZ(@"..\..\..\resources\bunny.xyz")
@@ -88,7 +88,9 @@ namespace RCi.Tutorials.Gfx.Client
         /// </summary>
         public static IEnumerable<IPrimitive> GetPrimitives()
         {
-            return GetPrimitivesWorldAxis()
+            return new IPrimitive[0]
+                .Concat(GetPrimitivesTriangles())
+                .Concat(GetPrimitivesWorldAxis())
                 .Concat(GetPrimitivesScreenViewLines())
                 .Concat(GetPrimitivesCubes())
                 .Concat(GetPrimitivesPointCloud())
@@ -224,6 +226,43 @@ namespace RCi.Tutorials.Gfx.Client
         {
             return PointCloudBunny;
         }
+
+        /// <summary>
+        /// Get some triangle primitives.
+        /// </summary>
+        private static IEnumerable<IPrimitive> GetPrimitivesTriangles()
+        {
+            yield return new Materials.Position.Primitive
+            (
+                new PrimitiveBehaviour(Space.World),
+                PrimitiveTopology.TriangleStrip,
+                new[]
+                {
+                    new Materials.Position.Vertex(new Vector3F(0, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(1, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(0, 1, 0)),
+                    new Materials.Position.Vertex(new Vector3F(1, 1, 0)),
+                },
+                Color.Goldenrod
+            );
+
+            yield return new Materials.Position.Primitive
+            (
+                new PrimitiveBehaviour(Space.World),
+                PrimitiveTopology.TriangleList,
+                new[]
+                {
+                    new Materials.Position.Vertex(new Vector3F(-2, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(-2, 1, 0)),
+                    new Materials.Position.Vertex(new Vector3F(-1, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(-4, 0, 0)),
+                    new Materials.Position.Vertex(new Vector3F(-4, 1, 0)),
+                    new Materials.Position.Vertex(new Vector3F(-3, 0, 0)),
+                },
+                Color.Cyan
+            );
+        }
+
 
         /// <summary>
         /// Read *.xyz point cloud file.
