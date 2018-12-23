@@ -9,9 +9,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         #region // storage
 
         /// <summary>
-        /// Transform from world space to clip space.
+        /// Transform from given space to clip space.
         /// </summary>
-        private Matrix4D MatrixWorldViewProjection { get; set; } = Matrix4D.Identity;
+        private Matrix4D MatrixToClip { get; set; } = Matrix4D.Identity;
 
         /// <summary>
         /// Color in which primitives are gonna be drawn.
@@ -25,9 +25,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         /// <summary>
         /// Update global shader memory.
         /// </summary>
-        public void Update(in Matrix4D matrixWorldViewProjection, System.Drawing.Color color)
+        public void Update(in Matrix4D matrixToClip, System.Drawing.Color color)
         {
-            MatrixWorldViewProjection = matrixWorldViewProjection;
+            MatrixToClip = matrixToClip;
             Color = color.ToVector4F();
         }
 
@@ -40,7 +40,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         {
             return new Vertex
             (
-                MatrixWorldViewProjection.Transform(vertex.Position.ToVector4F(1))
+                MatrixToClip.Transform(vertex.Position.ToVector4F(1))
             );
         }
 
