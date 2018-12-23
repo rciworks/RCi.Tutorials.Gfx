@@ -128,6 +128,7 @@
     <Compile Include="Materials\Primitive.cs" />
     <Compile Include="Materials\PrimitiveBehaviour.cs" />
     <Compile Include="Materials\PrimitiveTopology.cs" />
+    <Compile Include="Mathematics\Extensions\InterpolateEx.cs" />
     <Compile Include="Mathematics\Extensions\Matrix4DEx.cs" />
     <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
     <Compile Include="Mathematics\Extensions\Point3DEx.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Mathematics\Extensions\Vector3FEx.cs" />
     <Compile Include="Mathematics\Extensions\Vector4DEx.cs" />
     <Compile Include="Mathematics\Extensions\Vector4FEx.cs" />
+    <Compile Include="Mathematics\IInterpolate.cs" />
     <Compile Include="Mathematics\Matrix4D.cs" />
     <Compile Include="Mathematics\Space.cs" />
     <Compile Include="Mathematics\Vector2F.cs" />

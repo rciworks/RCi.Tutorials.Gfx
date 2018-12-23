@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Mathematics
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct Vector2F
+    public readonly struct Vector2F :
+        IInterpolate<Vector2F>
     {
         #region // static
 
@@ -68,6 +70,20 @@ namespace RCi.Tutorials.Gfx.Mathematics
             (
                 left.X / right,
                 left.Y / right
+            );
+        }
+
+        #endregion
+
+        #region // interpolation
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector2F InterpolateLinear(in Vector2F other, float alpha)
+        {
+            return new Vector2F
+            (
+                X.InterpolateLinear(other.X, alpha),
+                Y.InterpolateLinear(other.Y, alpha)
             );
         }
 
