@@ -5,7 +5,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
     /// <summary>
     /// Internal shader vertex interface.
     /// </summary>
-    public interface IVertexShader
+    public interface IVertex
     {
         /// <summary>
         /// Clip space position (vertex shader output).
@@ -17,13 +17,13 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
     /// Access to clone shader vertex.
     /// TODO: temporary
     /// </summary>
-    public interface IVertexShader<out TVertexShader> :
-        IVertexShader
-        where TVertexShader : struct, IVertexShader
+    public interface IVertex<out TVertex> :
+        IVertex
+        where TVertex : struct, IVertex
     {
         /// <summary>
         /// Clone shader vertex with new NDC position.
         /// </summary>
-        TVertexShader CloneWithNewPosition(Vector4F position);
+        TVertex CloneWithNewPosition(Vector4F position);
     }
 }

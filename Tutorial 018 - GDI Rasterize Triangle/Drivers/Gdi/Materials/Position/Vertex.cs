@@ -3,9 +3,9 @@ using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 {
-    /// <inheritdoc cref="IVertexShader"/>
-    public readonly struct VertexShader :
-        IVertexShader<VertexShader>
+    /// <inheritdoc cref="IVertex"/>
+    public readonly struct Vertex :
+        IVertex<Vertex>
     {
         #region // storage
 
@@ -18,7 +18,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 
         /// <summary />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public VertexShader(Vector4F position)
+        public Vertex(Vector4F position)
         {
             Position = position;
         }
@@ -29,9 +29,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public VertexShader CloneWithNewPosition(Vector4F position)
+        public Vertex CloneWithNewPosition(Vector4F position)
         {
-            return new VertexShader(position);
+            return new Vertex(position);
         }
 
         /// <inheritdoc />

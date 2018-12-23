@@ -8,17 +8,17 @@ using RCi.Tutorials.Gfx.Mathematics.Extensions;
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 {
     /// <inheritdoc />
-    public class Pipeline<TVertex, TVertexShader> :
-        IPipeline<TVertex, TVertexShader>
-        where TVertex : struct
-        where TVertexShader : struct, IVertexShader<TVertexShader/* TODO: temporary */>
+    public class Pipeline<TVertexIn, TVertex> :
+        IPipeline<TVertexIn, TVertex>
+        where TVertexIn : struct
+        where TVertex : struct, IVertex<TVertex/* TODO: temporary */>
     {
         #region // singleton
 
         /// <summary>
         /// Singleton access.
         /// </summary>
-        public static IPipeline<TVertex, TVertexShader> Instance { get; } = new Pipeline<TVertex, TVertexShader>();
+        public static IPipeline<TVertexIn, TVertex> Instance { get; } = new Pipeline<TVertexIn, TVertex>();
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Ongoing shader.
         /// </summary>
-        private IShader<TVertex, TVertexShader> Shader { get; set; }
+        private IShader<TVertexIn, TVertex> Shader { get; set; }
 
         #endregion
 
@@ -42,10 +42,10 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         public void SetRenderHost(RenderHost renderHost) => RenderHost = renderHost;
 
         /// <inheritdoc />
-        public void SetShader(IShader<TVertex, TVertexShader> shader) => Shader = shader;
+        public void SetShader(IShader<TVertexIn, TVertex> shader) => Shader = shader;
 
         /// <inheritdoc />
-        public void Render(TVertex[] vertices, PrimitiveTopology primitiveTopology)
+        public void Render(TVertexIn[] vertices, PrimitiveTopology primitiveTopology)
         {
             StageVertexShader(vertices, primitiveTopology);
         }
@@ -57,7 +57,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Transform clip space to NDC to screen space.
         /// </summary>
-        private void TransformClipToScreen(ref TVertexShader vertex)
+        private void TransformClipToScreen(ref TVertex vertex)
         {
             // clip space to NDC to screen space
             var positionScreen = RenderHost.CameraInfo.Cache.MatrixViewport
@@ -76,9 +76,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Vertex shader stage.
         /// </summary>
-        private void StageVertexShader(TVertex[] vertices, PrimitiveTopology primitiveTopology)
+        private void StageVertexShader(TVertexIn[] vertices, PrimitiveTopology primitiveTopology)
         {
-            var verticesVsOut = new TVertexShader[vertices.Length];
+            var verticesVsOut = new TVertex[vertices.Length];
             for (var i = 0; i < vertices.Length; i++)
             {
                 verticesVsOut[i] = Shader.VertexShader(vertices[i]);
@@ -90,7 +90,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Primitive assembly stage.
         /// </summary>
-        private void StagePrimitiveAssembly(TVertexShader[] vertices, PrimitiveTopology primitiveTopology)
+        private void StagePrimitiveAssembly(TVertex[] vertices, PrimitiveTopology primitiveTopology)
         {
             switch (primitiveTopology)
             {
@@ -133,7 +133,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Pixel (fragment) shader stage.
         /// </summary>
-        private void StagePixelShader(int x, int y, ref TVertexShader vertex)
+        private void StagePixelShader(int x, int y, ref TVertex vertex)
         {
             var color = Shader.PixelShader(vertex);
 
@@ -173,7 +173,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Rasterize point (input vertex in clip space).
         /// </summary>
-        private void RasterizePoint(ref TVertexShader vertex0)
+        private void RasterizePoint(ref TVertex vertex0)
         {
             // TODO: clipping
             TransformClipToScreen(ref vertex0);
@@ -183,7 +183,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Draw point (input vertex in screen space).
         /// </summary>
-        private void DrawPoint(ref TVertexShader vertex0)
+        private void DrawPoint(ref TVertex vertex0)
         {
             var x = (int)vertex0.Position.X;
             var y = (int)vertex0.Position.Y;
@@ -197,7 +197,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Rasterize line (input vertices in clip space).
         /// </summary>
-        private void RasterizeLine(ref TVertexShader vertex0, ref TVertexShader vertex1)
+        private void RasterizeLine(ref TVertex vertex0, ref TVertex vertex1)
         {
             // TODO: clipping
             TransformClipToScreen(ref vertex0);
@@ -208,7 +208,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <summary>
         /// Draw line (input vertices in screen space).
         /// </summary>
-        private void DrawLine(ref TVertexShader vertex0, ref TVertexShader vertex1)
+        private void DrawLine(ref TVertex vertex0, ref TVertex vertex1)
         {
             // we're in screen space
             var x0 = (int)vertex0.Position.X;
@@ -217,7 +217,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             var y1 = (int)vertex1.Position.Y;
 
             // TODO: vertex interpolation
-            var empty = default(TVertexShader);
+            var empty = default(TVertex);
 
             // get pixel stream
             var pixels = BresenhamLine(x0, y0, x1, y1);

@@ -166,7 +166,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             // TODO: in a future we're gonna solve this generically (without typecasting)
             foreach (var primitive in primitives.OfType<Gfx.Materials.Position.IPrimitive>())
             {
-                var pipeline = Pipeline<Gfx.Materials.Position.Vertex, Materials.Position.VertexShader>.Instance;
+                var pipeline = Pipeline<Gfx.Materials.Position.Vertex, Materials.Position.Vertex>.Instance;
                 pipeline.SetRenderHost(this);
                 ShaderLibrary.ShaderPosition.Update(GetMatrixForVertexShader(this, primitive.PrimitiveBehaviour.Space), primitive.Material.Color);
                 pipeline.SetShader(ShaderLibrary.ShaderPosition);

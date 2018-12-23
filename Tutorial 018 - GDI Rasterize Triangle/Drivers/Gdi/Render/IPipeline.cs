@@ -17,27 +17,27 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
     /// <summary>
     /// <see cref="IPipeline"/> with known vertex type.
     /// </summary>
-    public interface IPipeline<in TVertex> :
+    public interface IPipeline<in TVertexIn> :
         IPipeline
-        where TVertex : struct
+        where TVertexIn : struct
     {
         /// <summary>
         /// Render primitives.
         /// </summary>
-        void Render(TVertex[] vertices, PrimitiveTopology primitiveTopology);
+        void Render(TVertexIn[] vertices, PrimitiveTopology primitiveTopology);
     }
 
     /// <summary>
     /// <see cref="IPipeline{TVertex}"/> with known internal shader vertex type.
     /// </summary>
-    public interface IPipeline<TVertex, TVertexShader> :
-        IPipeline<TVertex>
-        where TVertex : struct
-        where TVertexShader : struct, IVertexShader
+    public interface IPipeline<TvertexIn, TVertex> :
+        IPipeline<TvertexIn>
+        where TvertexIn : struct
+        where TVertex : struct, Materials.IVertex
     {
         /// <summary>
         /// Set current shader.
         /// </summary>
-        void SetShader(IShader<TVertex, TVertexShader> shader);
+        void SetShader(IShader<TvertexIn, TVertex> shader);
     }
 }
