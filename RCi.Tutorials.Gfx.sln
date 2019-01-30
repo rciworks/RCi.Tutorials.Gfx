@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 017 - GDI Rasteriz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 018 - GDI Rasterize Triangle", "Tutorial 018 - GDI Rasterize Triangle\Tutorial 018 - GDI Rasterize Triangle.csproj", "{EAF1E771-AC50-438D-A248-D50E3B7F605D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 019 - GDI Interpolation", "Tutorial 019 - GDI Interpolation\Tutorial 019 - GDI Interpolation.csproj", "{BA52B315-21E8-426A-B1D6-B0F7E115D929}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{EAF1E771-AC50-438D-A248-D50E3B7F605D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAF1E771-AC50-438D-A248-D50E3B7F605D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAF1E771-AC50-438D-A248-D50E3B7F605D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
