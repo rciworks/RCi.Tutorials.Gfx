@@ -7,7 +7,7 @@
     <ProjectGuid>{B04CF5FD-59B8-46CE-BD96-E1ECB383B25B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial 015 - Primitives, Materials</AssemblyName>
+    <AssemblyName>Tutorial 016 - GDI Pipeline</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

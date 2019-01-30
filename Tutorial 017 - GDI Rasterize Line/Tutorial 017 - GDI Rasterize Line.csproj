@@ -7,7 +7,7 @@
     <ProjectGuid>{2EA97E80-96DA-4BD1-A68B-19D2F44F8F8F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial 015 - Primitives, Materials</AssemblyName>
+    <AssemblyName>Tutorial 017 - GDI Rasterize Line</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

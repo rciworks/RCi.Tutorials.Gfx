@@ -7,7 +7,7 @@
     <ProjectGuid>{EAF1E771-AC50-438D-A248-D50E3B7F605D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial 015 - Primitives, Materials</AssemblyName>
+    <AssemblyName>Tutorial 018 - GDI Rasterize Triangle</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

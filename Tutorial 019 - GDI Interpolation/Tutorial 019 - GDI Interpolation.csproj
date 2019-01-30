@@ -7,7 +7,7 @@
     <ProjectGuid>{BA52B315-21E8-426A-B1D6-B0F7E115D929}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial 015 - Primitives, Materials</AssemblyName>
+    <AssemblyName>Tutorial 019 - GDI Interpolation</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
