@@ -2,17 +2,19 @@
 using System.Runtime.InteropServices;
 using RCi.Tutorials.Gfx.Mathematics;
 
-namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
+namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.PositionColor
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct VsIn
     {
         public Vector3F Position { get; }
+        public Vector4F Color { get; }
 
-        public VsIn(Vector3F position)
+        public VsIn(Vector3F position, Vector4F color)
         {
             Position = position;
+            Color = color;
         }
     }
 
@@ -22,10 +24,12 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         IPsIn<PsIn>
     {
         public Vector4F Position { get; }
+        public Vector4F Color { get; }
 
-        public PsIn(Vector4F position)
+        public PsIn(Vector4F position, Vector4F color)
         {
             Position = position;
+            Color = color;
         }
 
         #region // interpolation
@@ -34,7 +38,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         {
             return new PsIn
             (
-                Position.InterpolateMultiply(multiplier)
+                Position.InterpolateMultiply(multiplier),
+                Color.InterpolateMultiply(multiplier)
             );
         }
 
@@ -42,7 +47,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         {
             return new PsIn
             (
-                Position.InterpolateLinear(other.Position, alpha)
+                Position.InterpolateLinear(other.Position, alpha),
+                Color.InterpolateLinear(other.Color, alpha)
             );
         }
 
@@ -50,7 +56,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         {
             return new PsIn
             (
-                Position.InterpolateBarycentric(other0.Position, other1.Position, barycentric)
+                Position.InterpolateBarycentric(other0.Position, other1.Position, barycentric),
+                Color.InterpolateBarycentric(other0.Color, other1.Color, barycentric)
             );
         }
 
@@ -60,7 +67,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         {
             return new PsIn
             (
-                position
+                position,
+                Color
             );
         }
     }

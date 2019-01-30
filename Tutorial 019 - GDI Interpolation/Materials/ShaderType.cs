@@ -14,5 +14,10 @@
         /// Mono-colored.
         /// </summary>
         Position,
+
+        /// <summary>
+        /// Vertices with individual colors.
+        /// </summary>
+        PositionColor,
     }
 }

@@ -23,6 +23,11 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         /// </summary>
         public Position.Shader ShaderPosition { get; set; }
 
+        /// <summary>
+        /// <see cref="ShaderType.PositionColor"/> shader.
+        /// </summary>
+        public PositionColor.Shader ShaderPositionColor { get; set; }
+
         #endregion
 
         #region // ctor
@@ -31,6 +36,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         public ShaderLibrary(RenderHost renderHost)
         {
             Shaders.Add(ShaderPosition = new Position.Shader(renderHost));
+            Shaders.Add(ShaderPositionColor = new PositionColor.Shader(renderHost));
         }
 
         /// <inheritdoc />

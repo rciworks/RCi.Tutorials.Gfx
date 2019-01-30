@@ -19,6 +19,9 @@ namespace RCi.Tutorials.Gfx.Materials
         public Vector3F[] Positions { get; set; }
 
         /// <inheritdoc />
+        public int[] Colors { get; set; }
+
+        /// <inheritdoc />
         public int Color { get; set; }
     }
 }

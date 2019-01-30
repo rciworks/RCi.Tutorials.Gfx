@@ -22,6 +22,11 @@ namespace RCi.Tutorials.Gfx.Materials
         Vector3F[] Positions { get; set; }
 
         /// <summary>
+        /// Color buffer.
+        /// </summary>
+        int[] Colors { get; set; }
+
+        /// <summary>
         /// Color for whole model.
         /// </summary>
         int Color { get; set; }

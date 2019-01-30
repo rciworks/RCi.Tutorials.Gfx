@@ -35,7 +35,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
             var x = (int)primitive.PositionScreen0.X;
             var y = (int)primitive.PositionScreen0.Y;
 
-            StagePixelShader(x, y, default);
+            StagePixelShader(x, y, primitive.PsIn0);
         }
     }
 }

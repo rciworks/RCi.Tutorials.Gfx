@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
@@ -95,12 +96,24 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
         {
             var pixels = LineBresenham(
                     primitive.PositionScreen0.ToVector2F(),
-                    primitive.PositionScreen1.ToVector2F());
+                    primitive.PositionScreen1.ToVector2F())
+                .ToArray();
+
+            // get delta per pixel going from vertex0 to vertex1
+            var deltaAlpha = 1f / pixels.Length;
+            // get alpha (with prestep)
+            var alpha = deltaAlpha * 0.5f;
 
             foreach (var (x, y) in pixels)
             {
+                // interpolate attributes
+                var interpolant = primitive.PsIn0.InterpolateLinear(primitive.PsIn1, alpha);
+
                 // pass to pixel shader
-                StagePixelShader(x, y, default);
+                StagePixelShader(x, y, interpolant);
+
+                // increment (interpolate going towards vertex1)
+                alpha += deltaAlpha;
             }
         }
 
