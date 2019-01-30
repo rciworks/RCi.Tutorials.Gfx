@@ -37,7 +37,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         /// <summary>
         /// Render.
         /// </summary>
-        void Render(IEnumerable<IPrimitive> primitives);
+        void Render(IEnumerable<IModel> models);
 
         /// <summary>
         /// Fires when <see cref="CameraInfo"/> changed.

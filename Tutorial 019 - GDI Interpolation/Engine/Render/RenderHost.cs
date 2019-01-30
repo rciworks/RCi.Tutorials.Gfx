@@ -159,19 +159,19 @@ namespace RCi.Tutorials.Gfx.Engine.Render
         #region // render
 
         /// <inheritdoc />
-        public void Render(IEnumerable<IPrimitive> primitives)
+        public void Render(IEnumerable<IModel> models)
         {
             EnsureBufferSize();
             FrameStarted = DateTime.UtcNow;
             FpsCounter.StartFrame();
-            RenderInternal(primitives);
+            RenderInternal(models);
             FpsCounter.StopFrame();
         }
 
         /// <summary>
         /// Internal rendering for particular driver.
         /// </summary>
-        protected abstract void RenderInternal(IEnumerable<IPrimitive> primitives);
+        protected abstract void RenderInternal(IEnumerable<IModel> models);
 
         #endregion
     }

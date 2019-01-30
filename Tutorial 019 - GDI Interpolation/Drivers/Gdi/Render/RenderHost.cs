@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using RCi.Tutorials.Gfx.Drivers.Gdi.Materials;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Materials;
@@ -138,13 +137,13 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         #region // render
 
         /// <inheritdoc />
-        protected override void RenderInternal(IEnumerable<IPrimitive> primitives)
+        protected override void RenderInternal(IEnumerable<IModel> models)
         {
             // clear buffers
             BackBuffer.Clear(Color.Black);
 
-            // render primitives
-            RenderPrimitives(primitives);
+            // render models
+            RenderModels(models);
 
             // draw fps
             BackBuffer.Graphics.DrawString(FpsCounter.FpsString, FontConsolas12, Brushes.Red, 0, 0);
@@ -159,24 +158,16 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         }
 
         /// <summary>
-        /// Draw primitives.
+        /// Draw models.
         /// </summary>
-        private void RenderPrimitives(IEnumerable<IPrimitive> primitives)
+        private void RenderModels(IEnumerable<IModel> models)
         {
-            // TODO: currently we know how to draw only certain type of primitives, so just filter them out
-            // TODO: in a future we're gonna solve this generically (without typecasting)
-            foreach (var primitive in primitives.OfType<Gfx.Materials.Position.IPrimitive>())
+            foreach (var model in models)
             {
-                var gfxModel = GfxModel.Factory(this, new Model
+                using (var gfxModel = GfxModel.Factory(this, model))
                 {
-                    ShaderType = ShaderType.Position,
-                    Space = primitive.PrimitiveBehaviour.Space,
-                    PrimitiveTopology = primitive.PrimitiveTopology,                 
-                    Positions = primitive.Vertices.Select(v => v.Position).ToArray(),
-                    Color = primitive.Material.Color.ToRgba(),
-                });
-                ShaderLibrary.ShaderPosition.Update(GetMatrixForVertexShader(this, primitive.PrimitiveBehaviour.Space), primitive.Material.Color.ToRgba());
-                gfxModel.Render(GetMatrixForVertexShader(this, primitive.PrimitiveBehaviour.Space));
+                    gfxModel.Render(GetMatrixForVertexShader(this, model.Space));
+                }
             }
         }
 
