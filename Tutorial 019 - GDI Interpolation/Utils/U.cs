@@ -129,12 +129,27 @@ namespace RCi.Tutorials.Gfx.Utils
         }
 
         /// <summary>
-        /// Convert color to RGBA integer: 0xRRGGBBAA;
+        /// Convert <see cref="System.Drawing.Color"/> to RGBA integer: 0xAABBGGRR.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ToRgba(this System.Drawing.Color color)
         {
             return ((((color.A << 8) + color.B) << 8) + color.G << 8) + color.R;
+        }
+
+        /// <summary>
+        /// Convert 0xAABBGGRR color <see cref="System.Drawing.Color"/>.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static System.Drawing.Color FromRgbaToColor(this int color)
+        {
+            return System.Drawing.Color.FromArgb
+            (
+                (color >> 24) & 0xFF,
+                (color >> 0) & 0xFF,
+                (color >> 8) & 0xFF,
+                (color >> 16) & 0xFF
+            );
         }
     }
 }

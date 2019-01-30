@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -73,14 +75,21 @@
     <Compile Include="Common\Camera\Projections\Projection.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
+    <Compile Include="Drivers\Gdi\Materials\GfxModel.cs" />
+    <Compile Include="Drivers\Gdi\Materials\IPsIn.cs" />
     <Compile Include="Drivers\Gdi\Materials\IShader.cs" />
-    <Compile Include="Drivers\Gdi\Materials\IVertex.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\Shader.cs" />
-    <Compile Include="Drivers\Gdi\Materials\Position\Vertex.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\ShaderLibrary.cs" />
-    <Compile Include="Drivers\Gdi\Render\IPipeline.cs" />
-    <Compile Include="Drivers\Gdi\Render\Pipeline.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\IBufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\IPipeline.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\Pipeline.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\PipelineLine.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\PipelinePoint.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\PipelineTriangle.cs" />
     <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
     <Compile Include="Common\Camera\Viewport.cs" />
     <Compile Include="Engine\Operators\IOperator.cs" />
@@ -111,14 +120,17 @@
     <Compile Include="Inputs\MouseEventHandler.cs" />
     <Compile Include="Inputs\SizeEventArgs.cs" />
     <Compile Include="Inputs\SizeEventHandler.cs" />
+    <Compile Include="Materials\IGfxModel.cs" />
     <Compile Include="Materials\IHaveMaterial.cs" />
     <Compile Include="Materials\IHavePrimitiveBehaviour.cs" />
     <Compile Include="Materials\IHavePrimitiveTopology.cs" />
     <Compile Include="Materials\IHaveVertices.cs" />
     <Compile Include="Materials\IMaterial.cs" />
+    <Compile Include="Materials\IModel.cs" />
     <Compile Include="Materials\IPrimitive.cs" />
     <Compile Include="Materials\IVertex.cs" />
     <Compile Include="Materials\Material.cs" />
+    <Compile Include="Materials\Model.cs" />
     <Compile Include="Materials\Position\IMaterial.cs" />
     <Compile Include="Materials\Position\IPrimitive.cs" />
     <Compile Include="Materials\Position\IVertex.cs" />
@@ -128,6 +140,7 @@
     <Compile Include="Materials\Primitive.cs" />
     <Compile Include="Materials\PrimitiveBehaviour.cs" />
     <Compile Include="Materials\PrimitiveTopology.cs" />
+    <Compile Include="Materials\ShaderType.cs" />
     <Compile Include="Mathematics\Extensions\InterpolateEx.cs" />
     <Compile Include="Mathematics\Extensions\Matrix4DEx.cs" />
     <Compile Include="Mathematics\Extensions\Point2DEx.cs" />

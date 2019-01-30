@@ -1,55 +1,46 @@
-﻿using RCi.Tutorials.Gfx.Mathematics;
+﻿using RCi.Tutorials.Gfx.Drivers.Gdi.Render;
+using RCi.Tutorials.Gfx.Materials;
+using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 {
+    /// <summary>
+    /// <see cref="ShaderType.Position"/>
+    /// </summary>
     public class Shader :
-        Shader<Gfx.Materials.Position.Vertex, Vertex>
+        Shader<VsIn, PsIn>
     {
-        #region // storage
-
-        /// <summary>
-        /// Transform from given space to clip space.
-        /// </summary>
         private Matrix4D MatrixToClip { get; set; } = Matrix4D.Identity;
-
-        /// <summary>
-        /// Color in which primitives are gonna be drawn.
-        /// </summary>
         private Vector4F Color { get; set; } = new Vector4F(0, 0, 0, 0);
 
-        #endregion
+        public Shader(RenderHost renderHost) :
+            base(renderHost)
+        {
+        }
 
-        #region // routines
-
-        /// <summary>
-        /// Update global shader memory.
-        /// </summary>
-        public void Update(in Matrix4D matrixToClip, System.Drawing.Color color)
+        public void Update(in Matrix4D matrixToClip, int color)
         {
             MatrixToClip = matrixToClip;
-            Color = color.ToVector4F();
+            Color = color.FromRgbaToVector4F();
         }
 
-        #endregion
-
-        #region // shaders
-
-        /// <inheritdoc />
-        public override Vertex VertexShader(in Gfx.Materials.Position.Vertex vertex)
+        public override bool VertexShader(in VsIn vsin, out PsIn vsout)
         {
-            return new Vertex
-            (
-                MatrixToClip.Transform(vertex.Position.ToVector4F(1))
-            );
+            vsout = new PsIn(MatrixToClip.Transform(vsin.Position.ToVector4F(1)));
+            return true;
         }
 
-        /// <inheritdoc />
-        public override Vector4F? PixelShader(in Vertex vertex)
+        public override bool PixelShader(in PsIn psin, out Vector4F psout)
         {
-            return Color.W > 0 ? Color : default;
-        }
+            if (Color.W <= 0)
+            {
+                psout = default;
+                return false;
+            }
 
-        #endregion
+            psout = Color;
+            return true;
+        }
     }
 }

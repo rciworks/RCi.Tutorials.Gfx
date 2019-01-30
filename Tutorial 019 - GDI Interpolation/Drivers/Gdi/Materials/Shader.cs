@@ -1,25 +1,45 @@
-﻿using RCi.Tutorials.Gfx.Mathematics;
+﻿using RCi.Tutorials.Gfx.Drivers.Gdi.Render;
+using RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization;
+using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
 {
     /// <inheritdoc />
-    public abstract class Shader<TVertexIn, TVertex> :
-        IShader<TVertexIn, TVertex>
-        where TVertexIn : struct
-        where TVertex : struct, IVertex
+    public abstract class Shader<TVsIn, TPsIn> :
+        IShader<TVsIn, TPsIn>
+        where TVsIn : unmanaged
+        where TPsIn : unmanaged, IPsIn<TPsIn>
     {
-        #region // shaders
+        /// <inheritdoc />
+        public RenderHost RenderHost { get; private set; }
 
         /// <inheritdoc />
-        public abstract TVertex VertexShader(in TVertexIn vertex);
+        public IPipeline<TVsIn, TPsIn> Pipeline { get; private set; }
+
+        #region // ctor
 
         /// <inheritdoc />
-        public virtual Vector4F? PixelShader(in TVertex vertex)
+        protected Shader(RenderHost renderHost)
         {
-            // by default let's draw in white
-            return new Vector4F(1, 1, 1, 1);
+            RenderHost = renderHost;
+            Pipeline = new Pipeline<TVsIn, TPsIn>(this);
+        }
+
+        /// <inheritdoc />
+        public virtual void Dispose()
+        {
+            Pipeline.Dispose();
+            Pipeline = default;
+
+            RenderHost = default;
         }
 
         #endregion
+
+        /// <inheritdoc />
+        public abstract bool VertexShader(in TVsIn vsin, out TPsIn vsout);
+
+        /// <inheritdoc />
+        public abstract bool PixelShader(in TPsIn psin, out Vector4F color);
     }
 }

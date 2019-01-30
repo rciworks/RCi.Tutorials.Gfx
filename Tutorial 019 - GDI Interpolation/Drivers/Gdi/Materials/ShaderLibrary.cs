@@ -1,14 +1,25 @@
-﻿namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
+﻿using System;
+using System.Collections.Generic;
+using RCi.Tutorials.Gfx.Drivers.Gdi.Render;
+using RCi.Tutorials.Gfx.Materials;
+
+namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
 {
     /// <summary>
     /// Shader library.
     /// </summary>
-    public class ShaderLibrary
+    public class ShaderLibrary :
+        IDisposable
     {
         #region // storage
 
         /// <summary>
-        /// <see cref="Position"/> material shader.
+        /// All created shaders.
+        /// </summary>
+        private List<IShader> Shaders { get; set; } = new List<IShader>();
+
+        /// <summary>
+        /// <see cref="ShaderType.Position"/> shader.
         /// </summary>
         public Position.Shader ShaderPosition { get; set; }
 
@@ -17,9 +28,19 @@
         #region // ctor
 
         /// <summary />
-        public ShaderLibrary()
+        public ShaderLibrary(RenderHost renderHost)
         {
-            ShaderPosition = new Position.Shader();
+            Shaders.Add(ShaderPosition = new Position.Shader(renderHost));
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            foreach (var shader in Shaders)
+            {
+                shader.Dispose();
+            }
+            Shaders = default;
         }
 
         #endregion
