@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace RCi.Tutorials.Gfx.Utils
 {
@@ -10,15 +9,9 @@ namespace RCi.Tutorials.Gfx.Utils
     /// Bitmap wrapper for direct access to its memory.
     /// </summary>
     public class DirectBitmap :
-        Buffer2D<int>,
-        IDisposable
+        Buffer2D<int>
     {
         #region // storage
-
-        /// <summary>
-        /// Pinned GC handle to <see cref="Buffer"/>.
-        /// </summary>
-        private GCHandle BufferHandle { get; set; }
 
         /// <summary>
         /// Bitmap constructed from <see cref="Buffer"/>.
@@ -34,13 +27,17 @@ namespace RCi.Tutorials.Gfx.Utils
 
         #region // ctor
 
+        public DirectBitmap(Size size, int[] data) :
+            base(size, data)
+        {
+            Bitmap = new Bitmap(Width, Height, Width * sizeof(int), PixelFormat.Format32bppPArgb, Address);
+            Graphics = Graphics.FromImage(Bitmap);
+        }
+
         /// <inheritdoc />
         public DirectBitmap(Size size) :
-            base(size)
+            this(size, new int[size.Width * size.Height])
         {
-            BufferHandle = GCHandle.Alloc(Buffer, GCHandleType.Pinned);
-            Bitmap = new Bitmap(Width, Height, Width * 4, PixelFormat.Format32bppPArgb, BufferHandle.AddrOfPinnedObject());
-            Graphics = Graphics.FromImage(Bitmap);
         }
 
         /// <inheritdoc />
@@ -50,7 +47,7 @@ namespace RCi.Tutorials.Gfx.Utils
         }
 
         /// <inheritdoc cref="IDisposable" />
-        public void Dispose()
+        public override void Dispose()
         {
             Graphics.Dispose();
             Graphics = default;
@@ -58,8 +55,7 @@ namespace RCi.Tutorials.Gfx.Utils
             Bitmap.Dispose();
             Bitmap = default;
 
-            BufferHandle.Free();
-            BufferHandle = default;
+            base.Dispose();
         }
 
         #endregion
@@ -70,13 +66,13 @@ namespace RCi.Tutorials.Gfx.Utils
         /// Set pixel color at (x, y).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetPixel(int x, int y, Color color) => SetValue(x, y, color.ToArgb());
+        public void SetPixel(int x, int y, Color color) => Write(x, y, color.ToArgb());
 
         /// <summary>
         /// Get pixel color at (x, y).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Color GetPixel(int x, int y) => Color.FromArgb(GetValue(x, y));
+        public Color GetPixel(int x, int y) => Color.FromArgb(Read<int>(x, y));
 
         /// <summary>
         /// Clear buffer by one color.

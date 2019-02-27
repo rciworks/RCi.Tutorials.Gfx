@@ -213,7 +213,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
         /// </summary>
         private void StageOutputMerger(int x, int y, Vector4F psout)
         {
-            RenderHost.BackBuffer.SetValue(x, y, psout.ToArgb());
+            RenderHost.BackBuffer.Write(x, y, psout.ToArgb());
         }
 
         #endregion

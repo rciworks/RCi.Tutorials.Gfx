@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Utils
@@ -6,7 +7,9 @@ namespace RCi.Tutorials.Gfx.Utils
     /// <summary>
     /// 2 dimensional buffer.
     /// </summary>
-    public class Buffer2D<T>
+    public class Buffer2D<T> :
+        Buffer<T>
+        where T : unmanaged
     {
         #region // storage
 
@@ -15,20 +18,23 @@ namespace RCi.Tutorials.Gfx.Utils
         /// </summary>
         public Size Size { get; }
 
-        /// <summary>
-        /// Flattened array representing 2 dimensional buffer.
-        /// </summary>
-        public T[] Buffer { get; }
-
         #endregion
 
         #region // ctor
 
-        /// <inheritdoc />
-        public Buffer2D(Size size)
+        public Buffer2D(Size size, T[] data) :
+            base(data)
         {
+            if (size.Width * size.Height != data.Length)
+            {
+                throw new ArgumentException("Invalid data.");
+            }
             Size = size;
-            Buffer = new T[Width * Height];
+        }
+
+        public Buffer2D(Size size) :
+            this(size, new T[size.Width * size.Height])
+        {
         }
 
         #endregion
@@ -51,10 +57,10 @@ namespace RCi.Tutorials.Gfx.Utils
         public T this[int x, int y]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetValue(x, y);
+            get => Read<T>(x, y);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => SetValue(x, y, value);
+            set => Write(x, y, value);
         }
 
         /// <summary>
@@ -78,17 +84,34 @@ namespace RCi.Tutorials.Gfx.Utils
         /// Set value at (x, y).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetValue(int x, int y, in T value) => Buffer[GetIndex(x, y)] = value;
+        public void Write<U>(int x, int y, U value)
+            where U : unmanaged
+        {
+            Write(GetIndex(x, y), value);
+        }
 
         /// <summary>
         /// Get value at (x, y).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public T GetValue(int x, int y) => Buffer[GetIndex(x, y)];
+        public U Read<U>(int x, int y)
+            where U : unmanaged
+        {
+            return Read<U>(GetIndex(x, y));
+        }
+
+        /// <summary>
+        /// Get value at (x, y).
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public T Read(int x, int y)
+        {
+            return Read<T>(x, y);
+        }
 
         /// <inheritdoc cref="U.Fill{T}"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Clear(T value = default) => Buffer.Fill(value);
+        public void Clear(T value = default) => Data.Fill(value);
 
         #endregion
     }
