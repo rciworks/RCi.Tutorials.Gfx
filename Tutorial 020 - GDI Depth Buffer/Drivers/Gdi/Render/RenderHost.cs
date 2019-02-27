@@ -33,10 +33,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// </summary>
         private BufferedGraphics BufferedGraphics { get; set; }
 
-        /// <summary>
-        /// Back buffer.
-        /// </summary>
-        public DirectBitmap BackBuffer { get; private set; }
+        /// <inheritdoc cref="FrameBuffers"/>
+        public FrameBuffers FrameBuffers { get; private set; }
 
         /// <summary>
         /// Shader library.
@@ -111,13 +109,13 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 
         private void CreateBuffers(Size size)
         {
-            BackBuffer = new DirectBitmap(size);
+            FrameBuffers = new FrameBuffers(size);
         }
 
         private void DisposeBuffers()
         {
-            BackBuffer.Dispose();
-            BackBuffer = default;
+            FrameBuffers.Dispose();
+            FrameBuffers = default;
         }
 
         private void CreateSurface(Size size)
@@ -140,20 +138,23 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         protected override void RenderInternal(IEnumerable<IModel> models)
         {
             // clear buffers
-            BackBuffer.Clear(Color.Black);
+            FrameBuffers.BufferColor[0].Clear(Color.Black);
+            FrameBuffers.BufferDepth.Clear(1);
 
             // render models
             RenderModels(models);
 
-            // draw fps
-            BackBuffer.Graphics.DrawString(FpsCounter.FpsString, FontConsolas12, Brushes.Red, 0, 0);
-
-            // flush and swap buffers
+            // flush to screen back buffer
             BufferedGraphics.Graphics.DrawImage(
-                BackBuffer.Bitmap,
+                FrameBuffers.BufferColor[0].Bitmap,
                 new RectangleF(PointF.Empty, HostSize),
                 new RectangleF(new PointF(-0.5f, -0.5f), BufferSize),
                 GraphicsUnit.Pixel);
+
+            // draw fps
+            BufferedGraphics.Graphics.DrawString(FpsCounter.FpsString, FontConsolas12, Brushes.Red, 0, 0);
+
+            // swap buffers
             BufferedGraphics.Render(GraphicsHostDeviceContext);
         }
 
