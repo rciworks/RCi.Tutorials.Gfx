@@ -213,6 +213,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
                 // go horizontally (execute scanline)
                 for (var x = xStart; x < xEnd; x++)
                 {
+                    // collect depth
+                    var z = scanline.Z;
+
                     var barycentric = TriangleGetBarycentric
                     (
                         primitive.PositionScreen0.ToVector3F(),
@@ -225,7 +228,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
                     var interpolant = primitive.PsIn0.InterpolateBarycentric(primitive.PsIn1, primitive.PsIn2, barycentric);
 
                     // pass to pixel shader
-                    StagePixelShader(x, y, interpolant);
+                    StagePixelShader(x, y, z, interpolant);
 
                     // increment (interpolate) scanline (going right)
                     scanline += deltaScanline;

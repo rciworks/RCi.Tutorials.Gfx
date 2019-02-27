@@ -148,6 +148,25 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
             }
         }
 
+        /// <summary>
+        /// Perform depth test on depth buffer (write new z if successful).
+        /// </summary>
+        private bool DepthTest(int index, float z)
+        {
+            // get reference to depth
+            ref var refDepth = ref RenderHost.FrameBuffers.BufferDepth.Data[index];
+
+            // depth test
+            if (refDepth < z)
+            {
+                return false;
+            }
+
+            // write new depth
+            refDepth = z;
+            return true;
+        }
+
         #endregion
 
         #region // stages
@@ -189,7 +208,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
         /// <summary>
         /// Pixel (fragment) shader stage.
         /// </summary>
-        private void StagePixelShader(int x, int y, in TPsIn psin)
+        private void StagePixelShader(int x, int y, float z, in TPsIn psin)
         {
             // sanity check
             if (x < 0 || y < 0 || x >= RenderHost.FrameBuffers.Size.Width || y >= RenderHost.FrameBuffers.Size.Height)
@@ -205,15 +224,19 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
                 return;
             }
 
-            StageOutputMerger(x, y, psout);
+            StageOutputMerger(x, y, z, psout);
         }
 
         /// <summary>
         /// Output merger stage.
         /// </summary>
-        private void StageOutputMerger(int x, int y, Vector4F psout)
+        private void StageOutputMerger(int x, int y, float z, Vector4F psout)
         {
-            RenderHost.FrameBuffers.BufferColor[0].Write(x, y, psout.ToArgb());
+            var index = RenderHost.FrameBuffers.BufferDepth.GetIndex(x, y);
+
+            if (!DepthTest(index, z)) return;
+
+            RenderHost.FrameBuffers.BufferColor[0].Write(index, psout.ToArgb());
         }
 
         #endregion

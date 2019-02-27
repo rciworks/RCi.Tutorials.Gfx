@@ -106,11 +106,14 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
 
             foreach (var (x, y) in pixels)
             {
+                // interpolate screen
+                var interpolantScreen = primitive.PositionScreen0.InterpolateLinear(primitive.PositionScreen1, alpha);
+
                 // interpolate attributes
                 var interpolant = primitive.PsIn0.InterpolateLinear(primitive.PsIn1, alpha);
 
                 // pass to pixel shader
-                StagePixelShader(x, y, interpolant);
+                StagePixelShader(x, y, interpolantScreen.Z, interpolant);
 
                 // increment (interpolate going towards vertex1)
                 alpha += deltaAlpha;
