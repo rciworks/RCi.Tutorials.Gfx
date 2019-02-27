@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 018 - GDI Rasteriz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 019 - GDI Interpolation", "Tutorial 019 - GDI Interpolation\Tutorial 019 - GDI Interpolation.csproj", "{BA52B315-21E8-426A-B1D6-B0F7E115D929}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 020 - GDI Depth Buffer", "Tutorial 020 - GDI Depth Buffer\Tutorial 020 - GDI Depth Buffer.csproj", "{BF55C633-7DD6-4CED-8290-B85077067665}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA52B315-21E8-426A-B1D6-B0F7E115D929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF55C633-7DD6-4CED-8290-B85077067665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF55C633-7DD6-4CED-8290-B85077067665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF55C633-7DD6-4CED-8290-B85077067665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF55C633-7DD6-4CED-8290-B85077067665}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
