@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51952CD4-7047-4AB0-8264-8496B76AD47F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
+    <AssemblyName>Tutorial 020 - GDI Depth Buffer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.5.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Spatial.0.4.0\lib\net40\MathNet.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\Program.cs" />
+    <Compile Include="Client\Seed.cs" />
+    <Compile Include="Client\WindowFactory.cs" />
+    <Compile Include="Common\Camera\CameraInfo.cs" />
+    <Compile Include="Common\Camera\CameraInfoCache.cs" />
+    <Compile Include="Common\Camera\ICameraInfo.cs" />
+    <Compile Include="Common\Camera\ICameraInfoCache.cs" />
+    <Compile Include="Common\Camera\ICameraInfoEx.cs" />
+    <Compile Include="Common\Camera\Projections\IProjection.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionOrthographic.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionPerspective.cs" />
+    <Compile Include="Common\Camera\Projections\Projection.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
+    <Compile Include="Drivers\Gdi\Materials\GfxModel.cs" />
+    <Compile Include="Drivers\Gdi\Materials\IPsIn.cs" />
+    <Compile Include="Drivers\Gdi\Materials\IShader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionColor\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionColor\GfxModel.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionColor\Shader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionColor\Vertices.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\GfxModel.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\Shader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\Vertices.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\ShaderLibrary.cs" />
+    <Compile Include="Drivers\Gdi\Render\FrameBuffers.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\IBufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\IPipeline.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\Pipeline.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\PipelineLine.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\PipelinePoint.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\PipelineTriangle.cs" />
+    <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
+    <Compile Include="Common\Camera\Viewport.cs" />
+    <Compile Include="Engine\Operators\IOperator.cs" />
+    <Compile Include="Engine\Operators\Operator.cs" />
+    <Compile Include="Engine\Operators\OperatorCameraOrbit.cs" />
+    <Compile Include="Engine\Operators\OperatorCameraZoom.cs" />
+    <Compile Include="Engine\Operators\OperatorCameraPan.cs" />
+    <Compile Include="Engine\Operators\OperatorResize.cs" />
+    <Compile Include="Engine\Render\FpsCounter.cs" />
+    <Compile Include="Engine\Render\IRenderHost.cs" />
+    <Compile Include="Engine\Render\IRenderHostSetup.cs" />
+    <Compile Include="Engine\Render\RenderHost.cs" />
+    <Compile Include="Engine\Render\RenderHostSetup.cs" />
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Inputs\IInput.cs" />
+    <Compile Include="Inputs\IKeyEventArgs.cs" />
+    <Compile Include="Inputs\IMouseEventArgs.cs" />
+    <Compile Include="Inputs\Input.cs" />
+    <Compile Include="Inputs\InputForms.cs" />
+    <Compile Include="Inputs\InputWpf.cs" />
+    <Compile Include="Inputs\ISizeEventArgs.cs" />
+    <Compile Include="Inputs\Key.cs" />
+    <Compile Include="Inputs\KeyEventArgs.cs" />
+    <Compile Include="Inputs\KeyEventHandler.cs" />
+    <Compile Include="Inputs\Modifiers.cs" />
+    <Compile Include="Inputs\MouseButtons.cs" />
+    <Compile Include="Inputs\MouseEventArgs.cs" />
+    <Compile Include="Inputs\MouseEventHandler.cs" />
+    <Compile Include="Inputs\SizeEventArgs.cs" />
+    <Compile Include="Inputs\SizeEventHandler.cs" />
+    <Compile Include="Materials\IGfxModel.cs" />
+    <Compile Include="Materials\IModel.cs" />
+    <Compile Include="Materials\Model.cs" />
+    <Compile Include="Materials\PrimitiveTopology.cs" />
+    <Compile Include="Materials\ShaderType.cs" />
+    <Compile Include="Mathematics\Extensions\InterpolateEx.cs" />
+    <Compile Include="Mathematics\Extensions\Matrix4DEx.cs" />
+    <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
+    <Compile Include="Mathematics\Extensions\Point3DEx.cs" />
+    <Compile Include="Mathematics\Extensions\QuaternionEx.cs" />
+    <Compile Include="Mathematics\Extensions\Vector2FEx.cs" />
+    <Compile Include="Mathematics\Extensions\Vector3DEx.cs" />
+    <Compile Include="Mathematics\Extensions\Vector3FEx.cs" />
+    <Compile Include="Mathematics\Extensions\Vector4DEx.cs" />
+    <Compile Include="Mathematics\Extensions\Vector4FEx.cs" />
+    <Compile Include="Mathematics\IInterpolate.cs" />
+    <Compile Include="Mathematics\Matrix4D.cs" />
+    <Compile Include="Mathematics\Space.cs" />
+    <Compile Include="Mathematics\Vector2F.cs" />
+    <Compile Include="Mathematics\Vector3F.cs" />
+    <Compile Include="Mathematics\Vector4D.cs" />
+    <Compile Include="Mathematics\Vector4F.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Buffer.cs" />
+    <Compile Include="Utils\Buffer2D.cs" />
+    <Compile Include="Utils\DirectBitmap.cs" />
+    <Compile Include="Utils\RandomSync.cs" />
+    <Compile Include="Utils\U.cs" />
+    <Compile Include="Win\User32.cs" />
+    <Compile Include="Win\POINT.cs" />
+    <Compile Include="Win\RECT.cs" />
+    <Compile Include="Win\W.cs" />
+    <Compile Include="Win\WindowInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

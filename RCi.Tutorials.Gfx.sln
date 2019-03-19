@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 019 - GDI Interpol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 020 - GDI Depth Buffer", "Tutorial 020 - GDI Depth Buffer\Tutorial 020 - GDI Depth Buffer.csproj", "{BF55C633-7DD6-4CED-8290-B85077067665}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 021 - GDI Rasterize Line, Diamond-Exit", "Tutorial 021 - GDI Rasterize Line, Diamond-Exit\Tutorial 021 - GDI Rasterize Line, Diamond-Exit.csproj", "{51952CD4-7047-4AB0-8264-8496B76AD47F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{BF55C633-7DD6-4CED-8290-B85077067665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF55C633-7DD6-4CED-8290-B85077067665}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF55C633-7DD6-4CED-8290-B85077067665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
