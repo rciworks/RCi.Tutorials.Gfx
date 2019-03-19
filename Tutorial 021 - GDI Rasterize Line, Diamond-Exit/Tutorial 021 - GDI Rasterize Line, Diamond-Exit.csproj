@@ -7,7 +7,7 @@
     <ProjectGuid>{51952CD4-7047-4AB0-8264-8496B76AD47F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>RCi.Tutorials.Gfx</RootNamespace>
-    <AssemblyName>Tutorial 020 - GDI Depth Buffer</AssemblyName>
+    <AssemblyName>Tutorial 021 - GDI Rasterize Line, Diamond-Exit</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
