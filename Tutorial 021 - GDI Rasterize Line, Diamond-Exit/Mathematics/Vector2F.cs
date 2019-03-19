@@ -34,6 +34,18 @@ namespace RCi.Tutorials.Gfx.Mathematics
         #region // operators
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(Vector2F left, Vector2F right)
+        {
+            return left.X.Equals(right.X) && left.Y.Equals(right.Y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(Vector2F left, Vector2F right)
+        {
+            return !(left == right);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2F operator +(Vector2F left, Vector2F right)
         {
             return new Vector2F
@@ -110,6 +122,27 @@ namespace RCi.Tutorials.Gfx.Mathematics
         #endregion
 
         #region // routines
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Vector2F other)
+        {
+            return X.Equals(other.X) && Y.Equals(other.Y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool Equals(object obj)
+        {
+            return obj is Vector2F other && Equals(other);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (X.GetHashCode() * 397) ^ Y.GetHashCode();
+            }
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{X:0.000000}, {Y:0.000000}";

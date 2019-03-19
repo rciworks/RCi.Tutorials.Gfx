@@ -297,24 +297,24 @@ namespace RCi.Tutorials.Gfx.Client
                 },
             };
 
-            yield return new Model
-            {
-                ShaderType = ShaderType.PositionColor,
-                Space = Space.World,
-                PrimitiveTopology = PrimitiveTopology.TriangleList,
-                Positions = new[]
-                {
-                    new Vector3F(1, 0, 0),
-                    new Vector3F(0, 0, 1),
-                    new Vector3F(0, 1, 0),
-                },
-                Colors = new[]
-                {
-                    Color.Red.ToRgba(),
-                    Color.Blue.ToRgba(),
-                    Color.LawnGreen.ToRgba(),
-                },
-            };
+            //yield return new Model
+            //{
+            //    ShaderType = ShaderType.PositionColor,
+            //    Space = Space.World,
+            //    PrimitiveTopology = PrimitiveTopology.TriangleList,
+            //    Positions = new[]
+            //    {
+            //        new Vector3F(1, 0, 0),
+            //        new Vector3F(0, 0, 1),
+            //        new Vector3F(0, 1, 0),
+            //    },
+            //    Colors = new[]
+            //    {
+            //        Color.Red.ToRgba(),
+            //        Color.Blue.ToRgba(),
+            //        Color.LawnGreen.ToRgba(),
+            //    },
+            //};
         }
 
         /// <summary>
