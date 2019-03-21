@@ -23,7 +23,7 @@ namespace RCi.Tutorials.Gfx.Materials.Position
         /// Constructor.
         /// </summary>
         public Primitive(PrimitiveBehaviour primitiveBehaviour, PrimitiveTopology primitiveTopology, IEnumerable<IVertex> vertices, Color color) :
-            this(primitiveBehaviour, primitiveTopology, vertices is IReadOnlyList<IVertex> readOnlyList ? readOnlyList : vertices.ToArray(), color)
+            this(primitiveBehaviour, primitiveTopology, vertices as IReadOnlyList<IVertex> ?? vertices.ToArray(), color)
         {
         }
 
