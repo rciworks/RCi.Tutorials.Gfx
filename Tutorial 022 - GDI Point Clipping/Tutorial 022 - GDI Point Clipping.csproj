@@ -89,6 +89,7 @@
     <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\ShaderLibrary.cs" />
     <Compile Include="Drivers\Gdi\Render\FrameBuffers.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\Clipping.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\IBufferBinding.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\IPipeline.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\Pipeline.cs" />
