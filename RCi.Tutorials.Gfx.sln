@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 020 - GDI Depth Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 021 - GDI Rasterize Line, Diamond-Exit", "Tutorial 021 - GDI Rasterize Line, Diamond-Exit\Tutorial 021 - GDI Rasterize Line, Diamond-Exit.csproj", "{51952CD4-7047-4AB0-8264-8496B76AD47F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 022 - GDI Point Clipping", "Tutorial 022 - GDI Point Clipping\Tutorial 022 - GDI Point Clipping.csproj", "{05259DEF-3900-4D38-A28B-2CDC722EF8B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51952CD4-7047-4AB0-8264-8496B76AD47F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05259DEF-3900-4D38-A28B-2CDC722EF8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05259DEF-3900-4D38-A28B-2CDC722EF8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05259DEF-3900-4D38-A28B-2CDC722EF8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05259DEF-3900-4D38-A28B-2CDC722EF8B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
