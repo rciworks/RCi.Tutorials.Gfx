@@ -26,6 +26,16 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
         /// </summary>
         private void VertexPostProcessingLine(ref TPsIn psin0, ref TPsIn psin1)
         {
+            // clipping: go through each plane
+            for (var i = 0; i < 6; i++)
+            {
+                if (!Clipping<TPsIn>.ClipByPlane((ClippingPlane)(1 << i), ref psin0, ref psin1))
+                {
+                    // both outside, clipped out
+                    return;
+                }
+            }
+
             // vertex post processing + primitive assembly
             PrimitiveLine primitive;
             primitive.PsIn0 = psin0;

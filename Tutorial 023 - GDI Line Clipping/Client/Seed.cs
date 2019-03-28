@@ -91,12 +91,12 @@ namespace RCi.Tutorials.Gfx.Client
         public static IEnumerable<IModel> GetModels()
         {
             return new IModel[0]
-                .Concat(GetWorldAxis())
+                //.Concat(GetWorldAxis())
                 //.Concat(GetScreenViewLines())
                 //.Concat(GetTriangles())
                 //.Concat(GetCubes())
-                .Concat(GetPointCloud())
-                //.Concat(GetPositionColorSamples())
+                //.Concat(GetPointCloud())
+                .Concat(GetPositionColorSamples())
                 ;
         }
 
@@ -293,7 +293,7 @@ namespace RCi.Tutorials.Gfx.Client
                 Colors = new[]
                 {
                     Color.Cyan.ToRgba(),
-                    Color.Magenta.ToRgba(),
+                    Color.Yellow.ToRgba(),
                 },
             };
 
