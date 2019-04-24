@@ -25,6 +25,21 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
 
         #region // routines
 
+        /// <summary>
+        /// Check if triangle needs to be culled. Simplified Shoelace algorithm for triangles.
+        /// https://en.wikipedia.org/wiki/Shoelace_formula
+        /// </summary>
+        private static bool TriangleFaceCulling(in PrimitiveTriangle primitive)
+        {
+            // get whether vertices go in counter-clockwise direction
+            var isCounterClockWise =
+                (primitive.PositionScreen1.X - primitive.PositionScreen0.X) * (primitive.PositionScreen2.Y - primitive.PositionScreen0.Y) -
+                (primitive.PositionScreen2.X - primitive.PositionScreen0.X) * (primitive.PositionScreen1.Y - primitive.PositionScreen0.Y) > 0;
+
+            // front face: clockwise, therefore cull if counter-clockwise
+            return isCounterClockWise;
+        }
+
         private static int TriangleClampX(int value, in Viewport viewport) => value.Clamp(viewport.X, viewport.X + viewport.Width);
 
         private static int TriangleClampY(int value, in Viewport viewport) => value.Clamp(viewport.Y, viewport.Y + viewport.Height);
@@ -67,6 +82,12 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
             VertexPostProcessing(ref primitive.PsIn0, out primitive.PositionScreen0);
             VertexPostProcessing(ref primitive.PsIn1, out primitive.PositionScreen1);
             VertexPostProcessing(ref primitive.PsIn2, out primitive.PositionScreen2);
+
+            // check for face culling
+            if (!TriangleFaceCulling(primitive))
+            {
+                return;
+            }
 
             // rasterization stage
             RasterizeTriangle(primitive);
