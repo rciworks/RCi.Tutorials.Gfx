@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 022 - GDI Point Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 023 - GDI Line Clipping", "Tutorial 023 - GDI Line Clipping\Tutorial 023 - GDI Line Clipping.csproj", "{A87C226B-269A-4FC8-A627-9D3271CC604F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 024 - GDI Back-Face Culling", "Tutorial 024 - GDI Back-Face Culling\Tutorial 024 - GDI Back-Face Culling.csproj", "{C5D7A876-4B95-41EC-8B93-5A7A00028171}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{A87C226B-269A-4FC8-A627-9D3271CC604F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A87C226B-269A-4FC8-A627-9D3271CC604F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A87C226B-269A-4FC8-A627-9D3271CC604F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D7A876-4B95-41EC-8B93-5A7A00028171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D7A876-4B95-41EC-8B93-5A7A00028171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D7A876-4B95-41EC-8B93-5A7A00028171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D7A876-4B95-41EC-8B93-5A7A00028171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
