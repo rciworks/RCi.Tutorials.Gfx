@@ -5,7 +5,13 @@ using System.Runtime.CompilerServices;
 namespace RCi.Tutorials.Gfx.Utils
 {
     public static class U
-    {
+    {        
+        /// <inheritdoc cref="Environment.ProcessorCount"/>
+        public static int EnvironmentProcessorCount { get; } = Environment.ProcessorCount;
+
+        /// <inheritdoc cref="System.Threading.Tasks.ParallelOptions"/>
+        public static System.Threading.Tasks.ParallelOptions ParallelOptionsDefault = new System.Threading.Tasks.ParallelOptions { MaxDegreeOfParallelism = EnvironmentProcessorCount };
+
         /// <summary>
         /// Clamp value (ensure it falls into a given range).
         /// </summary>

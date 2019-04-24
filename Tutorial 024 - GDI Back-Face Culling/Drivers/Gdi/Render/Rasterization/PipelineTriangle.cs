@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define USE_PARALLEL
+
+using System;
 using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
@@ -179,7 +181,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
             RasterizeTriangleFlat(primitive, vertexTop, vertexTop, deltaLeft, deltaRight, height);
         }
 
-        private void RasterizeTriangleFlat(in PrimitiveTriangle primitive, Vector4F edgeLeft, Vector4F edgeRight, Vector4F deltaLeft, Vector4F deltaRight, float height)
+        private void RasterizeTriangleFlat(PrimitiveTriangle primitive, Vector4F edgeLeft, Vector4F edgeRight, Vector4F deltaLeft, Vector4F deltaRight, float height)
         {
             // get where we start and end vertically
             var yStart = TriangleClampY((int)Math.Round(edgeLeft.Y), RenderHost.CameraInfo.Viewport);
@@ -190,7 +192,11 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
             edgeRight += deltaRight * (yStart - edgeRight.Y + 0.5f);
 
             // go vertically down
+#if USE_PARALLEL
+            System.Threading.Tasks.Parallel.For(yStart, yEnd, U.ParallelOptionsDefault, y =>
+#else           
             for (var y = yStart; y < yEnd; y++)
+#endif
             {
                 // increment (interpolate) edges (going down)
                 var eLeft = edgeLeft + deltaLeft * (y - yStart);
@@ -234,6 +240,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
                     scanline += deltaScanline;
                 }
             }
+#if USE_PARALLEL
+            ); // end of Parallel.For
+#endif
         }
 
         #endregion
