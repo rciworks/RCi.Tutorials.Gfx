@@ -74,6 +74,59 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
         /// </summary>
         private void VertexPostProcessingTriangle(ref TPsIn psin0, ref TPsIn psin1, ref TPsIn psin2)
         {
+            VertexPostProcessingTriangleClipping(ref psin0, ref psin1, ref psin2, 5 /* all 6 clipping planes */);
+        }
+
+        private void VertexPostProcessingTriangleClipping(ref TPsIn psin0, ref TPsIn psin1, ref TPsIn psin2, int planesLeft)
+        {
+            if (planesLeft < 0)
+            {
+                // triangle is clipped, go to rasterization
+                VertexPostProcessingTriangleAssemble(psin0, psin1, psin2);
+                return;
+            }
+
+            // clip by plane
+            var vertexCount = Clipping<TPsIn>.ClipByPlane((ClippingPlane)(1 << planesLeft), ref psin0, ref psin1, ref psin2, out var psin3);
+
+            if (vertexCount == 0)
+            {
+                // clipped out
+                return;
+            }
+
+            planesLeft--;
+            if (vertexCount == 3)
+            {
+                // wasn't clipped, however there are more planes to clip, continue clipping with the same triangle
+                VertexPostProcessingTriangleClipping(ref psin0, ref psin1, ref psin2, planesLeft);
+                return;
+            }
+
+            // was clipped into 4 vertices, therefore continue clipping with 2 new triangles
+            var psin0Copy = psin0;
+            var psin1Copy = psin1;
+            var psin2Copy = psin2;
+
+            // first triangle goes regularly: v0,v1,v2
+            VertexPostProcessingTriangleClipping(ref psin0Copy, ref psin1Copy, ref psin2Copy, planesLeft);
+
+            // second triangle goes regularly or reversed
+            if (vertexCount == 4)
+            {
+                // regular case: v0,v2,v3
+                VertexPostProcessingTriangleClipping(ref psin0, ref psin2, ref psin3, planesLeft);
+            }
+            else
+            {
+                System.Diagnostics.Debug.Assert(vertexCount == -4, "Reverse triangle should come with code -4.");
+                // reverse case: v1,v3,v2
+                VertexPostProcessingTriangleClipping(ref psin1, ref psin3, ref psin2, planesLeft);
+            }
+        }
+
+        private void VertexPostProcessingTriangleAssemble(in TPsIn psin0, in TPsIn psin1, in TPsIn psin2)
+        {
             // vertex post processing + primitive assembly
             PrimitiveTriangle primitive;
             primitive.PsIn0 = psin0;

@@ -147,5 +147,89 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
 
             return true;
         }
+
+        /// <summary>
+        /// Clip triangle by a given plane (modify given vertices if clipping, also create new one if needed).
+        /// </summary>
+        /// <returns>
+        /// Number of vertices:
+        ///     0 - no triangle: all vertices outside
+        ///     3 - one triangle: v0, v1, v2
+        ///     4 - two triangles: v0, v1, v2 and v0, v2, v3 (regular case)
+        ///    -4 - two triangles: v0, v1, v2 and v1, v3, v2 (reverse case)
+        /// </returns>
+        public static int ClipByPlane(ClippingPlane plane, ref TVertex vertex0, ref TVertex vertex1, ref TVertex vertex2, out TVertex vertex3)
+        {
+            var inside0 = !IsOutside(plane, vertex0);
+            var inside1 = !IsOutside(plane, vertex1);
+            var inside2 = !IsOutside(plane, vertex2);
+
+            var count = 0;
+            if (inside0) count++;
+            if (inside1) count++;
+            if (inside2) count++;
+
+            if (count == 3)
+            {
+                // all inside
+                vertex3 = default;
+                return 3;
+            }
+
+            if (count == 0)
+            {
+                // all outside
+                vertex3 = default;
+                return 0;
+            }
+
+            if (count == 1)
+            {
+                // 1 inside
+                if (inside0)
+                {
+                    vertex1 = vertex0.InterpolateLinear(vertex1, GetAlpha(plane, vertex0, vertex1));
+                    vertex2 = vertex0.InterpolateLinear(vertex2, GetAlpha(plane, vertex0, vertex2));
+                    vertex3 = default;
+                    return 3;
+                }
+                if (inside1)
+                {
+                    vertex0 = vertex1.InterpolateLinear(vertex0, GetAlpha(plane, vertex1, vertex0));
+                    vertex2 = vertex1.InterpolateLinear(vertex2, GetAlpha(plane, vertex1, vertex2));
+                    vertex3 = default;
+                    return 3;
+                }
+                if (inside2)
+                {
+                    vertex0 = vertex2.InterpolateLinear(vertex0, GetAlpha(plane, vertex2, vertex0));
+                    vertex1 = vertex2.InterpolateLinear(vertex1, GetAlpha(plane, vertex2, vertex1));
+                    vertex3 = default;
+                    return 3;
+                }
+            }
+
+            // 1 outside
+            if (!inside0)
+            {
+                vertex3 = vertex0.InterpolateLinear(vertex2, GetAlpha(plane, vertex0, vertex2));
+                vertex0 = vertex0.InterpolateLinear(vertex1, GetAlpha(plane, vertex0, vertex1));
+                return 4;
+            }
+            if (!inside1)
+            {
+                vertex3 = vertex1.InterpolateLinear(vertex2, GetAlpha(plane, vertex1, vertex2));
+                vertex1 = vertex0.InterpolateLinear(vertex1, GetAlpha(plane, vertex0, vertex1));
+                return -4; // negative indicates that triangles go v0,v1,v2 and v1,v3,v2
+            }
+            if (!inside2)
+            {
+                vertex3 = vertex0.InterpolateLinear(vertex2, GetAlpha(plane, vertex0, vertex2));
+                vertex2 = vertex1.InterpolateLinear(vertex2, GetAlpha(plane, vertex1, vertex2));
+                return 4;
+            }
+
+            throw new NotSupportedException("Invalid logic path.");
+        }
     }
 }
