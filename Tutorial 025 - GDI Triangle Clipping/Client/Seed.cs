@@ -93,10 +93,10 @@ namespace RCi.Tutorials.Gfx.Client
             return new IModel[0]
                 .Concat(GetWorldAxis())
                 //.Concat(GetScreenViewLines())
-                .Concat(GetTriangles())
+                //.Concat(GetTriangles())
                 //.Concat(GetCubes())
                 //.Concat(GetPointCloud())
-                //.Concat(GetPositionColorSamples())
+                .Concat(GetPositionColorSamples())
                 ;
         }
 
@@ -164,7 +164,7 @@ namespace RCi.Tutorials.Gfx.Client
                     new Vector3F(0, 0, 0),
                     new Vector3F(0, 1, 0),
                 },
-                Color = Color.LawnGreen.ToRgba(),
+                Color = Color.FromArgb(255, 0, 255, 0).ToRgba(),
             };
 
             // z axis
@@ -280,41 +280,41 @@ namespace RCi.Tutorials.Gfx.Client
         /// </summary>
         private static IEnumerable<IModel> GetPositionColorSamples()
         {
-            yield return new Model
-            {
-                ShaderType = ShaderType.PositionColor,
-                Space = Space.World,
-                PrimitiveTopology = PrimitiveTopology.LineList,
-                Positions = new[]
-                {
-                    new Vector3F(1f, 0, 0),
-                    new Vector3F(0, 1f, 0),
-                },
-                Colors = new[]
-                {
-                    Color.Cyan.ToRgba(),
-                    Color.Yellow.ToRgba(),
-                },
-            };
-
             //yield return new Model
             //{
             //    ShaderType = ShaderType.PositionColor,
             //    Space = Space.World,
-            //    PrimitiveTopology = PrimitiveTopology.TriangleList,
+            //    PrimitiveTopology = PrimitiveTopology.LineList,
             //    Positions = new[]
             //    {
-            //        new Vector3F(1, 0, 0),
-            //        new Vector3F(0, 0, 1),
-            //        new Vector3F(0, 1, 0),
+            //        new Vector3F(1f, 0, 0),
+            //        new Vector3F(0, 1f, 0),
             //    },
             //    Colors = new[]
             //    {
-            //        Color.Red.ToRgba(),
-            //        Color.Blue.ToRgba(),
-            //        Color.LawnGreen.ToRgba(),
+            //        Color.Cyan.ToRgba(),
+            //        Color.Yellow.ToRgba(),
             //    },
             //};
+
+            yield return new Model
+            {
+                ShaderType = ShaderType.PositionColor,
+                Space = Space.World,
+                PrimitiveTopology = PrimitiveTopology.TriangleList,
+                Positions = new[]
+                {
+                    new Vector3F(1, 0, 0),
+                    new Vector3F(0, 0, 1),
+                    new Vector3F(0, 1, 0),
+                },
+                Colors = new[]
+                {
+                    Color.Red.ToRgba(),
+                    Color.Blue.ToRgba(),
+                    Color.FromArgb(255, 0, 255, 0).ToRgba(),
+                },
+            };
         }
 
         /// <summary>

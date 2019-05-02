@@ -86,7 +86,7 @@ namespace RCi.Tutorials.Gfx.Engine.Render
                 new Point3D(1, 1, 1),
                 new Point3D(0, 0, 0),
                 new UnitVector3D(0, 0, 1),
-                new ProjectionPerspective(0.001, 1000, Math.PI * 0.5, 1),
+                new ProjectionPerspective(0.1, 1000, Math.PI * 0.5, 1),
                 //new ProjectionOrthographic(0.001, 1000, 2, 2),
                 new Viewport(0, 0, 1, 1, 0, 1)
             );
