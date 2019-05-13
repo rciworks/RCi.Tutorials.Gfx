@@ -82,6 +82,10 @@
     <Compile Include="Drivers\Gdi\Materials\PositionColor\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\Vertices.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionTexture\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionTexture\GfxModel.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionTexture\Shader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionTexture\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\BufferBinding.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\Shader.cs" />

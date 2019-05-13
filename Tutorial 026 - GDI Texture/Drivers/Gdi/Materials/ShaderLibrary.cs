@@ -21,12 +21,17 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         /// <summary>
         /// <see cref="ShaderType.Position"/> shader.
         /// </summary>
-        public Position.Shader ShaderPosition { get; set; }
+        public Position.Shader ShaderPosition { get; }
 
         /// <summary>
         /// <see cref="ShaderType.PositionColor"/> shader.
         /// </summary>
-        public PositionColor.Shader ShaderPositionColor { get; set; }
+        public PositionColor.Shader ShaderPositionColor { get; }
+
+        /// <summary>
+        /// <see cref="ShaderType.PositionTexture"/> shader.
+        /// </summary>
+        public PositionTexture.Shader ShaderPositionTexture { get; }
 
         #endregion
 
@@ -37,15 +42,13 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         {
             Shaders.Add(ShaderPosition = new Position.Shader(renderHost));
             Shaders.Add(ShaderPositionColor = new PositionColor.Shader(renderHost));
+            Shaders.Add(ShaderPositionTexture = new PositionTexture.Shader(renderHost));
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            foreach (var shader in Shaders)
-            {
-                shader.Dispose();
-            }
+            Shaders.ForEach(shader => shader.Dispose());
             Shaders = default;
         }
 
