@@ -22,6 +22,12 @@ namespace RCi.Tutorials.Gfx.Materials
         public int[] Colors { get; set; }
 
         /// <inheritdoc />
+        public Vector2F[] TextureCoordinates { get; set; }
+
+        /// <inheritdoc />
         public int Color { get; set; }
+
+        /// <inheritdoc />
+        public ITextureResource TextureResource { get; set; }
     }
 }

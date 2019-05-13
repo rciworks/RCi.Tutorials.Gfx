@@ -13,7 +13,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 
         /// <summary />
         public GfxModel(RenderHost renderHost, IModel model) :
-            base(model, renderHost.ShaderLibrary.ShaderPosition, new BufferBinding(model.Positions))
+            base(renderHost, model, renderHost.ShaderLibrary.ShaderPosition, new BufferBinding(model.Positions))
         {
             Shader = renderHost.ShaderLibrary.ShaderPosition;
         }

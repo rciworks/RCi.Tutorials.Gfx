@@ -13,7 +13,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.PositionColor
 
         /// <summary />
         public GfxModel(RenderHost renderHost, IModel model) :
-            base(model, renderHost.ShaderLibrary.ShaderPositionColor, new BufferBinding(model.Positions, model.Colors))
+            base(renderHost, model, renderHost.ShaderLibrary.ShaderPositionColor, new BufferBinding(model.Positions, model.Colors))
         {
             Shader = renderHost.ShaderLibrary.ShaderPositionColor;
         }

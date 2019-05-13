@@ -19,5 +19,10 @@
         /// Vertices with individual colors.
         /// </summary>
         PositionColor,
+
+        /// <summary>
+        /// Textured vertices.
+        /// </summary>
+        PositionTexture,
     }
 }

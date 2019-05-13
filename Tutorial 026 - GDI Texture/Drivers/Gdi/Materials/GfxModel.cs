@@ -12,25 +12,36 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
     {
         #region // storage
 
-        /// <summary>
-        /// Raw model.
-        /// </summary>
+        /// <inheritdoc cref="RenderHost"/>
+        protected RenderHost RenderHost { get; set; }
+
+        /// <inheritdoc cref="IModel"/>
         public IModel Model { get; set; }
+
+        /// <inheritdoc cref="Texture"/>
+        public Texture Texture { get; set; }
 
         #endregion
 
         #region // ctor
 
         /// <summary />
-        protected GfxModel(IModel model)
+        protected GfxModel(RenderHost renderHost, IModel model)
         {
+            RenderHost = renderHost;
             Model = model;
+            if (!(Model.TextureResource is null))
+            {
+                Texture = RenderHost.TextureLibrary.GetTexture(Model.TextureResource);
+            }
         }
 
         /// <inheritdoc />
         public virtual void Dispose()
         {
+            Texture = default;
             Model = default;
+            RenderHost = default;
         }
 
         #endregion
@@ -50,6 +61,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
 
                 case ShaderType.PositionColor:
                     return new PositionColor.GfxModel(renderHost, model);
+
+                case ShaderType.PositionTexture:
+                    throw new NotImplementedException(); // TODO:
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(model.ShaderType), model.ShaderType, default);
@@ -95,8 +109,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         #region // ctor
 
         /// <summary />
-        protected GfxModel(IModel model, IShader<TVsIn, TPsIn> shader, IBufferBinding<TVsIn> bufferBinding) :
-            base(model)
+        protected GfxModel(RenderHost renderHost, IModel model, IShader<TVsIn, TPsIn> shader, IBufferBinding<TVsIn> bufferBinding) :
+            base(renderHost, model)
         {
             Shader = shader;
             BufferBinding = bufferBinding;

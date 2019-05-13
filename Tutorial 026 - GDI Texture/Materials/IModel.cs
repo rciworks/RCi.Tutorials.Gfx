@@ -27,8 +27,16 @@ namespace RCi.Tutorials.Gfx.Materials
         int[] Colors { get; set; }
 
         /// <summary>
+        /// Texture coordinate buffer.
+        /// </summary>
+        Vector2F[] TextureCoordinates { get; set; }
+
+        /// <summary>
         /// Color for whole model.
         /// </summary>
         int Color { get; set; }
+
+        /// <inheritdoc cref="ITextureResource"/>
+        ITextureResource TextureResource { get; set; }
     }
 }

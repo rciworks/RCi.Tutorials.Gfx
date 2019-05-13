@@ -88,6 +88,8 @@
     <Compile Include="Drivers\Gdi\Materials\Position\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\ShaderLibrary.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Texture.cs" />
+    <Compile Include="Drivers\Gdi\Materials\TextureLibrary.cs" />
     <Compile Include="Drivers\Gdi\Render\FrameBuffers.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\Clipping.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\IBufferBinding.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Drivers\Gdi\Render\Rasterization\PipelineLine.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\PipelinePoint.cs" />
     <Compile Include="Drivers\Gdi\Render\Rasterization\PipelineTriangle.cs" />
+    <Compile Include="Drivers\Gdi\Render\Rasterization\TextureSampler.cs" />
     <Compile Include="Drivers\Gdi\Render\RenderHost.cs" />
     <Compile Include="Common\Camera\Viewport.cs" />
     <Compile Include="Engine\Operators\IOperator.cs" />

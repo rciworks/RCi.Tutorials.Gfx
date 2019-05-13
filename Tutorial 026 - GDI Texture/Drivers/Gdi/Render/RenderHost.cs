@@ -35,6 +35,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         /// <inheritdoc cref="FrameBuffers"/>
         public FrameBuffers FrameBuffers { get; private set; }
 
+        /// <inheritdoc cref="TextureLibrary"/>
+        public TextureLibrary TextureLibrary { get; private set; }
+
         /// <summary>
         /// Shader library.
         /// </summary>
@@ -59,6 +62,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             GraphicsHostDeviceContext = GraphicsHost.GetHdc();
             CreateSurface(HostInput.Size);
             CreateBuffers(BufferSize);
+            TextureLibrary = new TextureLibrary();
             ShaderLibrary = new ShaderLibrary(this);
             FontConsolas12 = new Font("Consolas", 12);
         }
@@ -71,6 +75,9 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 
             ShaderLibrary.Dispose();
             ShaderLibrary = default;
+
+            TextureLibrary.Dispose();
+            TextureLibrary = default;
 
             DisposeBuffers();
             DisposeSurface();
