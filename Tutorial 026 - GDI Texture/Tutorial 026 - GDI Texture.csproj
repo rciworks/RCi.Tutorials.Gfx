@@ -128,9 +128,13 @@
     <Compile Include="Inputs\SizeEventHandler.cs" />
     <Compile Include="Materials\IGfxModel.cs" />
     <Compile Include="Materials\IModel.cs" />
+    <Compile Include="Materials\ITextureResource.cs" />
     <Compile Include="Materials\Model.cs" />
     <Compile Include="Materials\PrimitiveTopology.cs" />
     <Compile Include="Materials\ShaderType.cs" />
+    <Compile Include="Materials\TextureLibrary.cs" />
+    <Compile Include="Materials\TextureResource.cs" />
+    <Compile Include="Materials\TextureResourceLibrary.cs" />
     <Compile Include="Mathematics\Extensions\InterpolateEx.cs" />
     <Compile Include="Mathematics\Extensions\Matrix4DEx.cs" />
     <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
@@ -149,6 +153,7 @@
     <Compile Include="Mathematics\Vector4D.cs" />
     <Compile Include="Mathematics\Vector4F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\BitmapLock.cs" />
     <Compile Include="Utils\Buffer.cs" />
     <Compile Include="Utils\Buffer2D.cs" />
     <Compile Include="Utils\DirectBitmap.cs" />
