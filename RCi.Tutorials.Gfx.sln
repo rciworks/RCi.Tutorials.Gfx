@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 024 - GDI Back-Fac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 025 - GDI Triangle Clipping", "Tutorial 025 - GDI Triangle Clipping\Tutorial 025 - GDI Triangle Clipping.csproj", "{C001088C-8D41-48B1-8448-2F2C32E8342C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 026 - GDI Texture", "Tutorial 026 - GDI Texture\Tutorial 026 - GDI Texture.csproj", "{29431B62-8FC3-4CF0-9077-4041CC4DC9F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,10 @@ Global
 		{C001088C-8D41-48B1-8448-2F2C32E8342C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C001088C-8D41-48B1-8448-2F2C32E8342C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C001088C-8D41-48B1-8448-2F2C32E8342C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29431B62-8FC3-4CF0-9077-4041CC4DC9F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29431B62-8FC3-4CF0-9077-4041CC4DC9F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29431B62-8FC3-4CF0-9077-4041CC4DC9F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29431B62-8FC3-4CF0-9077-4041CC4DC9F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
