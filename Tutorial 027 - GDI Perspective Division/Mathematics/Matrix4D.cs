@@ -7,7 +7,8 @@ namespace RCi.Tutorials.Gfx.Mathematics
 {
     [Serializable]
     [StructLayout(LayoutKind.Explicit, Pack = 16)]
-    public readonly struct Matrix4D
+    public readonly struct Matrix4D :
+        IInterpolateDoubleLinear<Matrix4D>
     {
         #region // storage
 
@@ -198,6 +199,21 @@ namespace RCi.Tutorials.Gfx.Mathematics
                 (left.M00 * right.X + left.M10 * right.Y + left.M20 * right.Z + left.M30) * wInv,
                 (left.M01 * right.X + left.M11 * right.Y + left.M21 * right.Z + left.M31) * wInv,
                 (left.M02 * right.X + left.M12 * right.Y + left.M22 * right.Z + left.M32) * wInv
+            );
+        }
+
+        #endregion
+
+        #region // interpolation
+
+        public Matrix4D InterpolateLinear(in Matrix4D other, double alpha)
+        {
+            return new Matrix4D
+            (
+                Row0.InterpolateLinear(other.Row0, alpha),
+                Row1.InterpolateLinear(other.Row1, alpha),
+                Row2.InterpolateLinear(other.Row2, alpha),
+                Row3.InterpolateLinear(other.Row3, alpha)
             );
         }
 

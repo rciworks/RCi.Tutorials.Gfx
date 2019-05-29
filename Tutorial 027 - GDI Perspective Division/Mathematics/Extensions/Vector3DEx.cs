@@ -51,5 +51,39 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         public static float[] ToFloats(this Vector3D value) => new[] { (float)value.X, (float)value.Y, (float)value.Z };
 
         #endregion
+
+        #region // interpolation
+
+        public static Vector3D InterpolateMultiply(this in Vector3D value, double multiplier)
+        {
+            return new Vector3D
+            (
+                value.X.InterpolateMultiply(multiplier),
+                value.Y.InterpolateMultiply(multiplier),
+                value.Z.InterpolateMultiply(multiplier)
+            );
+        }
+
+        public static Vector3D InterpolateLinear(this in Vector3D value, in Vector3D other, double alpha)
+        {
+            return new Vector3D
+            (
+                value.X.InterpolateLinear(other.X, alpha),
+                value.Y.InterpolateLinear(other.Y, alpha),
+                value.Z.InterpolateLinear(other.Z, alpha)
+            );
+        }
+
+        public static Vector3D InterpolateBarycentric(this in Vector3D value, in Vector3D other0, in Vector3D other1, Vector3D barycentric)
+        {
+            return new Vector3D
+            (
+                value.X.InterpolateBarycentric(other0.X, other1.X, barycentric),
+                value.Y.InterpolateBarycentric(other0.Y, other1.Y, barycentric),
+                value.Z.InterpolateBarycentric(other0.Z, other1.Z, barycentric)
+            );
+        }
+
+        #endregion
     }
 }

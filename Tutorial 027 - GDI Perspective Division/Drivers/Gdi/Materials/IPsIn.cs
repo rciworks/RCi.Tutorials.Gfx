@@ -6,7 +6,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
     /// Internal shader vertex interface.
     /// </summary>
     public interface IPsIn<TPsIn> :
-        IInterpolate<TPsIn>
+        IInterpolateSingle<TPsIn>
     {
         /// <summary>
         /// Clip space position (vertex shader output).

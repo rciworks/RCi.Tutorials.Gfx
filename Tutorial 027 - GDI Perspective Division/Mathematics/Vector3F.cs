@@ -8,7 +8,7 @@ namespace RCi.Tutorials.Gfx.Mathematics
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Vector3F :
-        IInterpolate<Vector3F>
+        IInterpolateSingle<Vector3F>
     {
         #region // static
 

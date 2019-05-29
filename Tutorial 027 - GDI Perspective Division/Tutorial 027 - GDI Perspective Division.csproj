@@ -148,6 +148,7 @@
     <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
     <Compile Include="Mathematics\Extensions\Point3DEx.cs" />
     <Compile Include="Mathematics\Extensions\QuaternionEx.cs" />
+    <Compile Include="Mathematics\Extensions\UnitVector3DEx.cs" />
     <Compile Include="Mathematics\Extensions\Vector2FEx.cs" />
     <Compile Include="Mathematics\Extensions\Vector3DEx.cs" />
     <Compile Include="Mathematics\Extensions\Vector3FEx.cs" />
