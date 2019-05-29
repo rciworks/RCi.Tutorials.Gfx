@@ -73,6 +73,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
 
                 // interpolate attributes
                 var interpolant = primitive.PsIn0.InterpolateLinear(primitive.PsIn1, alpha);
+                // correct for perspective division
+                interpolant = interpolant.InterpolateMultiply(1 / interpolantScreen.W);
 
                 // pass to pixel shader
                 StagePixelShader(x, y, interpolantScreen.Z, interpolant);

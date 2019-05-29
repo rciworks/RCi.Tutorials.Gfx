@@ -248,12 +248,17 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
         /// </summary>
         private void VertexPostProcessing(ref TPsIn psin, out Vector4F positionScreen)
         {
+            // invert W (required for perspective division correction at rasterization stage)
+            var wInv = 1 / psin.Position.W;
+
             // perspective division (clip space to NDC)
-            var ndc = psin.Position / psin.Position.W;
-            psin = psin.ReplacePosition(ndc);
+            psin = psin.InterpolateMultiply(wInv);
 
             // NDC to screen space
             positionScreen = RenderHost.CameraInfo.Cache.MatrixViewport.Transform(psin.Position);
+
+            // save inverted W for later usage
+            positionScreen = new Vector4F(positionScreen.X, positionScreen.Y, positionScreen.Z, wInv);
         }
 
         #endregion

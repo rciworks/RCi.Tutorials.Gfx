@@ -62,14 +62,5 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.PositionTexture
         }
 
         #endregion
-
-        public PsIn ReplacePosition(Vector4F position)
-        {
-            return new PsIn
-            (
-                position,
-                TextureCoordinate
-            );
-        }
     }
 }

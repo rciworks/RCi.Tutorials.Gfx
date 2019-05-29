@@ -62,14 +62,5 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.PositionColor
         }
 
         #endregion
-
-        public PsIn ReplacePosition(Vector4F position)
-        {
-            return new PsIn
-            (
-                position,
-                Color
-            );
-        }
     }
 }

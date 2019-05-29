@@ -46,7 +46,10 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render.Rasterization
             var y = (int)primitive.PositionScreen0.Y;
             var z = primitive.PositionScreen0.Z;
 
-            StagePixelShader(x, y, z, primitive.PsIn0);
+            // correct for perspective division
+            var psin0 = primitive.PsIn0.InterpolateMultiply(1 / primitive.PositionScreen0.W);
+
+            StagePixelShader(x, y, z, psin0);
         }
     }
 }
