@@ -4,6 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using MathNet.Spatial.Euclidean;
+using RCi.Tutorials.Gfx.Engine.Render;
+using RCi.Tutorials.Gfx.Inputs;
 using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
@@ -363,5 +365,17 @@ namespace RCi.Tutorials.Gfx.Client
                 }
             }
         }
+
+        #region // input
+
+        public static void HostInputOnKeyDown(IKeyEventArgs args, IRenderHost renderHost)
+        {
+            if (args.Modifiers == Modifiers.None && args.Key == Key.F12)
+            {
+                SeedProjectionTransition.Switch(renderHost);
+            }
+        }
+
+        #endregion
     }
 }

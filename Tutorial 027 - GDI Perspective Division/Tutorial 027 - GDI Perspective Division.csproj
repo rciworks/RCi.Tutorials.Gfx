@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Client\Program.cs" />
     <Compile Include="Client\Seed.cs" />
+    <Compile Include="Client\SeedProjectionTransition.cs" />
     <Compile Include="Client\WindowFactory.cs" />
     <Compile Include="Common\Camera\CameraInfo.cs" />
     <Compile Include="Common\Camera\CameraInfoCache.cs" />

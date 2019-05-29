@@ -44,6 +44,9 @@ namespace RCi.Tutorials.Gfx.Client
             // create some render hosts for rendering
             RenderHosts = WindowFactory.SeedWindows();
 
+            // hook to input listening
+            RenderHosts.ForEach(rh => rh.HostInput.KeyDown += (sender, args) => Seed.HostInputOnKeyDown(args, rh));
+
             // render loop
             while (!Dispatcher.HasShutdownStarted)
             {
