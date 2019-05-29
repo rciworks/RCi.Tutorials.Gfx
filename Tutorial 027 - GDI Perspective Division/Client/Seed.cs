@@ -370,9 +370,15 @@ namespace RCi.Tutorials.Gfx.Client
 
         public static void HostInputOnKeyDown(IKeyEventArgs args, IRenderHost renderHost)
         {
-            if (args.Modifiers == Modifiers.None && args.Key == Key.F12)
+            switch (args.Modifiers)
             {
-                SeedProjectionTransition.Switch(renderHost);
+                case Modifiers.Control when args.Key == Key.F12:
+                    SeedProjectionTransition.Switch(renderHost);
+                    break;
+
+                case Modifiers.None when args.Key == Key.F12:
+                    SeedProjectionTransition.Transit(renderHost);
+                    break;
             }
         }
 

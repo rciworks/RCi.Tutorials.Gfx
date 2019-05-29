@@ -73,9 +73,11 @@
     <Compile Include="Common\Camera\Projections\IProjection.cs" />
     <Compile Include="Common\Camera\Projections\IProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\IProjectionPerspective.cs" />
+    <Compile Include="Common\Camera\Projections\IProjectionCombined.cs" />
     <Compile Include="Common\Camera\Projections\Projection.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
+    <Compile Include="Common\Camera\Projections\ProjectionCombined.cs" />
     <Compile Include="Drivers\Gdi\Materials\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\IPsIn.cs" />
     <Compile Include="Drivers\Gdi\Materials\IShader.cs" />

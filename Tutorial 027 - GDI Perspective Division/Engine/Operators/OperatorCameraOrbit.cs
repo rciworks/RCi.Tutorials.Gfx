@@ -84,14 +84,16 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
 
             if (!MouseDownView.HasValue || MouseDownCameraInfo == null || !OrbitOrigin.HasValue) return;
 
-            var mouseMoveView = RenderHost.CameraInfo.GetTransformationMatrix(Space.Screen, Space.View).Transform(args.Position.ToPoint3D());
-            RenderHost.CameraInfo = Orbit(MouseDownCameraInfo, mouseMoveView - MouseDownView.Value, OrbitOrigin.Value);
+            var cameraInfo = RenderHost.CameraInfo;
+            var mouseMoveView = cameraInfo.GetTransformationMatrix(Space.Screen, Space.View).Transform(args.Position.ToPoint3D());
+            Orbit(MouseDownCameraInfo, mouseMoveView - MouseDownView.Value, OrbitOrigin.Value, out var cameraPosition, out var cameraTarget);
+            RenderHost.CameraInfo = new CameraInfo(cameraPosition, cameraTarget, cameraInfo.UpVector, cameraInfo.Projection.Cloned(), cameraInfo.Viewport);
         }
 
         /// <summary>
-        /// Create new <see cref="ICameraInfo"/> based on mouse offset in view space and orbit origin.
+        /// Create new camera position and target based on mouse offset in view space and orbit origin.
         /// </summary>
-        public static ICameraInfo Orbit(ICameraInfo cameraInfoStart, Vector3D mouseOffsetView, Point3D orbitOrigin)
+        public static void Orbit(ICameraInfo cameraInfoStart, Vector3D mouseOffsetView, Point3D orbitOrigin, out Point3D cameraPosition, out Point3D cameraTarget)
         {
             // default input
             var eye = cameraInfoStart.Position;
@@ -126,11 +128,8 @@ namespace RCi.Tutorials.Gfx.Engine.Operators
 
             // transform back to world system
             var matrixLocalToWorld = matrixWorldToLocal.Inverse();
-            eye = matrixLocalToWorld.Transform(eye);
-            target = matrixLocalToWorld.Transform(target);
-
-            // update camera info
-            return new CameraInfo(eye, target, cameraInfoStart.UpVector, cameraInfoStart.Projection.Cloned(), cameraInfoStart.Viewport);
+            cameraPosition = matrixLocalToWorld.Transform(eye);
+            cameraTarget = matrixLocalToWorld.Transform(target);
         }
 
         /// <summary>

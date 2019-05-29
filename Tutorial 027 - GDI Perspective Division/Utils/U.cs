@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace RCi.Tutorials.Gfx.Utils
 {
     public static class U
-    {        
+    {
         /// <inheritdoc cref="Environment.ProcessorCount"/>
         public static int EnvironmentProcessorCount { get; } = Environment.ProcessorCount;
 
@@ -17,6 +17,24 @@ namespace RCi.Tutorials.Gfx.Utils
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Clamp(this int value, int min, int max)
+        {
+            if (value < min)
+            {
+                value = min;
+                return value;
+            }
+            if (value > max)
+            {
+                value = max;
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Clamp value (ensure it falls into a given range).
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Clamp(this double value, double min, double max)
         {
             if (value < min)
             {
