@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 026 - GDI Texture"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 027 - GDI Perspective Division", "Tutorial 027 - GDI Perspective Division\Tutorial 027 - GDI Perspective Division.csproj", "{8B5D48C1-2592-49EB-BF41-48F79923703B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial 028 - Deployers", "Tutorial 028 - Deployers\Tutorial 028 - Deployers.csproj", "{55453A99-11C3-44A1-B652-EBEDB5C3C0BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{8B5D48C1-2592-49EB-BF41-48F79923703B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B5D48C1-2592-49EB-BF41-48F79923703B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B5D48C1-2592-49EB-BF41-48F79923703B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55453A99-11C3-44A1-B652-EBEDB5C3C0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55453A99-11C3-44A1-B652-EBEDB5C3C0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55453A99-11C3-44A1-B652-EBEDB5C3C0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55453A99-11C3-44A1-B652-EBEDB5C3C0BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
