@@ -44,6 +44,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RCi.Bridge, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RCi.Bridge.1.0.1\lib\netstandard2.0\RCi.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -78,6 +81,8 @@
     <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionCombined.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Default\Deployer.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Deployer.cs" />
     <Compile Include="Drivers\Gdi\Materials\Default\BufferBinding.cs" />
     <Compile Include="Drivers\Gdi\Materials\Default\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\Default\Vertices.cs" />
@@ -85,12 +90,15 @@
     <Compile Include="Drivers\Gdi\Materials\IPsIn.cs" />
     <Compile Include="Drivers\Gdi\Materials\IShader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionColor\Deployer.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionTexture\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\PositionTexture\Deployer.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionTexture\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionTexture\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Position\Deployer.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
@@ -137,6 +145,7 @@
     <Compile Include="Inputs\SizeEventArgs.cs" />
     <Compile Include="Inputs\SizeEventHandler.cs" />
     <Compile Include="Materials\Default\Material.cs" />
+    <Compile Include="Materials\Deployer.cs" />
     <Compile Include="Materials\IGfxModel.cs" />
     <Compile Include="Materials\IMaterial.cs" />
     <Compile Include="Materials\IModel.cs" />
@@ -186,7 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

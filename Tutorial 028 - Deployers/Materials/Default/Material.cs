@@ -11,5 +11,11 @@ namespace RCi.Tutorials.Gfx.Materials.Default
             base(space)
         {
         }
+
+        /// <inheritdoc />
+        public override TResult Deploy<TGfxModel, TResult>(TGfxModel gfxModel, RenderContext renderContext)
+        {
+            return Deploy<TGfxModel, Material, TResult>(gfxModel, this, renderContext);
+        }
     }
 }

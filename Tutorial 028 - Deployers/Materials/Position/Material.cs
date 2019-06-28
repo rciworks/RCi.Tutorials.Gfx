@@ -17,5 +17,11 @@ namespace RCi.Tutorials.Gfx.Materials.Position
         {
             Color = color;
         }
+
+        /// <inheritdoc />
+        public override TResult Deploy<TGfxModel, TResult>(TGfxModel gfxModel, RenderContext renderContext)
+        {
+            return Deploy<TGfxModel, Material, TResult>(gfxModel, this, renderContext);
+        }
     }
 }
