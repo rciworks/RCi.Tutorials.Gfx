@@ -50,7 +50,7 @@ namespace RCi.Tutorials.Gfx.Client
             // render loop
             while (!Dispatcher.HasShutdownStarted)
             {
-                Render(RenderHosts, Seed.GetModels());
+                Render(RenderHosts, Seed.GetVisuals());
 
                 // message pump
                 System.Windows.Forms.Application.DoEvents();
@@ -72,9 +72,9 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Render <see cref="IRenderHost"/>s.
         /// </summary>
-        private static void Render(IEnumerable<IRenderHost> renderHosts, IEnumerable<IModel> models)
+        private static void Render(IEnumerable<IRenderHost> renderHosts, IEnumerable<IVisual> visuals)
         {
-            renderHosts.ForEach(rh => rh.Render(models));
+            renderHosts.ForEach(rh => rh.Render(visuals));
         }
 
         #endregion

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Drivers.Gdi.Materials;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Materials;
@@ -141,14 +142,14 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         #region // render
 
         /// <inheritdoc />
-        protected override void RenderInternal(IEnumerable<IModel> models)
+        protected override void RenderInternal(IEnumerable<IVisual> visuals)
         {
             // clear buffers
             FrameBuffers.BufferColor[0].Clear(Color.Black);
             FrameBuffers.BufferDepth.Clear(1);
 
             // render models
-            RenderModels(models);
+            RenderVisuals(visuals);
 
             // flush to screen back buffer
             BufferedGraphics.Graphics.DrawImage(
@@ -165,15 +166,21 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
         }
 
         /// <summary>
-        /// Draw models.
+        /// Draw visuals.
         /// </summary>
-        private void RenderModels(IEnumerable<IModel> models)
+        private void RenderVisuals(IEnumerable<IVisual> visuals)
         {
-            foreach (var model in models)
+            foreach (var visual in visuals)
             {
-                using (var gfxModel = GfxModel.Factory(this, model))
+                var viewport = new Viewport(0, 0, BufferSize.Width, BufferSize.Height, CameraInfo.Viewport.MinZ, CameraInfo.Viewport.MaxZ);
+                var renderContext = new RenderContext(GetMatrixForVertexShader(this, visual.Material.Space), viewport);
+
+                foreach (var model in visual.Models)
                 {
-                    gfxModel.Render(GetMatrixForVertexShader(this, model.Space));
+                    using (var gfxModel = (IGfxModel)new GfxModel(this, model))
+                    {
+                        gfxModel.Render(visual.Material, renderContext);
+                    }
                 }
             }
         }

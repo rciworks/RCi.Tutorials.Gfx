@@ -1,12 +1,11 @@
 ﻿using RCi.Tutorials.Gfx.Drivers.Gdi.Render;
-using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 {
     /// <summary>
-    /// <see cref="ShaderType.Position"/>
+    /// <see cref="Gfx.Materials.Position.Material"/> shader.
     /// </summary>
     public class Shader :
         Shader<VsIn, PsIn>

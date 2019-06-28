@@ -1,5 +1,4 @@
 ﻿using System;
-using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Materials
 {
@@ -12,6 +11,6 @@ namespace RCi.Tutorials.Gfx.Materials
         /// <summary>
         /// Render to mounted surface.
         /// </summary>
-        void Render(in Matrix4D matrixToClip);
+        void Render(IMaterial material, RenderContext renderContext);
     }
 }

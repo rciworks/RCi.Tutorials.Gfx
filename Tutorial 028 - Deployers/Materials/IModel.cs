@@ -7,12 +7,6 @@ namespace RCi.Tutorials.Gfx.Materials
     /// </summary>
     public interface IModel
     {
-        /// <inheritdoc cref="ShaderType"/>
-        ShaderType ShaderType { get; set; }
-
-        /// <inheritdoc cref="Space"/>
-        Space Space { get; set; }
-
         /// <inheritdoc cref="PrimitiveTopology"/>
         PrimitiveTopology PrimitiveTopology { get; set; }
 
@@ -31,12 +25,7 @@ namespace RCi.Tutorials.Gfx.Materials
         /// </summary>
         Vector2F[] TextureCoordinates { get; set; }
 
-        /// <summary>
-        /// Color for whole model.
-        /// </summary>
-        int Color { get; set; }
-
         /// <inheritdoc cref="ITextureResource"/>
-        ITextureResource TextureResource { get; set; }
+        ITextureResource[] TextureResources { get; set; }
     }
 }

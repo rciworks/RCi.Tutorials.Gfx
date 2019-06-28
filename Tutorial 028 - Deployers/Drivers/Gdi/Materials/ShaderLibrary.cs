@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using RCi.Tutorials.Gfx.Drivers.Gdi.Render;
-using RCi.Tutorials.Gfx.Materials;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
 {
@@ -18,19 +17,16 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         /// </summary>
         private List<IShader> Shaders { get; set; } = new List<IShader>();
 
-        /// <summary>
-        /// <see cref="ShaderType.Position"/> shader.
-        /// </summary>
+        /// <inheritdoc cref="Default.Shader"/>
+        public Default.Shader ShaderDefault { get; }
+
+        /// <inheritdoc cref="Position.Shader"/>
         public Position.Shader ShaderPosition { get; }
 
-        /// <summary>
-        /// <see cref="ShaderType.PositionColor"/> shader.
-        /// </summary>
+        /// <inheritdoc cref="PositionColor.Shader"/>
         public PositionColor.Shader ShaderPositionColor { get; }
 
-        /// <summary>
-        /// <see cref="ShaderType.PositionTexture"/> shader.
-        /// </summary>
+        /// <inheritdoc cref="PositionTexture.Shader"/>
         public PositionTexture.Shader ShaderPositionTexture { get; }
 
         #endregion
@@ -40,6 +36,7 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials
         /// <summary />
         public ShaderLibrary(RenderHost renderHost)
         {
+            Shaders.Add(ShaderDefault = new Default.Shader(renderHost));
             Shaders.Add(ShaderPosition = new Position.Shader(renderHost));
             Shaders.Add(ShaderPositionColor = new PositionColor.Shader(renderHost));
             Shaders.Add(ShaderPositionTexture = new PositionTexture.Shader(renderHost));

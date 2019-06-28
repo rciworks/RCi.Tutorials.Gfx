@@ -53,7 +53,7 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Point cloud of a bunny.
         /// </summary>
-        private static readonly IModel[] PointCloudBunny = new Func<IModel[]>(() =>
+        private static readonly IVisual[] PointCloudBunny = new Func<IVisual[]>(() =>
         {
             // adjust for different coordinate system
             var matrix = Matrix4DEx.Scale(10) * Matrix4DEx.Rotate(QuaternionEx.AroundAxis(UnitVector3D.XAxis, Math.PI * 0.5)) * Matrix4DEx.Translate(-1, -1, -0.5);
@@ -63,17 +63,15 @@ namespace RCi.Tutorials.Gfx.Client
                 .Select(vertex => matrix.Transform(vertex))
                 .ToArray();
 
-            return new IModel[]
+            return new IVisual[]
             {
                 // construct point list (point cloud) model
-                new Model
+                new Visual(new Model
                 {
-                    ShaderType = ShaderType.Position,
-                    Space = Space.World,
                     PrimitiveTopology = PrimitiveTopology.PointList,
                     Positions = vertices,
-                    Color = Color.White.ToRgba(),
-                }
+                },
+                new Materials.Position.Material(Space.World, Color.White.ToRgba()))
             };
         })();
 
@@ -90,15 +88,15 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Get graphical models.
         /// </summary>
-        public static IEnumerable<IModel> GetModels()
+        public static IEnumerable<IVisual> GetVisuals()
         {
-            return new IModel[0]
+            return new IVisual[0]
                 .Concat(GetWorldAxis())
-                //.Concat(GetScreenViewLines())
-                //.Concat(GetTriangles())
-                //.Concat(GetCubes())
-                //.Concat(GetPointCloud())
-                //.Concat(GetPositionColorSamples())
+                .Concat(GetScreenViewLines())
+                .Concat(GetTriangles())
+                .Concat(GetCubes())
+                .Concat(GetPointCloud())
+                .Concat(GetPositionColorSamples())
                 .Concat(GetPositionTextureSamples())
                 ;
         }
@@ -106,89 +104,79 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Get models showing difference between <see cref="Space.Screen"/> and <see cref="Space.View"/>.
         /// </summary>
-        private static IEnumerable<IModel> GetScreenViewLines()
+        private static IEnumerable<IVisual> GetScreenViewLines()
         {
             // screen space
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.Screen,
                 PrimitiveTopology = PrimitiveTopology.LineList,
                 Positions = new[]
                 {
                     new Vector3F(3, 20, 0),
                     new Vector3F(140, 20, 0),
                 },
-                Color = Color.Gray.ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.Screen, Color.Gray.ToRgba()));
 
             // view space
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.View,
                 PrimitiveTopology = PrimitiveTopology.LineList,
                 Positions = new[]
                 {
                     new Vector3F(-0.9f, -0.9f, 0),
                     new Vector3F(0.9f, -0.9f, 0),
                 },
-                Color = Color.Gray.ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.View, Color.Gray.ToRgba()));
         }
 
         /// <summary>
         /// Get models representing world axis at world origin (each length of 1).
         /// </summary>
-        private static IEnumerable<IModel> GetWorldAxis()
+        private static IEnumerable<IVisual> GetWorldAxis()
         {
             // x axis
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.World,
                 PrimitiveTopology = PrimitiveTopology.LineList,
                 Positions = new[]
                 {
                     new Vector3F(0, 0, 0),
                     new Vector3F(1, 0, 0),
                 },
-                Color = Color.Red.ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.World, Color.Red.ToRgba()));
 
             // y axis
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.World,
                 PrimitiveTopology = PrimitiveTopology.LineList,
                 Positions = new[]
                 {
                     new Vector3F(0, 0, 0),
                     new Vector3F(0, 1, 0),
                 },
-                Color = Color.FromArgb(255, 0, 255, 0).ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.World, Color.FromArgb(255, 0, 255, 0).ToRgba()));
 
             // z axis
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.World,
                 PrimitiveTopology = PrimitiveTopology.LineList,
                 Positions = new[]
                 {
                     new Vector3F(0, 0, 0),
                     new Vector3F(0, 0, 1),
                 },
-                Color = Color.Blue.ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.World, Color.Blue.ToRgba()));
         }
 
         /// <summary>
         /// Get some models to demonstrate hierarchical matrix multiplication.
         /// </summary>
-        private static IEnumerable<IModel> GetCubes()
+        private static IEnumerable<IVisual> GetCubes()
         {
             var duration = new TimeSpan(DateTime.UtcNow.Ticks);
 
@@ -201,14 +189,12 @@ namespace RCi.Tutorials.Gfx.Client
 
             foreach (var cubePolyline in CubePolylines)
             {
-                yield return new Model
+                yield return new Visual(new Model
                 {
-                    ShaderType = ShaderType.Position,
-                    Space = Space.World,
                     PrimitiveTopology = PrimitiveTopology.LineStrip,
                     Positions = matrixModel.Transform(cubePolyline),
-                    Color = Color.White.ToRgba(),
-                };
+                },
+                new Materials.Position.Material(Space.World, Color.White.ToRgba()));
             }
 
             // world space smaller cube
@@ -221,21 +207,19 @@ namespace RCi.Tutorials.Gfx.Client
 
             foreach (var cubePolyline in CubePolylines)
             {
-                yield return new Model
+                yield return new Visual(new Model
                 {
-                    ShaderType = ShaderType.Position,
-                    Space = Space.World,
                     PrimitiveTopology = PrimitiveTopology.LineStrip,
                     Positions = matrixModel.Transform(cubePolyline),
-                    Color = Color.Yellow.ToRgba(),
-                };
+                },
+                new Materials.Position.Material(Space.World, Color.Yellow.ToRgba()));
             }
         }
 
         /// <summary>
         /// Get some point cloud models.
         /// </summary>
-        private static IEnumerable<IModel> GetPointCloud()
+        private static IEnumerable<IVisual> GetPointCloud()
         {
             return PointCloudBunny;
         }
@@ -243,12 +227,10 @@ namespace RCi.Tutorials.Gfx.Client
         /// <summary>
         /// Get some triangle models.
         /// </summary>
-        private static IEnumerable<IModel> GetTriangles()
+        private static IEnumerable<IVisual> GetTriangles()
         {
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.World,
                 PrimitiveTopology = PrimitiveTopology.TriangleStrip,
                 Positions = new[]
                 {
@@ -257,13 +239,11 @@ namespace RCi.Tutorials.Gfx.Client
                     new Vector3F(0, -2, 0),
                     new Vector3F(1, -2, 0),
                 },
-                Color = Color.Goldenrod.ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.World, Color.Goldenrod.ToRgba()));
 
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.Position,
-                Space = Space.World,
                 PrimitiveTopology = PrimitiveTopology.TriangleList,
                 Positions = new[]
                 {
@@ -274,36 +254,33 @@ namespace RCi.Tutorials.Gfx.Client
                     new Vector3F(-4, 1, 0),
                     new Vector3F(-3, 0, 0),
                 },
-                Color = Color.Cyan.ToRgba(),
-            };
+            },
+            new Materials.Position.Material(Space.World, Color.Cyan.ToRgba()));
         }
 
         /// <summary>
         /// Get some models to demonstrate vertex interpolation.
         /// </summary>
-        private static IEnumerable<IModel> GetPositionColorSamples()
+        private static IEnumerable<IVisual> GetPositionColorSamples()
         {
-            //yield return new Model
-            //{
-            //    ShaderType = ShaderType.PositionColor,
-            //    Space = Space.World,
-            //    PrimitiveTopology = PrimitiveTopology.LineList,
-            //    Positions = new[]
-            //    {
-            //        new Vector3F(1f, 0, 0),
-            //        new Vector3F(0, 1f, 0),
-            //    },
-            //    Colors = new[]
-            //    {
-            //        Color.Cyan.ToRgba(),
-            //        Color.Yellow.ToRgba(),
-            //    },
-            //};
-
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.PositionColor,
-                Space = Space.World,
+                PrimitiveTopology = PrimitiveTopology.LineList,
+                Positions = new[]
+                {
+                    new Vector3F(1f, 0, 0),
+                    new Vector3F(0, 1f, 0),
+                },
+                Colors = new[]
+                {
+                    Color.Cyan.ToRgba(),
+                    Color.Yellow.ToRgba(),
+                },
+            },
+            new Materials.PositionColor.Material(Space.World));
+
+            yield return new Visual(new Model
+            {
                 PrimitiveTopology = PrimitiveTopology.TriangleList,
                 Positions = new[]
                 {
@@ -317,20 +294,18 @@ namespace RCi.Tutorials.Gfx.Client
                     Color.Blue.ToRgba(),
                     Color.FromArgb(255, 0, 255, 0).ToRgba(),
                 },
-            };
+            },
+            new Materials.PositionColor.Material(Space.World));
         }
 
         /// <summary>
         /// Get some textured models.
         /// </summary>
-        private static IEnumerable<IModel> GetPositionTextureSamples()
+        private static IEnumerable<IVisual> GetPositionTextureSamples()
         {
-            yield return new Model
+            yield return new Visual(new Model
             {
-                ShaderType = ShaderType.PositionTexture,
-                Space = Space.World,
                 PrimitiveTopology = PrimitiveTopology.TriangleStrip,
-                TextureResource = TextureResourceLibrary.GetOrCreateFromFile("../../../resources/checkers.png"),
                 Positions = new[]
                 {
                     new Vector3F(0, 0, 0),
@@ -345,7 +320,9 @@ namespace RCi.Tutorials.Gfx.Client
                     new Vector2F(1, 1),
                     new Vector2F(1, 0),
                 },
-            };
+                TextureResources = new[] { TextureResourceLibrary.GetOrCreateFromFile("../../../resources/checkers.png"), },
+            },
+            new Materials.PositionTexture.Material(Space.World));
         }
 
         /// <summary>

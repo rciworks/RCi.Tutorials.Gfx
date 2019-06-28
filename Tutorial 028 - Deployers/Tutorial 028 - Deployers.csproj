@@ -78,19 +78,19 @@
     <Compile Include="Common\Camera\Projections\ProjectionOrthographic.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionPerspective.cs" />
     <Compile Include="Common\Camera\Projections\ProjectionCombined.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Default\BufferBinding.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Default\Shader.cs" />
+    <Compile Include="Drivers\Gdi\Materials\Default\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\IPsIn.cs" />
     <Compile Include="Drivers\Gdi\Materials\IShader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\BufferBinding.cs" />
-    <Compile Include="Drivers\Gdi\Materials\PositionColor\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionColor\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionTexture\BufferBinding.cs" />
-    <Compile Include="Drivers\Gdi\Materials\PositionTexture\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionTexture\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\PositionTexture\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\BufferBinding.cs" />
-    <Compile Include="Drivers\Gdi\Materials\Position\GfxModel.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\Shader.cs" />
     <Compile Include="Drivers\Gdi\Materials\Position\Vertices.cs" />
     <Compile Include="Drivers\Gdi\Materials\Shader.cs" />
@@ -136,15 +136,23 @@
     <Compile Include="Inputs\MouseEventHandler.cs" />
     <Compile Include="Inputs\SizeEventArgs.cs" />
     <Compile Include="Inputs\SizeEventHandler.cs" />
+    <Compile Include="Materials\Default\Material.cs" />
     <Compile Include="Materials\IGfxModel.cs" />
+    <Compile Include="Materials\IMaterial.cs" />
     <Compile Include="Materials\IModel.cs" />
     <Compile Include="Materials\ITextureResource.cs" />
+    <Compile Include="Materials\IVisual.cs" />
+    <Compile Include="Materials\Material.cs" />
     <Compile Include="Materials\Model.cs" />
+    <Compile Include="Materials\PositionColor\Material.cs" />
+    <Compile Include="Materials\PositionTexture\Material.cs" />
+    <Compile Include="Materials\Position\Material.cs" />
     <Compile Include="Materials\PrimitiveTopology.cs" />
-    <Compile Include="Materials\ShaderType.cs" />
+    <Compile Include="Materials\RenderContext.cs" />
     <Compile Include="Materials\TextureLibrary.cs" />
     <Compile Include="Materials\TextureResource.cs" />
     <Compile Include="Materials\TextureResourceLibrary.cs" />
+    <Compile Include="Materials\Visual.cs" />
     <Compile Include="Mathematics\Extensions\InterpolateEx.cs" />
     <Compile Include="Mathematics\Extensions\Matrix4DEx.cs" />
     <Compile Include="Mathematics\Extensions\Point2DEx.cs" />
@@ -180,5 +188,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

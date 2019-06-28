@@ -7,12 +7,6 @@ namespace RCi.Tutorials.Gfx.Materials
         IModel
     {
         /// <inheritdoc />
-        public ShaderType ShaderType { get; set; }
-
-        /// <inheritdoc />
-        public Space Space { get; set; }
-
-        /// <inheritdoc />
         public PrimitiveTopology PrimitiveTopology { get; set; }
 
         /// <inheritdoc />
@@ -25,9 +19,6 @@ namespace RCi.Tutorials.Gfx.Materials
         public Vector2F[] TextureCoordinates { get; set; }
 
         /// <inheritdoc />
-        public int Color { get; set; }
-
-        /// <inheritdoc />
-        public ITextureResource TextureResource { get; set; }
+        public ITextureResource[] TextureResources { get; set; }
     }
 }
