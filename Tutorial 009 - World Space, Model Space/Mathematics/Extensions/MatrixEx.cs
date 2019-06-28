@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Engine.Common;
@@ -12,19 +11,16 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
     {
         #region // import
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> ToMatrix(this double[] values, int rows, int columns)
         {
             return Matrix<double>.Build.DenseOfRowMajor(rows, columns, values);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> ToMatrix(this double[] values)
         {
             return ToMatrix(values, 4, 4);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> ToMatrix(this float[] values)
         {
             return ToMatrix(values.Select(f => (double)f).ToArray());
@@ -34,37 +30,31 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // export
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double[] ToDoublesRowMajor(this Matrix<double> matrix)
         {
             return matrix.AsRowMajorArray() ?? matrix.ToRowMajorArray();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double[] ToDoublesColumnMajor(this Matrix<double> matrix)
         {
             return matrix.AsColumnMajorArray() ?? matrix.ToColumnMajorArray();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double[] ToDoubles(this Matrix<double> matrix)
         {
             return matrix.ToDoublesRowMajor();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float[] ToFloatsRowMajor(this Matrix<double> matrix)
         {
             return matrix.ToDoublesRowMajor().Select(d => (float)d).ToArray();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float[] ToFloatsColumnMajor(this Matrix<double> matrix)
         {
             return matrix.ToDoublesColumnMajor().Select(d => (float)d).ToArray();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float[] ToFloats(this Matrix<double> matrix)
         {
             return matrix.ToDoubles().Select(d => (float)d).ToArray();
@@ -89,7 +79,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // transform
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MultiplyRowMajor(this Matrix<double> m,
             double x, double y, double z, double w,
             out double _x, out double _y, out double _z, out double _w)
@@ -100,7 +89,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             _w = m[0, 3] * x + m[1, 3] * y + m[2, 3] * z + m[3, 3] * w;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MultiplyColumnMajor(this Matrix<double> m,
             double x, double y, double z, double w,
             out double _x, out double _y, out double _z, out double _w)
@@ -111,34 +99,29 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             _w = m[3, 0] * x + m[3, 1] * y + m[3, 2] * z + m[3, 3] * w;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Point3D Transform(this Matrix<double> m, in Point3D v)
         {
             MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
             return new Point3D(x / w, y / w, z / w);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this Matrix<double> m, in Vector3D v)
         {
             MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
             return new Vector3D(x / w, y / w, z / w);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this Matrix<double> m, in UnitVector3D v)
         {
             MultiplyRowMajor(m, v.X, v.Y, v.Z, 1, out var x, out var y, out var z, out var w);
             return new Vector3D(x / w, y / w, z / w);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<Point3D> Transform(this Matrix<double> matrix, IEnumerable<Point3D> value)
         {
             return value.Select(v => matrix.Transform(v));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<Vector3D> Transform(this Matrix<double> matrix, IEnumerable<Vector3D> value)
         {
             return value.Select(v => matrix.Transform(v));
@@ -168,7 +151,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // scale
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Scale(double x, double y, double z)
         {
             return new[]
@@ -180,19 +162,16 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             }.ToMatrix();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Scale(double uniform)
         {
             return Scale(uniform, uniform, uniform);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Scale(in Point3D value)
         {
             return Scale(value.X, value.Y, value.Z);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Scale(in Vector3D value)
         {
             return Scale(value.X, value.Y, value.Z);
@@ -234,7 +213,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             }.ToMatrix();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Rotate(in Vector3D axis, double angle)
         {
             return Rotate(axis.Normalize(), angle);
@@ -319,7 +297,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // translate
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Translate(double x, double y, double z)
         {
             return new[]
@@ -331,19 +308,16 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             }.ToMatrix();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Translate(in Point3D value)
         {
             return Translate(value.X, value.Y, value.Z);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> Translate(in Vector3D value)
         {
             return Translate(value.X, value.Y, value.Z);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix<double> TransformAround(this Matrix<double> transformation, in Point3D transformationOrigin)
         {
             var translate = Translate(transformationOrigin);

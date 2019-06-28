@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Utils
 {
@@ -9,7 +8,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// <see cref="ICloneable.Clone"/> and cast it to explicit type <typeparam name="T"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Cloned<T>(this T cloneable) where T : ICloneable
         {
             return (T)cloneable.Clone();
@@ -59,7 +57,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get handle of this window.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr Handle(this System.Windows.Forms.Control window)
         {
             return window.IsDisposed ? default : Handle((System.Windows.Forms.IWin32Window)window);
@@ -68,7 +65,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get handle of this window.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr Handle(this System.Windows.Forms.IWin32Window window)
         {
             return window.Handle;
@@ -77,7 +73,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get handle of this window.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr Handle(this System.Windows.Media.Visual window)
         {
             var handleSource = window.HandleSource();
@@ -93,7 +88,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// If called from another thread, the Win32 window is destroyed asynchronously.
         /// Calling Dispose explicitly from the interoperating code might be necessary for certain interoperation scenarios.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.Windows.Interop.HwndSource HandleSource(this System.Windows.Media.Visual window)
         {
             return System.Windows.PresentationSource.FromVisual(window) as System.Windows.Interop.HwndSource;
@@ -102,7 +96,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Convert color to RGBA integer: 0xRRGGBBAA;
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ToRgba(this System.Drawing.Color color)
         {
             return ((((color.A << 8) + color.B) << 8) + color.G << 8) + color.R;

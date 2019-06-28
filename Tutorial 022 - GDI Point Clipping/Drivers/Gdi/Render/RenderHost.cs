@@ -6,7 +6,6 @@ using RCi.Tutorials.Gfx.Drivers.Gdi.Materials;
 using RCi.Tutorials.Gfx.Engine.Render;
 using RCi.Tutorials.Gfx.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
-using RCi.Tutorials.Gfx.Utils;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
 {

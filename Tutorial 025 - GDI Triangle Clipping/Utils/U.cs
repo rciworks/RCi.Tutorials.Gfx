@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Utils
 {
@@ -15,7 +14,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Clamp value (ensure it falls into a given range).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Clamp(this int value, int min, int max)
         {
             if (value < min)
@@ -33,7 +31,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// <see cref="ICloneable.Clone"/> and cast it to explicit type <typeparam name="T"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Cloned<T>(this T cloneable) where T : ICloneable
         {
             return (T)cloneable.Clone();
@@ -83,7 +80,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get handle of this window.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr Handle(this System.Windows.Forms.Control window)
         {
             return window.IsDisposed ? default : Handle((System.Windows.Forms.IWin32Window)window);
@@ -92,7 +88,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get handle of this window.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr Handle(this System.Windows.Forms.IWin32Window window)
         {
             return window.Handle;
@@ -101,7 +96,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get handle of this window.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr Handle(this System.Windows.Media.Visual window)
         {
             var handleSource = window.HandleSource();
@@ -117,7 +111,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// If called from another thread, the Win32 window is destroyed asynchronously.
         /// Calling Dispose explicitly from the interoperating code might be necessary for certain interoperation scenarios.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.Windows.Interop.HwndSource HandleSource(this System.Windows.Media.Visual window)
         {
             return System.Windows.PresentationSource.FromVisual(window) as System.Windows.Interop.HwndSource;
@@ -126,7 +119,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Swap two instances.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Swap<T>(ref T value0, ref T value1)
         {
             var temp = value0;
@@ -137,7 +129,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Convert <see cref="System.Drawing.Color"/> to RGBA integer: 0xAABBGGRR.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ToRgba(this System.Drawing.Color color)
         {
             return ((((color.A << 8) + color.B) << 8) + color.G << 8) + color.R;
@@ -146,7 +137,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Convert 0xAABBGGRR color <see cref="System.Drawing.Color"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static System.Drawing.Color FromRgbaToColor(this int color)
         {
             return System.Drawing.Color.FromArgb

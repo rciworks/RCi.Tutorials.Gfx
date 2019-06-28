@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Utils
 {
@@ -56,23 +55,18 @@ namespace RCi.Tutorials.Gfx.Utils
         /// </summary>
         public T this[int x, int y]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => Read<T>(x, y);
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => Write(x, y, value);
         }
 
         /// <summary>
         /// Get index from (x, y) in flattened <see cref="Buffer"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetIndex(int x, int y) => x + y * Width;
 
         /// <summary>
         /// Get (x, y) from index in flattened <see cref="Buffer"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public (int x, int y) GetXY(int index)
         {
             var y = index / Width;
@@ -83,7 +77,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Set value at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Write<U>(int x, int y, U value)
             where U : unmanaged
         {
@@ -93,7 +86,6 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get value at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public U Read<U>(int x, int y)
             where U : unmanaged
         {
@@ -103,14 +95,12 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Get value at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public T Read(int x, int y)
         {
             return Read<T>(x, y);
         }
 
         /// <inheritdoc cref="U.Fill{T}"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Clear(T value = default) => Data.Fill(value);
 
         #endregion

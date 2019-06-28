@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Utils
 {
@@ -50,23 +49,19 @@ namespace RCi.Tutorials.Gfx.Utils
         /// </summary>
         public T this[int x, int y]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => GetValue(x, y);
 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => SetValue(x, y, value);
         }
 
         /// <summary>
         /// Get index from (x, y) in flattened <see cref="Buffer"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetIndex(int x, int y) => x + y * Width;
 
         /// <summary>
         /// Get (x, y) from index in flattened <see cref="Buffer"/>.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public (int x, int y) GetXY(int index)
         {
             var y = index / Width;
@@ -77,17 +72,14 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Set value at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetValue(int x, int y, in T value) => Buffer[GetIndex(x, y)] = value;
 
         /// <summary>
         /// Get value at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public T GetValue(int x, int y) => Buffer[GetIndex(x, y)];
 
         /// <inheritdoc cref="U.Fill{T}"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Clear(T value = default) => Buffer.Fill(value);
 
         #endregion

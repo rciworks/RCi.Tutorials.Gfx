@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace RCi.Tutorials.Gfx.Utils
@@ -88,26 +87,20 @@ namespace RCi.Tutorials.Gfx.Utils
 
         #region // routines
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetIndex(int x, int y) => x + y * Width;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void GetXY(int index, out int x, out int y)
         {
             y = index / Width;
             x = index - y * Width;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetArgb(int x, int y, int argb) => Buffer[GetIndex(x, y)] = argb;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetArgb(int x, int y) => Buffer[GetIndex(x, y)];
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPixel(int x, int y, Color color) => SetArgb(x, y, color.ToArgb());
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Color GetPixel(int x, int y) => Color.FromArgb(GetArgb(x, y));
 
         #endregion

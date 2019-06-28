@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Mathematics.Extensions;
@@ -31,14 +30,12 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // ctor
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector4D(double x, double y, double z, double w) => (X, Y, Z, W) = (x, y, z, w);
 
         #endregion
 
         #region // operators
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator +(in Vector4D left, in Vector4D right)
         {
             return new Vector4D
@@ -50,7 +47,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator -(in Vector4D left, in Vector4D right)
         {
             return new Vector4D
@@ -62,7 +58,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator *(in Vector4D left, double right)
         {
             return new Vector4D
@@ -74,7 +69,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator /(in Vector4D left, double right)
         {
             return new Vector4D
@@ -90,14 +84,12 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // routines
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{X:0.000000}, {Y:0.000000}, {Z:0.000000}, {W:0.000000}";
 
         #endregion
 
         #region // interpolation
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector4D InterpolateMultiply(double multiplier)
         {
             return new Vector4D
@@ -109,7 +101,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector4D InterpolateLinear(in Vector4D other, double alpha)
         {
             return new Vector4D
@@ -121,7 +112,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector4D InterpolateBarycentric(in Vector4D other0, in Vector4D other1, Vector3D barycentric)
         {
             return new Vector4D

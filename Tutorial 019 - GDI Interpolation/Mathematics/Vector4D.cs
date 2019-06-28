@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace RCi.Tutorials.Gfx.Mathematics
@@ -28,14 +27,12 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // ctor
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector4D(double x, double y, double z, double w) => (X, Y, Z, W) = (x, y, z, w);
 
         #endregion
 
         #region // operators
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator +(in Vector4D left, in Vector4D right)
         {
             return new Vector4D
@@ -47,7 +44,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator -(in Vector4D left, in Vector4D right)
         {
             return new Vector4D
@@ -59,7 +55,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator *(in Vector4D left, double right)
         {
             return new Vector4D
@@ -71,7 +66,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator /(in Vector4D left, double right)
         {
             return new Vector4D
@@ -87,7 +81,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // routines
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{X:0.000000}, {Y:0.000000}, {Z:0.000000}, {W:0.000000}";
 
         #endregion

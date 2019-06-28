@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Utils
 {
@@ -65,19 +64,16 @@ namespace RCi.Tutorials.Gfx.Utils
         /// <summary>
         /// Set pixel color at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPixel(int x, int y, Color color) => Write(x, y, color.ToArgb());
 
         /// <summary>
         /// Get pixel color at (x, y).
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Color GetPixel(int x, int y) => Color.FromArgb(Read<int>(x, y));
 
         /// <summary>
         /// Clear buffer by one color.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Clear(Color color) => Clear(color.ToArgb());
 
         #endregion

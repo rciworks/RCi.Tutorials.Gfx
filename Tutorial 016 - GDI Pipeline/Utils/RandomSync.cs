@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
+﻿
 namespace RCi.Tutorials.Gfx.Utils
 {
     /// <summary>
@@ -12,7 +11,6 @@ namespace RCi.Tutorials.Gfx.Utils
         private static readonly object m_Lock = new object();
         private static readonly System.Random m_Random = new System.Random((int)System.DateTime.UtcNow.Ticks);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Next()
         {
             lock (m_Lock)
@@ -21,7 +19,6 @@ namespace RCi.Tutorials.Gfx.Utils
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Next(int maxValue)
         {
             lock (m_Lock)
@@ -30,7 +27,6 @@ namespace RCi.Tutorials.Gfx.Utils
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Next(int minValue, int maxValue)
         {
             lock (m_Lock)
@@ -39,7 +35,6 @@ namespace RCi.Tutorials.Gfx.Utils
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void NextBytes(byte[] buffer)
         {
             lock (m_Lock)
@@ -48,7 +43,6 @@ namespace RCi.Tutorials.Gfx.Utils
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double NextDouble()
         {
             lock (m_Lock)
@@ -61,7 +55,6 @@ namespace RCi.Tutorials.Gfx.Utils
 
         #region // extensions
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double NextDouble(double maxValue)
         {
             lock (m_Lock)
@@ -70,7 +63,6 @@ namespace RCi.Tutorials.Gfx.Utils
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double NextDouble(double minValue, double maxValue)
         {
             lock (m_Lock)

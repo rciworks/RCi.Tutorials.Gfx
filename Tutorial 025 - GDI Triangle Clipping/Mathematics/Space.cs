@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace RCi.Tutorials.Gfx.Mathematics
 {
@@ -42,13 +41,11 @@ namespace RCi.Tutorials.Gfx.Mathematics
         /// </summary>
         public static int[] SpaceIds { get; } = Enumerable.Range(0, SpaceCount).ToArray();
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ToSpaceId(this Space space)
         {
             return (int)space;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Space ToSpace(this int spaceId)
         {
             return (Space)spaceId;

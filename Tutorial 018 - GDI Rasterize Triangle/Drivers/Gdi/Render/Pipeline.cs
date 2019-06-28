@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using RCi.Tutorials.Gfx.Common.Camera;
 using RCi.Tutorials.Gfx.Drivers.Gdi.Materials;
 using RCi.Tutorials.Gfx.Mathematics;
@@ -450,10 +449,8 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Render
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int TriangleClampX(int value, in Viewport viewport) => value.Clamp(viewport.X, viewport.X + viewport.Width);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int TriangleClampY(int value, in Viewport viewport) => value.Clamp(viewport.Y, viewport.Y + viewport.Height);
 
         #endregion

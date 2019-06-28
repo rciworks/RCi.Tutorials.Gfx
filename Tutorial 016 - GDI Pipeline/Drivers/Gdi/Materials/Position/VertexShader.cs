@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using RCi.Tutorials.Gfx.Mathematics;
+﻿using RCi.Tutorials.Gfx.Mathematics;
 
 namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
 {
@@ -17,7 +16,6 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         #region // ctor
 
         /// <summary />
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public VertexShader(Vector4F position)
         {
             Position = position;
@@ -28,14 +26,12 @@ namespace RCi.Tutorials.Gfx.Drivers.Gdi.Materials.Position
         #region // routines
 
         /// <inheritdoc />
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public VertexShader CloneWithNewPosition(Vector4F position)
         {
             return new VertexShader(position);
         }
 
         /// <inheritdoc />
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return $"Position: {Position}";

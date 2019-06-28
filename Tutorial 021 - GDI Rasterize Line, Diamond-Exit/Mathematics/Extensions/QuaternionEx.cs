@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using MathNet.Spatial.Euclidean;
 
 namespace RCi.Tutorials.Gfx.Mathematics.Extensions
@@ -93,7 +92,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             return new Quaternion(w, x, y, z);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion AroundAxis(in UnitVector3D axis, double angle)
         {
             return Matrix4DEx.Rotate(axis, angle).ToQuaternion();

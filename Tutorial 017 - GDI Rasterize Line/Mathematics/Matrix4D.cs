@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MathNet.Spatial.Euclidean;
 
@@ -100,21 +99,18 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // operators
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D operator *(in Matrix4D left, in Matrix4D right)
         {
             Multiply(left, right, out var result);
             return result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D operator *(in Matrix4D left, in Vector4D right)
         {
             Multiply(left, right, out var result);
             return result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D operator *(in Matrix4D left, in Vector3D right)
         {
             Multiply(left, right, out var result);
@@ -125,7 +121,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // multiply
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4D left, in Matrix4D right, out Matrix4D result)
         {
             // row major
@@ -177,7 +172,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             //);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4D left, in Vector4D right, out Vector4D result)
         {
             result = new Vector4D
@@ -189,7 +183,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4D left, in Vector3D right, out Vector3D result)
         {
             var wInv = 1 / (left.M03 * right.X + left.M13 * right.Y + left.M23 * right.Z + left.M33);
@@ -205,7 +198,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // routines
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Transpose(in Matrix4D value, out Matrix4D result)
         {
             result = new Matrix4D
@@ -217,7 +209,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Matrix4D Transpose()
         {
             Transpose(this, out var result);
@@ -288,14 +279,12 @@ namespace RCi.Tutorials.Gfx.Mathematics
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Matrix4D Inverse()
         {
             Inverse(this, out var result);
             return result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool AlmostEqual(in Matrix4D left, in Matrix4D right, double maximumAbsoluteError)
         {
             return
@@ -320,7 +309,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
                 Math.Abs(left.M33 - right.M33) < maximumAbsoluteError;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool AlmostEqual(in Matrix4D other, double maximumAbsoluteError)
         {
             return AlmostEqual(this, other, maximumAbsoluteError);

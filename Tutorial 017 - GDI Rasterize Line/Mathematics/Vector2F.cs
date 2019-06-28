@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace RCi.Tutorials.Gfx.Mathematics
@@ -24,14 +23,12 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // ctor
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2F(float x, float y) => (X, Y) = (x, y);
 
         #endregion
 
         #region // operators
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2F operator +(in Vector2F left, in Vector2F right)
         {
             return new Vector2F
@@ -41,7 +38,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2F operator -(in Vector2F left, in Vector2F right)
         {
             return new Vector2F
@@ -51,7 +47,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2F operator *(in Vector2F left, float right)
         {
             return new Vector2F
@@ -61,7 +56,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2F operator /(in Vector2F left, float right)
         {
             return new Vector2F
@@ -75,7 +69,6 @@ namespace RCi.Tutorials.Gfx.Mathematics
 
         #region // routines
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{X:0.000000}, {Y:0.000000}";
 
         #endregion

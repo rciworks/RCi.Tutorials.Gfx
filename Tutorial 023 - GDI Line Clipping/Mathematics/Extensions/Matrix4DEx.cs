@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using MathNet.Spatial.Euclidean;
 using RCi.Tutorials.Gfx.Common.Camera;
 
@@ -9,7 +8,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
     {
         #region // convert
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double[] ToDoubles(this in Matrix4D value)
         {
             return new[]
@@ -21,7 +19,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             };
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float[] ToFloats(this in Matrix4D value)
         {
             return new[]
@@ -33,7 +30,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             };
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double[] ToDoublesColumnMajor(this in Matrix4D value)
         {
             return new[]
@@ -45,7 +41,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             };
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float[] ToFloatsColumnMajor(this in Matrix4D value)
         {
             return new[]
@@ -57,7 +52,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             };
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D ToMatrix4D(this MathNet.Numerics.LinearAlgebra.Matrix<double> value)
         {
             return new Matrix4D
@@ -69,7 +63,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MathNet.Numerics.LinearAlgebra.Matrix<double> ToMatrix(this in Matrix4D value)
         {
             return MathNet.Numerics.LinearAlgebra.Matrix<double>.Build.DenseOfRowMajor(4, 4, value.ToDoubles());
@@ -79,37 +72,31 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // transform
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4D Transform(this in Matrix4D m, in Vector4D v)
         {
             return m * v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this in Matrix4D m, in Vector3D v)
         {
             return m * v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3D Transform(this in Matrix4D m, in UnitVector3D v)
         {
             return m * v.ToVector3D();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Point3D Transform(this in Matrix4D m, in Point3D v)
         {
             return (m * v.ToVector3D()).ToPoint3D();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4F Transform(this in Matrix4D m, in Vector4F v)
         {
             return (m * v.ToVector4D()).ToVector4F();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3F Transform(this in Matrix4D m, Vector3F v)
         {
             return (m * v.ToVector3D()).ToVector3F();
@@ -129,7 +116,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // scale
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Scale(double x, double y, double z)
         {
             return new Matrix4D
@@ -141,13 +127,11 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Scale(double uniform)
         {
             return Scale(uniform, uniform, uniform);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Scale(in Vector3D value)
         {
             return Scale(value.X, value.Y, value.Z);
@@ -192,7 +176,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Rotate(in Vector3D axis, double angle)
         {
             return Rotate(axis.Normalize(), angle);
@@ -235,7 +218,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // translate
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Translate(double x, double y, double z)
         {
             return new Matrix4D
@@ -247,13 +229,11 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Translate(in Point3D value)
         {
             return Translate(value.X, value.Y, value.Z);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Translate(in Vector3D value)
         {
             return Translate(value.X, value.Y, value.Z);
@@ -263,14 +243,12 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
 
         #region // custom
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D TransformAround(this in Matrix4D transformation, in Point3D transformationOrigin)
         {
             var translate = Translate(transformationOrigin);
             return translate.Inverse() * transformation * translate;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D CoordinateSystem(in Point3D origin, in UnitVector3D xAxis, in UnitVector3D yAxis, in UnitVector3D zAxis)
         {
             return new Matrix4D
@@ -322,7 +300,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         /// <summary>
         /// View space to Clip space.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D OrthoRH(double width, double height, double znearPlane, double zfarPlane)
         {
             return new Matrix4D
@@ -337,7 +314,6 @@ namespace RCi.Tutorials.Gfx.Mathematics.Extensions
         /// <summary>
         /// Clip to Screen space.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4D Viewport(in Viewport viewport)
         {
             return new Matrix4D
